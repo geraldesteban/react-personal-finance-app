@@ -14,7 +14,7 @@ export default function SidebarNavigations({
 
   return (
     <li
-      className={`text-grey-300 flex items-center rounded-tr-xl rounded-br-xl relative mr-5 ${
+      className={`group text-grey-300 flex items-center rounded-tr-xl rounded-br-xl relative mr-5 ${
         active ? "bg-beige-100" : ""
       } ${isActive ? "mr-5" : "mr-0"}`}
     >
@@ -24,11 +24,15 @@ export default function SidebarNavigations({
         }`}
       ></div>
       <NavLink className="text-[16px] font-bold flex pl-10 py-5" to={to}>
-        <Icon className={`w-6 h-6 mr-9 ${active ? "text-green" : ""}`} />
+        <Icon
+          className={`w-6 h-6 mr-9 ${active ? "text-green" : ""} ${
+            active ? "" : "group-hover:text-grey-100"
+          }`}
+        />
         <span
           className={`${isActive ? `block ${width}` : `hidden ${width}`} ${
             active ? "text-grey-900" : ""
-          } text-[16px]`}
+          } text-[16px] ${active ? "" : "group-hover:text-grey-100"}`}
         >
           {label}
         </span>

@@ -64,14 +64,18 @@ function Sidebar() {
         </ul>
       </nav>
       <button
-        className={`font-bold flex items-center py-5`}
+        className={`group font-bold flex items-center py-5`}
         onClick={() => setActive(!active)}
       >
         <MinimizeLeftIcon
-          className={`w-6 h-6 mx-10 ${active ? "rotate-[-180deg]" : ""}`}
+          className={`text-grey-300 w-6 h-6 mx-10 ${
+            active ? "rotate-[-180deg]" : ""
+          } group-hover:text-grey-100`}
         />
         <span
-          className={`text-grey-300 ${active ? "block w-32" : "hidden w-32"}`}
+          className={`text-grey-300 ${
+            active ? "block w-32" : "hidden w-32"
+          } group-hover:text-grey-100`}
         >
           Minimize Menu
         </span>
