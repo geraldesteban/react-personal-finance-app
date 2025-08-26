@@ -61,7 +61,7 @@ export default function TransactionsDetails() {
       ))}
       <div className="flex justify-between items-center mt-10">
         <button
-          className={`group text-grey-900 flex items-center px-8 py-4 border border-beige-500 rounded-xl ${
+          className={`group text-grey-900 flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
             currentPage === 1 ? "cursor-not-allowed" : ""
           } hover:border-beige-500 hover:bg-beige-500 hover:text-white sm:px-5`}
           onClick={prevPage}
@@ -73,7 +73,7 @@ export default function TransactionsDetails() {
         <div className="flex mx-2">
           {[...Array(5)].map((_, i) => (
             <button
-              className={`text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 ${
+              className={`text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 transition duration-500 ${
                 currentPage === i + 1
                   ? "bg-grey-900 text-white border-grey-900"
                   : ""
@@ -94,7 +94,7 @@ export default function TransactionsDetails() {
           ))}
         </div>
         <button
-          className={`group text-grey-900 flex items-center px-8 py-4 border border-beige-500 rounded-xl ${
+          className={`group text-grey-900 flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
             currentPage === totalPages ? "cursor-not-allowed" : ""
           } hover:border-beige-500 hover:bg-beige-500 hover:text-white sm:px-5`}
           onClick={nextPage}

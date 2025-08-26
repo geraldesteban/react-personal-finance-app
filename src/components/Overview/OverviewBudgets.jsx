@@ -10,35 +10,37 @@ export default function OverviewBudgets() {
           <p>of $975 limit</p>
         </div>
         <div>
-          <div className="relative">
-            <div className="absolute w-1 h-full bg-green"></div>
+          <div className="relative mb-5">
+            <div className="absolute w-1 h-full bg-green rounded-xl"></div>
             <div className="ml-5">
-              <h2 className="text-grey-500 text-[12px] font-semibold">
+              <h2 className="text-grey-500 text-[12px] font-semibold mb-1">
                 Entertainment
               </h2>
               <p className="text-grey-900 text-[14px] font-bold">$50.00</p>
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute w-1 h-full bg-cyan"></div>
+          <div className="relative mb-5">
+            <div className="absolute w-1 h-full bg-cyan rounded-xl"></div>
             <div className="ml-5">
-              <h2 className="text-grey-500 text-[12px] font-semibold">Bills</h2>
+              <h2 className="text-grey-500 text-[12px] font-semibold mb-1">
+                Bills
+              </h2>
               <p className="text-grey-900 text-[14px] font-bold">$750.00</p>
             </div>
           </div>
-          <div className="relative">
-            <div className="absolute w-1 h-full bg-yellow"></div>
+          <div className="relative mb-5">
+            <div className="absolute w-1 h-full bg-yellow rounded-xl"></div>
             <div className="ml-5">
-              <h2 className="text-grey-500 text-[12px] font-semibold">
+              <h2 className="text-grey-500 text-[12px] font-semibold mb-1">
                 Dining Out
               </h2>
               <p className="text-grey-900 text-[14px] font-bold">$75.00</p>
             </div>
           </div>
           <div className="relative">
-            <div className="absolute w-1 h-full bg-navy"></div>
+            <div className="absolute w-1 h-full bg-navy rounded-xl"></div>
             <div className="ml-5">
-              <h2 className="text-grey-500 text-[12px] font-semibold">
+              <h2 className="text-grey-500 text-[12px] font-semibold mb-1">
                 Personal Care
               </h2>
               <p className="text-grey-900 text-[14px] font-bold">$100.00</p>

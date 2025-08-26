@@ -67,7 +67,6 @@ export default function BudgetsList() {
           </div>
         </div>
       </div>
-
       <div className="p-5 bg-beige-100 rounded-xl">
         <div className="flex items-center justify-between">
           <h2 className="font-bold">Latest Spending</h2>

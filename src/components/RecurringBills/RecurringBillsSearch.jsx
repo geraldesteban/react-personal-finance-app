@@ -11,7 +11,7 @@ export default function RecurringBillsSearch() {
   return (
     <form className="relative w-64 sm:w-40">
       <input
-        className="w-full py-2.5 pl-5 border border-grey-500 rounded-lg"
+        className="w-full py-2.5 pl-5 border border-grey-500 rounded-lg outline-none"
         type="search"
         placeholder="Search bills"
         value={query}
