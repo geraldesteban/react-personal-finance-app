@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        myFontRegular: ["PublicSansRegular"],
+        myFontBold: ["PublicSansBold"],
+      },
       colors: {
         beige: {
           100: "#F8F4F0",
