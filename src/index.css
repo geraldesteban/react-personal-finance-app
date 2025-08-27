@@ -13,3 +13,13 @@
     background-image: none;
   }
 }
+
+@font-face {
+  font-family: "PublicSansRegular";
+  src: url("./assets/static/PublicSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: "PublicSansBold";
+  src: url("./assets/static/PublicSans-Bold.ttf");
+}
