@@ -7,13 +7,15 @@ export default function RecurringBillsSortby() {
 
   return (
     <div className="flex items-center mr-5">
-      <h2 className="text-grey-500 text-[14px] mr-3 sm:hidden">Sort by</h2>
+      <h2 className="font-myFontRegular text-grey-500 text-[14px] mr-3 sm:hidden">
+        Sort by
+      </h2>
       <div className="relative">
         <button
-          className="flex items-center px-6 py-3 border border-grey-900 rounded-xl sm:px-0 sm:py-0 sm:border-none"
+          className="flex items-center px-6 py-3 border border-beige-500 rounded-xl sm:px-0 sm:py-0 sm:border-none"
           onClick={() => setActive(!active)}
         >
-          <span className="text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">
+          <span className="font-myFontRegular text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">
             Latest
           </span>
           <CaretDown

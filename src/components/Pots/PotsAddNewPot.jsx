@@ -9,7 +9,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
 
       <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 md:mx-10">
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-grey-900 text-[32px] font-bold sm:text-[20px]">
+          <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
             Add New Pot
           </h2>
           <button onClick={onClose}>
@@ -17,13 +17,13 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
           </button>
         </div>
 
-        <p className="text-grey-500 text-[14px] mb-5">
+        <p className="font-myFontRegular text-grey-500 text-[14px] mb-5">
           Create a pot to set savings targets. These can help keep you on track
           as you save for special purchases.
         </p>
 
         <form>
-          <label className="block text-grey-500 text-[12px] font-bold mb-2">
+          <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Pot Name
           </label>
           <input
@@ -31,7 +31,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
             placeholder=""
             className="w-full border border-grey-500 rounded-xl py-2 pl-5 mb-5"
           />
-          <label className="block text-grey-500 text-[12px] font-bold mb-2">
+          <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Target
           </label>
           <input
@@ -40,7 +40,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
             className="w-full border border-grey-500 rounded-xl py-2 pl-5 mb-5"
           />
 
-          <label className="block text-grey-500 text-[12px] font-bold mb-2">
+          <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Theme
           </label>
           <select
@@ -65,7 +65,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
           </select>
         </form>
 
-        <button className="w-full py-5 bg-grey-900 rounded-xl text-white font-bold">
+        <button className="font-myFontBold text-[14] w-full py-5 bg-grey-900 rounded-xl text-white">
           Add Pot
         </button>
       </div>

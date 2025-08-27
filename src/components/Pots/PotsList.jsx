@@ -18,7 +18,9 @@ export default function PotsList() {
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <div className="w-4 h-4 bg-black rounded-full mr-5"></div>
-            <h2 className="text-grey-900 text-[20px] font-bold">Savings</h2>
+            <h2 className="font-myFontBold text-grey-900 text-[20px]">
+              Savings
+            </h2>
           </div>
           <div className="relative z-10">
             <button onClick={() => setDropdownActive(!dropdownActive)}>
@@ -35,7 +37,7 @@ export default function PotsList() {
                   setDropdownActive(false);
                 }}
               >
-                Edit Budget
+                Edit Pot
               </button>
               <hr className="my-2" />
               <button
@@ -45,31 +47,37 @@ export default function PotsList() {
                   setDropdownActive(false);
                 }}
               >
-                Delete Budget
+                Delete Pot
               </button>
             </div>
           </div>
         </div>
         <div className="flex items-center justify-between my-5">
-          <p className="text-grey-500 text[14px]">Total Saved</p>
-          <p className="text-grey-900 text-[32px]">$159.00</p>
+          <p className="font-myFontRegular text-grey-500 text[14px]">
+            Total Saved
+          </p>
+          <p className="font-myFontBold text-grey-900 text-[32px]">$159.00</p>
         </div>
         <div className="relative">
           <div className="absolute w-full h-1 rounded-xl bg-black"></div>
         </div>
         <div className="flex justify-between items-center mb-5">
-          <p className="text-grey-500 text-[12px] font-bold mt-3">7.95%</p>
-          <p className="text-grey-500 text-[12px] mt-3">Target of $2,000</p>
+          <p className="font-myFontBold text-grey-500 text-[12px] mt-3">
+            7.95%
+          </p>
+          <p className="font-myFontRegular text-grey-500 text-[12px] mt-3">
+            Target of $2,000
+          </p>
         </div>
         <div className="flex justify-between items-center gap-5">
           <button
-            className="w-full py-5 rounded-xl bg-beige-100 font-bold border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
+            className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
             onClick={() => setAddMoneyActive(true)}
           >
             + Add Money
           </button>
           <button
-            className="w-full py-5 rounded-xl bg-beige-100 font-bold border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
+            className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
             onClick={() => setWithdrawActive(true)}
           >
             With Draw
@@ -97,7 +105,9 @@ export default function PotsList() {
         <div className="flex justify-between items-center">
           <div className="flex items-center">
             <div className="w-4 h-4 bg-black rounded-full mr-5"></div>
-            <h2 className="text-grey-900 text-[20px] font-bold">Savings</h2>
+            <h2 className="font-myFontBold text-grey-900 text-[20px]">
+              Savings
+            </h2>
           </div>
           <div className="relative z-10">
             <button onClick={() => setDropdownActive(!dropdownActive)}>
@@ -114,7 +124,7 @@ export default function PotsList() {
                   setDropdownActive(false);
                 }}
               >
-                Edit Budget
+                Edit Pot
               </button>
               <hr className="my-2" />
               <button
@@ -124,31 +134,37 @@ export default function PotsList() {
                   setDropdownActive(false);
                 }}
               >
-                Delete Budget
+                Delete Pot
               </button>
             </div>
           </div>
         </div>
         <div className="flex items-center justify-between my-5">
-          <p className="text-grey-500 text[14px]">Total Saved</p>
-          <p className="text-grey-900 text-[32px]">$159.00</p>
+          <p className="font-myFontRegular text-grey-500 text[14px]">
+            Total Saved
+          </p>
+          <p className="font-myFontBold text-grey-900 text-[32px]">$159.00</p>
         </div>
         <div className="relative">
           <div className="absolute w-full h-1 rounded-xl bg-black"></div>
         </div>
         <div className="flex justify-between items-center mb-5">
-          <p className="text-grey-500 text-[12px] font-bold mt-3">7.95%</p>
-          <p className="text-grey-500 text-[12px] mt-3">Target of $2,000</p>
+          <p className="font-myFontBold text-grey-500 text-[12px] mt-3">
+            7.95%
+          </p>
+          <p className="font-myFontRegular text-grey-500 text-[12px] mt-3">
+            Target of $2,000
+          </p>
         </div>
         <div className="flex justify-between items-center gap-5">
           <button
-            className="w-full py-5 rounded-xl bg-beige-100 font-bold border border-beige-100  hover:bg-[#FFFFFF] hover:border hover:border-grey-900"
+            className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
             onClick={() => setAddMoneyActive(true)}
           >
             + Add Money
           </button>
           <button
-            className="w-full py-5 rounded-xl bg-beige-100 font-bold border border-beige-100  hover:bg-[#FFFFFF] hover:border hover:border-grey-900"
+            className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
             onClick={() => setWithdrawActive(true)}
           >
             With Draw

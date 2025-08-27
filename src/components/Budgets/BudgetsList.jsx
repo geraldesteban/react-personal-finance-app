@@ -14,7 +14,9 @@ export default function BudgetsList() {
       <div className="flex justify-between items-center mb-5">
         <div className="flex items-center">
           <div className="w-4 h-4 bg-black rounded-full mr-5"></div>
-          <h2 className="text-grey-900 text-[20px] font-bold">Entertainment</h2>
+          <h2 className="font-myFontBold text-grey-900 text-[20px]">
+            Entertainment
+          </h2>
         </div>
         <div className="relative">
           <button onClick={() => setDropdownActive(!dropdownActive)}>
@@ -48,29 +50,35 @@ export default function BudgetsList() {
       </div>
 
       <div>
-        <h2 className="text-grey-500 text-[14px] mb-5">Maximum of $50.00</h2>
+        <h2 className="font-myFontRegular text-grey-500 text-[14px] mb-5">
+          Maximum of $50.00
+        </h2>
         <div className="w-full h-5 rounded-md bg-black"></div>
       </div>
       <div className="flex justify-between items-center my-5">
         <div className="flex flex-1 relative">
           <div className="absolute w-1 h-full bg-green rounded-xl"></div>
           <div className="ml-5">
-            <p className="text-grey-500 text-[12px]">Spent</p>
-            <p className="text-grey-900 text-[14px] font-bold">$15.00</p>
+            <p className="font-myFontRegular text-grey-500 text-[12px]">
+              Spent
+            </p>
+            <p className="font-myFontBold text-grey-900 text-[14px]">$15.00</p>
           </div>
         </div>
         <div className="flex flex-1 relative">
           <div className="absolute w-1 h-full bg-beige-100 rounded-xl"></div>
           <div className="ml-5">
-            <p className="text-grey-500 text-[12px]">Remaining</p>
-            <p className="text-grey-900 text-[14px] font-bold">$35.00</p>
+            <p className="font-myFontRegular text-grey-500 text-[12px]">
+              Remaining
+            </p>
+            <p className="font-myFontBold text-grey-900 text-[14px]">$35.00</p>
           </div>
         </div>
       </div>
       <div className="p-5 bg-beige-100 rounded-xl">
         <div className="flex items-center justify-between">
-          <h2 className="font-bold">Latest Spending</h2>
-          <button className="flex items-center text-[#696868] text-[14px] font-semibold gap-5">
+          <h2 className="font-myFontBold">Latest Spending</h2>
+          <button className="flex items-center font-myFontRegular text-[#696868] text-[14px] gap-5">
             <span>See All</span>
             <CaretRight />
           </button>
@@ -81,15 +89,15 @@ export default function BudgetsList() {
               alt="gerald"
               className="w-[40px] h-[40px] rounded-full mr-5 sm:hidden"
             />
-            <h2 className="text-grey-900 text-[12px] font-bold">
+            <h2 className="font-myFontBold text-grey-900 text-[12px]">
               James Thomson
             </h2>
           </div>
           <div>
-            <p className="text-right text-grey-900 text-[12px] font-bold">
+            <p className="text-right font-myFontBold text-grey-900 text-[12px]">
               -$5.00
             </p>
-            <p className="text-grey-500 text-[12px] font-semibold">
+            <p className="font-myFontRegular text-grey-500 text-[12px]">
               11 Aug 2024
             </p>
           </div>

@@ -12,7 +12,7 @@ export default function BudgetsLayout() {
       <div className="flex justify-between items-center relative">
         <Heading>Budgets</Heading>
         <button
-          className="text-white p-4 font-semibold bg-grey-900 rounded-xl transition duration-500 hover:bg-grey-500"
+          className="font-myFontBold text-[14px] text-white bg-grey-900 p-4 rounded-xl transition duration-500 hover:bg-grey-500"
           onClick={() => setActive(true)}
         >
           + Add New Budget

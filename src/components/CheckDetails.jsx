@@ -7,8 +7,8 @@ export default function OverviewViewDetails({ heading, span, seeDetails }) {
   return (
     <div className="flex justify-between mb-5">
       <h2
-        className="
-            text-grey-900 text-[20px] font-bold"
+        className="font-myFontBold
+            text-grey-900 text-[20px]"
       >
         {heading}
       </h2>
@@ -18,7 +18,7 @@ export default function OverviewViewDetails({ heading, span, seeDetails }) {
           navigate(`/${seeDetails}`);
         }}
       >
-        <span className="text-grey-500 font-semibold mr-5 group-hover:text-grey-900 transition-colors duration-500">
+        <span className="font-myFontRegular text-grey-500 text-[14px] mr-5 group-hover:text-grey-900 transition-colors duration-500">
           {span}
         </span>
         <CaretRight className="text-grey-500 group-hover:text-grey-900 transition-colors duration-500" />

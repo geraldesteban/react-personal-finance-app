@@ -12,7 +12,7 @@ export default function TransactionsSearch() {
     <>
       <form className="relative w-64 mb-10 lg:hidden sm:block">
         <input
-          className="w-full py-2.5 pl-5 border border-beige-500 rounded-lg outline-none"
+          className="font-myFontRegular text-[14px] w-full py-2.5 pl-5 border border-beige-500 rounded-lg outline-none"
           type="search"
           placeholder="Search transaction"
           value={query}
@@ -22,7 +22,7 @@ export default function TransactionsSearch() {
       </form>
       <form className="relative w-64 mb-10 hidden lg:block lg:w-44 sm:hidden">
         <input
-          className="w-full py-2.5 pl-5 border border-grey-500 rounded-lg"
+          className="font-myFontRegular text-[14px] w-full py-2.5 pl-5 border border-grey-500 rounded-lg"
           type="search"
           placeholder="Search tran..."
           value={query}

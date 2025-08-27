@@ -5,7 +5,7 @@ export default function RecurringBillsDetails() {
   const test = true;
   return (
     <div className="mx-5">
-      <div className="flex justify-between items-center text-grey-500 text-[12px] font-semibold border-b py-5">
+      <div className="flex justify-between items-center font-myFontRegular text-grey-500 text-[12px] border-b py-5">
         <span className="flex">Bill Title</span>
         <span className="flex sm:hidden">Due Date</span>
         <span className="flex">Amount</span>
@@ -19,12 +19,14 @@ export default function RecurringBillsDetails() {
               alt="{transaction.name}"
               className="rounded-full w-[40px] h-[40px]"
             />
-            <span className="text-grey-900 text-[14px] font-bold whitespace-nowrap">
+            <span className="font-myFontBold text-grey-900 text-[14px] whitespace-nowrap">
               Spark Electric Solutions
             </span>
           </div>
           <div className="hidden items-center w-[210px]  sm:flex">
-            <p className="text-green mr-2">Monthly-2nd</p>
+            <p className="font-myFontRegular text-[12px] text-green mr-2">
+              Monthly-2nd
+            </p>
             {test ? (
               <BillPaid className="text-green" />
             ) : (
@@ -33,7 +35,9 @@ export default function RecurringBillsDetails() {
           </div>
         </div>
         <div className="flex items-center w-[210px] sm:hidden">
-          <p className="text-green mr-2">Monthly-2nd</p>
+          <p className="font-myFontRegular text-[12px] text-green mr-2">
+            Monthly-2nd
+          </p>
           {test ? (
             <BillPaid className="text-green" />
           ) : (
@@ -41,7 +45,7 @@ export default function RecurringBillsDetails() {
           )}
         </div>
         <div>
-          <p className="text-grey-900 text-[14px] font-bold">$100.00</p>
+          <p className="font-myFontBold text-grey-900 text-[14px]">$100.00</p>
         </div>
       </div>
     </div>

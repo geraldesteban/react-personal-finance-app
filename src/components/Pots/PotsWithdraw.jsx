@@ -9,7 +9,7 @@ export default function PotsWithdraw({ active, onClose }) {
 
       <div className="relative bg-white rounded-xl p-10 z-20">
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-grey-900 text-[32px] font-bold">
+          <h2 className="font-myFontBold text-grey-900 text-[32px]">
             Withdraw from `Savings`
           </h2>
           <button onClick={onClose}>
@@ -17,21 +17,27 @@ export default function PotsWithdraw({ active, onClose }) {
           </button>
         </div>
 
-        <p className="text-grey-500 text-[14px] mb-5">
+        <p className="font-myFontRegular text-grey-500 text-[14px] mb-5">
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus
           hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet.
         </p>
         <div className="flex justify-between items-center my-3">
-          <p className="text-grey-500 text-[14px]">New Amount</p>
-          <p className="text-grey-900 text-[32px] font-bold">$139.00</p>
+          <p className="font-myFontRegular text-grey-500 text-[14px]">
+            New Amount
+          </p>
+          <p className="font-myFontBold text-grey-900 text-[32px] font-bold">
+            $139.00
+          </p>
         </div>
         <div className="w-full h-1 rounded-xl bg-black"></div>
         <div className="flex justify-between items-center my-1">
-          <p className="text-red] text-[12px]">5.95%</p>
-          <p className="text-grey-500 text-[12px]">Target of $2,000</p>
+          <p className="font-myFontRegular text-red text-[12px]">5.95%</p>
+          <p className="font-myFontRegular text-grey-500 text-[12px]">
+            Target of $2,000
+          </p>
         </div>
         <form>
-          <label className="block text-grey-500 text-[12px] font-bold mb-2">
+          <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Amount to Withdraw
           </label>
           <input
@@ -41,7 +47,7 @@ export default function PotsWithdraw({ active, onClose }) {
           />
         </form>
 
-        <button className="w-full py-5 bg-grey-900 rounded-xl text-white font-bold">
+        <button className="font-myFontBold text-[14px] w-full py-5 bg-grey-900 rounded-xl text-white font-bold">
           Confirm Withdrawal
         </button>
       </div>

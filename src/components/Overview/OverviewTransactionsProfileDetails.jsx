@@ -13,13 +13,17 @@ export default function OverviewTransactionsProfileDetails({
             src={profileImage}
             alt={profileName}
           />
-          <h2 className="text-grey-900 text-[14px] font-bold">{profileName}</h2>
+          <h2 className="font-myFontBold text-grey-900 text-[14px]">
+            {profileName}
+          </h2>
         </div>
-        <div className="">
-          <h2 className="text-green text-[14px] font-bold">
+        <div>
+          <h2 className="font-myFontBold text-green text-[14px] text-right mb-1">
             {transactionMoney}
           </h2>
-          <p className="text-grey-500 text-[12px]">{transactionDate}</p>
+          <p className="font-myFontRegular text-grey-500 text-[12px]">
+            {transactionDate}
+          </p>
         </div>
       </div>
       <div className="h-[1px] w-full bg-grey-100 my-5"></div>

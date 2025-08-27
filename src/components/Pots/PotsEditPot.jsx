@@ -9,7 +9,7 @@ export default function PotsEditPot({ active, onClose }) {
 
       <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 md:mx-10">
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-grey-900 text-[32px] font-bold sm:text-[20px]">
+          <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
             Edit Pot
           </h2>
           <button onClick={onClose}>
@@ -17,12 +17,12 @@ export default function PotsEditPot({ active, onClose }) {
           </button>
         </div>
 
-        <p className="text-grey-500 text-[14px] mb-5">
+        <p className="font-myFontRegular text-grey-500 text-[14px] mb-5">
           If your saving targets change, feel free to update your pots.
         </p>
 
         <form>
-          <label className="block text-grey-500 text-[12px] font-bold mb-2">
+          <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Pot Name
           </label>
           <input
@@ -31,7 +31,7 @@ export default function PotsEditPot({ active, onClose }) {
             className="w-full border border-beige-500 rounded-xl py-2 pl-5 mb-5"
           />
 
-          <label className="block text-grey-500 text-[12px] font-bold mb-2">
+          <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Target
           </label>
           <input
@@ -40,7 +40,7 @@ export default function PotsEditPot({ active, onClose }) {
             className="w-full border border-beige-500 rounded-xl py-2 pl-5 mb-5"
           />
 
-          <label className="block text-grey-500 text-[12px] font-bold mb-2">
+          <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Theme
           </label>
           <select
@@ -65,7 +65,7 @@ export default function PotsEditPot({ active, onClose }) {
           </select>
         </form>
 
-        <button className="w-full py-5 bg-grey-900 rounded-xl text-white font-bold">
+        <button className="font-myFontBold text-[14px] w-full py-5 bg-grey-900 rounded-xl text-white">
           Save Changes
         </button>
       </div>

@@ -7,7 +7,7 @@ export default function TransactionsCategory() {
 
   return (
     <div className="flex items-center">
-      <h2 className="text-grey-500 text-[14px] mr-3 sm:hidden sm:mr-0">
+      <h2 className="font-myFontRegular text-grey-500 text-[14px] mr-3 sm:hidden sm:mr-0">
         Category
       </h2>
       <div className="relative">
@@ -15,7 +15,7 @@ export default function TransactionsCategory() {
           className="flex items-center px-6 py-3 border border-beige-500 rounded-xl transition duration-500 hover:border-grey-900 focus:border-grey-900 sm:px-0 sm:py-0 sm:border-none"
           onClick={() => setActive(!active)}
         >
-          <span className="text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">
+          <span className="font-myFontRegular text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">
             All Transactions
           </span>
           <CaretDown

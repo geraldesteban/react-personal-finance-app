@@ -26,7 +26,7 @@ export default function TransactionsDetails() {
 
   return (
     <div className="mx-5">
-      <div className="flex justify-between items-center text-grey-500 text-[12px] font-semibold border-b pb-2">
+      <div className="flex justify-between items-center font-myFontRegular text-[12px] text-grey-500 border-b py-5">
         <span className="w-[150px]">Recipient/Sender</span>
         <div className="flex w-[200px] justify-between">
           <span className="w-1/2 sm:w-0 sm:hidden">Category</span>
@@ -36,7 +36,7 @@ export default function TransactionsDetails() {
       </div>
       {currentData.map((transaction, id) => (
         <div
-          className="flex justify-between items-center text-grey-500 text-[12px] py-5 border-b"
+          className="flex justify-between items-center py-5 border-b"
           key={id}
         >
           <div className="flex items-center w-[150px]">
@@ -45,30 +45,35 @@ export default function TransactionsDetails() {
               alt={transaction.name}
               className="rounded-full w-[40px] h-[40px] mr-5"
             />
-            <span className="text-grey-900 text-[14px] font-bold whitespace-nowrap">
+            <span className="font-myFontBold text-grey-900 text-[14px] whitespace-nowrap">
               {transaction.name}
             </span>
-            <h2></h2>
           </div>
           <div className="flex w-[200px] justify-between">
-            <span className="w-1/2 sm:w-0 sm:hidden">
+            <span className="font-myFontRegular text-[12px] text-grey-500 w-1/2 sm:w-0 sm:hidden">
               {transaction.category}
             </span>
-            <span className="w-1/2 sm:w-0 sm:hidden">{transaction.date}</span>
+            <span className="font-myFontRegular text-[12px] text-grey-500 w-1/2 sm:w-0 sm:hidden">
+              {transaction.date}
+            </span>
           </div>
-          <span className="w-[100px] text-right">{transaction.amount}</span>
+          <span className="font-myFontBold text-[12px] text-green w-[100px] text-right">
+            {transaction.amount}
+          </span>
         </div>
       ))}
       <div className="flex justify-between items-center mt-10">
         <button
-          className={`group text-grey-900 flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
+          className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
             currentPage === 1 ? "cursor-not-allowed" : ""
           } hover:border-beige-500 hover:bg-beige-500 hover:text-white sm:px-5`}
           onClick={prevPage}
           disabled={currentPage === 1}
         >
           <CaretRight className="text-grey-500 mr-5 group-hover:text-white sm:mr-0" />
-          <span className="text-[14px] sm:hidden">Prev</span>
+          <span className="font-myFontRegular text-grey-900 text-[14px] sm:hidden">
+            Prev
+          </span>
         </button>
         <div className="flex mx-2">
           {[...Array(5)].map((_, i) => (
@@ -84,8 +89,12 @@ export default function TransactionsDetails() {
             >
               {i + 1 === 3 ? (
                 <>
-                  <span className="sm:hidden">{i + 1}</span>
-                  <span className="hidden sm:block">...</span>
+                  <span className="font-myFontRegular text-[14px] sm:hidden">
+                    {i + 1}
+                  </span>
+                  <span className="font-myFontRegular text-[14px] hidden sm:block">
+                    ...
+                  </span>
                 </>
               ) : (
                 i + 1
@@ -94,13 +103,15 @@ export default function TransactionsDetails() {
           ))}
         </div>
         <button
-          className={`group text-grey-900 flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
+          className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
             currentPage === totalPages ? "cursor-not-allowed" : ""
           } hover:border-beige-500 hover:bg-beige-500 hover:text-white sm:px-5`}
           onClick={nextPage}
           disabled={currentPage === totalPages}
         >
-          <span className="mr-5 sm:mr-5 sm:hidden">Next</span>
+          <span className="font-myFontRegular text-grey-900 mr-5 sm:mr-5 sm:hidden">
+            Next
+          </span>
           <CaretLeft className="text-grey-500 group-hover:text-white" />
         </button>
       </div>

@@ -1,3 +1,5 @@
 export default function Heading({ children }) {
-  return <h2 className="text-[32px] font-bold text-grey-900">{children}</h2>;
+  return (
+    <h2 className="font-myFontBold text-[32px] text-grey-900">{children}</h2>
+  );
 }
