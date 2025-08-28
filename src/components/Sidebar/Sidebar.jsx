@@ -15,21 +15,23 @@ function Sidebar() {
 
   return (
     <div
-      className={`bg-grey-900 flex flex-col justify-between py-10 rounded-tr-xl rounded-br-xl
+      className={`bg-grey-900 flex flex-col h-full justify-between py-10 rounded-tr-xl rounded-br-xl
     transition-[width] duration-200
-    ${active ? "w-[500px]" : "w-[110px]"} lg:hidden`}
+    ${
+      active ? "w-[300px]" : "w-[110px]"
+    } lg:w-full lg:py-0 lg:rounded-br-none lg:rounded-tl-xl lg:pt-2 lg:px-5`}
     >
       {/* Navigation Sidebar */}
       <nav className="text-grey-300">
         {/* Logo */}
         <NavLink>
           {active ? (
-            <LogoLargeIcon className="mb-16 ml-10" />
+            <LogoLargeIcon className="mb-16 ml-10 lg:hidden lg:mb-0 lg:ml-0" />
           ) : (
-            <LogoSmallIcon className="mb-16 ml-10" />
+            <LogoSmallIcon className="mb-16 ml-10 lg:hidden lg:mb-0 lg:ml-0" />
           )}
         </NavLink>
-        <ul className="flex flex-col text-[16px]">
+        <ul className="flex flex-col text-[16px] lg:flex-row lg:justify-between">
           <SidebarNavigations
             to={"/overview"}
             label="Overview"
@@ -59,12 +61,11 @@ function Sidebar() {
             label="Recurring Bills"
             icon={RecurringBillsIcon}
             isActive={active}
-            width="w-28"
           />
         </ul>
       </nav>
       <button
-        className={`group font-bold flex items-center py-5`}
+        className={`group font-bold flex items-center py-5 lg:hidden`}
         onClick={() => setActive(!active)}
       >
         <MinimizeLeftIcon
@@ -73,7 +74,7 @@ function Sidebar() {
           } group-hover:text-grey-100`}
         />
         <span
-          className={`text-grey-300 ${
+          className={`whitespace-nowrap text-grey-300 ${
             active ? "block w-32" : "hidden w-32"
           } group-hover:text-grey-100`}
         >
