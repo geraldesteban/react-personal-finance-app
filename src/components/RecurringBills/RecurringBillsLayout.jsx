@@ -7,7 +7,7 @@ import RecurringBillsTotal from "./RecurringBillsTotal";
 
 export default function RecurringBillsLayout() {
   return (
-    <>
+    <div className="m-10 lg:m-5">
       <Heading>Recurring Bills</Heading>
       <div className="flex justify-between gap-5 mt-10 lg:flex-col">
         <div className="flex-[1] flex flex-col gap-5 lg:flex-row sm:flex-col">
@@ -24,6 +24,6 @@ export default function RecurringBillsLayout() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

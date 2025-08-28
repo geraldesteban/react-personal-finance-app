@@ -7,7 +7,7 @@ import Heading from "../Heading";
 
 export default function OverviewLayout() {
   return (
-    <>
+    <div className="m-10 lg:m-5">
       <Heading>Overview</Heading>
       <OverviewBalanceIncomeExpenses />
       <div className="flex gap-5 lg:flex-col">
@@ -20,6 +20,6 @@ export default function OverviewLayout() {
           <OverviewRecurringBills />
         </div>
       </div>
-    </>
+    </div>
   );
 }

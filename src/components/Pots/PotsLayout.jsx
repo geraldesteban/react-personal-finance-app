@@ -7,7 +7,7 @@ export default function PotsLayout() {
   const [active, setActive] = useState(false);
 
   return (
-    <>
+    <div className="m-10 lg:m-5">
       <div className="flex justify-between items-center relative">
         <Heading>Pots</Heading>
         <button
@@ -19,6 +19,6 @@ export default function PotsLayout() {
       </div>
       <PotsList />
       <PotsAddNewPot active={active} onClose={() => setActive(false)} />
-    </>
+    </div>
   );
 }

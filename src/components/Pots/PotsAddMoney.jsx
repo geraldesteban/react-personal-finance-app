@@ -7,7 +7,7 @@ export default function PotsAddMoney({ active, onClose }) {
     <div className="fixed inset-0 z-20 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/70"></div>
 
-      <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 md:mx-10">
+      <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 lg:mx-10 sm:mx-5">
         <div className="flex justify-between items-center mb-5 sm:text-[20px]">
           <h2 className="font-myFontBold text-grey-900 text-[32px]">
             Add to `Savings`

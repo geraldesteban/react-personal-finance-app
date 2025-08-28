@@ -8,7 +8,7 @@ export default function BudgetsLayout() {
   const [active, setActive] = useState(false);
 
   return (
-    <>
+    <div className="m-10 lg:m-5">
       <div className="flex justify-between items-center relative">
         <Heading>Budgets</Heading>
         <button
@@ -23,6 +23,6 @@ export default function BudgetsLayout() {
         <BudgetsList />
       </div>
       <BudgetsAddNewBudget active={active} onClose={() => setActive(false)} />
-    </>
+    </div>
   );
 }

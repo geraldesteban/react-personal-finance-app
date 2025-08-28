@@ -10,7 +10,7 @@ export default function TransactionsSearch() {
 
   return (
     <>
-      <form className="relative w-64 mb-10 lg:hidden sm:block">
+      <form className="relative w-64 mb-10 lg:hidden sm:block sm:mr-2">
         <input
           className="font-myFontRegular text-[14px] w-full py-2.5 pl-5 border border-beige-500 rounded-lg outline-none"
           type="search"
@@ -20,7 +20,7 @@ export default function TransactionsSearch() {
         />
         <SearchIcon className="absolute inset-y-4 right-5 flex items-center text-grey-900" />
       </form>
-      <form className="relative w-64 mb-10 hidden lg:block lg:w-44 sm:hidden">
+      <form className="relative w-64 mb-10 hidden lg:block lg:w-44 sm:hidden sm:mr-2">
         <input
           className="font-myFontRegular text-[14px] w-full py-2.5 pl-5 border border-grey-500 rounded-lg"
           type="search"

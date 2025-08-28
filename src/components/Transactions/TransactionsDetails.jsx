@@ -39,6 +39,7 @@ export default function TransactionsDetails() {
         <span className="w-[150px]">Recipient/Sender</span>
         <div className="flex w-[200px] justify-between">
           <span className="w-1/2 sm:w-0 sm:hidden">Category</span>
+
           <span className="w-1/2 sm:w-0 sm:hidden">Transaction Date</span>
         </div>
         <span className="w-[100px] text-right">Amount</span>
@@ -80,7 +81,7 @@ export default function TransactionsDetails() {
         <button
           className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
             currentPage === 1 ? "cursor-not-allowed" : ""
-          } hover:border-beige-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-6 sm:py-4`}
+          } hover:border-beige-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-[15px] sm:py-[10px]`}
           onClick={prevPage}
           disabled={currentPage === 1}
         >
@@ -89,14 +90,14 @@ export default function TransactionsDetails() {
             Prev
           </span>
         </button>
-        <div className="flex mx-2 sm:flex-wrap">
+        <div className="flex mx-2 sm:flex-wrap sm:mx-[2px]">
           {[...Array(5)].map((_, i) => (
             <button
               className={`text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 transition duration-500 ${
                 currentPage === i + 1
                   ? "bg-grey-900 text-white border-grey-900"
                   : ""
-              } ${i + 1 === 4 ? "sm:hidden" : ""}`}
+              } ${i + 1 === 4 ? "sm:hidden" : ""} sm:py-1 sm:px-3`}
               onClick={() => setCurrentPage(i + 1)}
               key={i}
               disabled={i + 1 === 3 && smallScreen}
@@ -119,7 +120,7 @@ export default function TransactionsDetails() {
         <button
           className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
             currentPage === totalPages ? "cursor-not-allowed" : ""
-          } hover:border-beige-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-6 sm:py-4`}
+          } hover:border-beige-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-[15px] sm:py-[10px]`}
           onClick={nextPage}
           disabled={currentPage === totalPages}
         >
