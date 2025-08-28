@@ -1,10 +1,16 @@
-import data from "../../data/data.json";
+import { useState } from "react";
+import { DATAURL } from "../../utils/constants";
+import { formatCurrency } from "../../utils/formatCurrency";
+import { formatDate } from "../../utils/formatDate";
 import CaretLeft from "../../assets/icon-caret-right.svg?react";
 import CaretRight from "../../assets/icon-caret-left.svg?react";
-import { useState } from "react";
+import useFetchData from "../../hooks/useFetchData";
+import Spinner from "../Spinner";
 
 export default function TransactionsDetails() {
   const [currentPage, setCurrentPage] = useState(1);
+  const { data, error, loading } = useFetchData(DATAURL);
+
   const transactions = data.transactions;
   const dataPerPage = 10;
 
@@ -24,8 +30,11 @@ export default function TransactionsDetails() {
     setCurrentPage((curPage) => curPage - 1);
   }
 
+  if (loading) return <Spinner />;
+  if (error) return <p>{error.message}</p>;
+
   return (
-    <div className="mx-5">
+    <div className="mx-5 sm:mx-0">
       <div className="flex justify-between items-center font-myFontRegular text-[12px] text-grey-500 border-b py-5">
         <span className="w-[150px]">Recipient/Sender</span>
         <div className="flex w-[200px] justify-between">
@@ -54,19 +63,24 @@ export default function TransactionsDetails() {
               {transaction.category}
             </span>
             <span className="font-myFontRegular text-[12px] text-grey-500 w-1/2 sm:w-0 sm:hidden">
-              {transaction.date}
+              {formatDate(transaction.date)}
             </span>
           </div>
-          <span className="font-myFontBold text-[12px] text-green w-[100px] text-right">
-            {transaction.amount}
+          <span
+            className={`font-myFontBold text-[12px] text-${
+              transaction.amount > 0 ? "green" : "grey-900"
+            } w-[100px] text-right`}
+          >
+            {transaction.amount > 0 ? "+" : ""}
+            {formatCurrency(transaction.amount, "USD")}
           </span>
         </div>
       ))}
-      <div className="flex justify-between items-center mt-10">
+      <div className="flex justify-between items-center mt-10 sm:flex-wrap">
         <button
           className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
             currentPage === 1 ? "cursor-not-allowed" : ""
-          } hover:border-beige-500 hover:bg-beige-500 hover:text-white sm:px-5`}
+          } hover:border-beige-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-6 sm:py-4`}
           onClick={prevPage}
           disabled={currentPage === 1}
         >
@@ -75,7 +89,7 @@ export default function TransactionsDetails() {
             Prev
           </span>
         </button>
-        <div className="flex mx-2">
+        <div className="flex mx-2 sm:flex-wrap">
           {[...Array(5)].map((_, i) => (
             <button
               className={`text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 transition duration-500 ${
@@ -105,7 +119,7 @@ export default function TransactionsDetails() {
         <button
           className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 ${
             currentPage === totalPages ? "cursor-not-allowed" : ""
-          } hover:border-beige-500 hover:bg-beige-500 hover:text-white sm:px-5`}
+          } hover:border-beige-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-6 sm:py-4`}
           onClick={nextPage}
           disabled={currentPage === totalPages}
         >

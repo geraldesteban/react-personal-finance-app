@@ -10,7 +10,7 @@ export default function RecurringBillsLayout() {
     <>
       <Heading>Recurring Bills</Heading>
       <div className="flex justify-between gap-5 mt-10 lg:flex-col">
-        <div className="flex-[1] flex flex-col gap-5 lg:flex-col">
+        <div className="flex-[1] flex flex-col gap-5 lg:flex-row sm:flex-col">
           <RecurringBillsTotal />
           <RecurringBillsSummary />
         </div>

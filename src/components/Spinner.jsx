@@ -1,6 +1,6 @@
 export default function Spinner() {
   return (
-    <div className="flex items-center justify-center h-full w-full">
+    <div className="flex items-center justify-center min-h-screen w-full">
       <div
         className="w-[40px] aspect-square rounded-full animate-spin"
         style={{

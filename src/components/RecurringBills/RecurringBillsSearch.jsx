@@ -9,7 +9,7 @@ export default function RecurringBillsSearch() {
   }
 
   return (
-    <form className="relative w-64 sm:w-40">
+    <form className="relative w-64 mr-10 lg:w-96 sm:w-72 sm:mr-5">
       <input
         className="font-myFontRegular text-[14px] w-full py-2.5 pl-5 border border-beige-500 rounded-lg outline-none"
         type="search"

@@ -19,7 +19,7 @@ export default function RecurringBillsDetails() {
               alt="{transaction.name}"
               className="rounded-full w-[40px] h-[40px]"
             />
-            <span className="font-myFontBold text-grey-900 text-[14px] whitespace-nowrap">
+            <span className="font-myFontBold text-grey-900 text-[14px]">
               Spark Electric Solutions
             </span>
           </div>

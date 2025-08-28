@@ -1,3 +1,6 @@
+import { formatCurrency } from "../../utils/formatCurrency";
+import { formatDate } from "../../utils/formatDate";
+
 export default function OverviewTransactionsProfileDetails({
   profileImage,
   profileName,
@@ -6,7 +9,7 @@ export default function OverviewTransactionsProfileDetails({
 }) {
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between py-5 border-b border-grey-100 last:border-none last:pb-0">
         <div className="flex items-center">
           <img
             className="mr-5 rounded-full w-[40px] h-[40px]"
@@ -18,15 +21,19 @@ export default function OverviewTransactionsProfileDetails({
           </h2>
         </div>
         <div>
-          <h2 className="font-myFontBold text-green text-[14px] text-right mb-1">
-            {transactionMoney}
+          <h2
+            className={`font-myFontBold text-${
+              transactionMoney > 0 ? "green" : "grey-900"
+            } text-[14px] text-right mb-1`}
+          >
+            {transactionMoney > 0 ? "+" : ""}
+            {formatCurrency(transactionMoney, "USD")}
           </h2>
           <p className="font-myFontRegular text-grey-500 text-[12px]">
-            {transactionDate}
+            {formatDate(transactionDate)}
           </p>
         </div>
       </div>
-      <div className="h-[1px] w-full bg-grey-100 my-5"></div>
     </>
   );
 }

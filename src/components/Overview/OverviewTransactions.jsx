@@ -1,12 +1,15 @@
 import OverviewTransactionsProfileDetails from "./OverviewTransactionsProfileDetails";
 import CheckDetails from "../CheckDetails";
-import data from "../../data/data.json";
+import { DATAURL } from "../../utils/constants";
+import useFetchData from "../../hooks/useFetchData";
 
 function OverviewTransactions() {
+  const { data } = useFetchData(DATAURL);
+
   const transactions = data.transactions;
 
   return (
-    <div className="flex-1 bg-white p-10 rounded-xl lg:p-5">
+    <div className="bg-white p-10 rounded-xl lg:p-5 lg:w-full">
       <CheckDetails
         heading="Transactions"
         span="View All"

@@ -9,23 +9,16 @@ export default function OverviewLayout() {
   return (
     <>
       <Heading>Overview</Heading>
-      <div className="flex justify-between items-stretch gap-6 flex-wrap mt-10">
-        {/* Current Balance, Income, and Expenses */}
-        <div className="flex flex-1 gap-6 lg:flex-wrap sm:flex-col">
-          <OverviewBalanceIncomeExpenses />
+      <OverviewBalanceIncomeExpenses />
+      <div className="flex gap-5 lg:flex-col">
+        <div className="grid grid-rows-1 flex-1 gap-5 flex-wrap">
+          <OverviewPots />
+          <OverviewTransactions />
         </div>
-      </div>
-      <div className="flex justify-between items-stretch gap-6 flex-wrap mt-6 lg:flex-col">
-        {/* Overview Pots*/}
-        <OverviewPots />
-        {/* Overview Budgets */}
-        <OverviewBudgets />
-      </div>
-      <div className="flex justify-between items-stretch gap-6 flex-wrap mt-6 lg:flex-col">
-        {/* Overview Transactions */}
-        <OverviewTransactions />
-        {/* Overview Recurring Bills */}
-        <OverviewRecurringBills />
+        <div className="grid grid-rows-2 flex-1 gap-5 flex-wrap lg:flex-col">
+          <OverviewBudgets />
+          <OverviewRecurringBills />
+        </div>
       </div>
     </>
   );

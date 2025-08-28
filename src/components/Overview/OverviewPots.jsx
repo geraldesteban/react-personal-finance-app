@@ -3,10 +3,10 @@ import CheckDetails from "../CheckDetails";
 
 function OverviewPots() {
   return (
-    <div className="flex-1 bg-white p-10 rounded-xl lg:p-5">
+    <div className="bg-white p-10 rounded-xl lg:p-5">
       <CheckDetails heading="Pots" span="See Details" seeDetails="pots" />
-      <div className="flex items-center justify-between">
-        <div className="flex flex-1 items-center bg-[#F8F4F0] rounded-xl py-5 pr-5">
+      <div className="flex items-center justify-between sm:flex-col sm:items-start">
+        <div className="flex flex-1 items-center bg-[#F8F4F0] rounded-xl py-5 pr-5 sm:w-full sm:pr-0 sm:mb-5">
           <PotIcon className="w-[25px] h-[35px] mx-5" />
           <div>
             <h2 className="font-myFontRegular text-grey-500 text-[14px] mb-1">
@@ -15,7 +15,7 @@ function OverviewPots() {
             <p className="font-myFontBold text-grey-900 text-[32px]">$850</p>
           </div>
         </div>
-        <div className="flex ml-5">
+        <div className="flex ml-5 sm:ml-0">
           <div>
             <div className="relative mb-5">
               <div className="absolute bg-green w-1 h-full rounded-xl"></div>
@@ -26,7 +26,7 @@ function OverviewPots() {
                 $159
               </p>
             </div>
-            <div className="relative mr-5">
+            <div className="relative mr-5 sm:mr-16">
               <div className="absolute bg-navy w-1 h-full rounded-xl"></div>
               <h2 className="font-myFontRegular text-grey-500 text-[12px] ml-5 mb-1">
                 Concert Ticket

@@ -10,7 +10,7 @@ export default function BudgetsList() {
   const [deleteModalActive, setDeleteModalActive] = useState(false);
 
   return (
-    <div className="flex-1 bg-white rounded-xl p-10">
+    <div className="flex-1 bg-white rounded-xl p-10 sm:p-5">
       <div className="flex justify-between items-center mb-5">
         <div className="flex items-center">
           <div className="w-4 h-4 bg-black rounded-full mr-5"></div>
@@ -103,8 +103,6 @@ export default function BudgetsList() {
           </div>
         </div>
       </div>
-
-      {/* Modals */}
       <BudgetsEditBudget
         active={editModalActive}
         onClose={() => setEditModalActive(false)}
