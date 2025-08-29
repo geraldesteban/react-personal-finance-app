@@ -1,13 +1,26 @@
 import useFetchData from "../../hooks/useFetchData";
 import { DATAURL } from "../../utils/constants";
+import { formatCurrency } from "../../utils/formatCurrency";
+import { getDayOnly } from "../../utils/formatDate";
 
 export function RecurringBills() {
   const { data } = useFetchData(DATAURL);
 
-  /* Formatted amounts, date, and recurring */
+  /* Recurring Bills Details */
+  const recurringBillsDetails = data.transactions
+    .map((val) => ({
+      billImage: val.avatar,
+      billTitle: val.name,
+      amount: formatCurrency(Math.abs(val.amount)),
+      date: getDayOnly(new Date(val.date)),
+      recurring: val.recurring,
+    }))
+    .filter((rec) => rec.recurring === true);
+
+  console.log(recurringBillsDetails);
+
+  /* Formatted Amounts, Date, and Recurring */
   const amountDateRecurring = data.transactions.map((val) => ({
-    billImage: val.avatar,
-    billTitle: val.name,
     amount: Math.abs(val.amount),
     date: new Date(val.date).getDate(),
     recurring: val.recurring,
@@ -64,5 +77,6 @@ export function RecurringBills() {
     totalUpcomingLength,
     dueSoon,
     dueSoonLength,
+    recurringBillsDetails,
   };
 }
