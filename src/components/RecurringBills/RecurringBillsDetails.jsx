@@ -1,15 +1,10 @@
 import BillPaid from "../../assets/icon-bill-paid.svg?react";
 import BillDue from "../../assets/icon-bill-due.svg?react";
-import { formatCurrency } from "../../utils/formatCurrency";
-import { getDayOnly } from "../../utils/formatDate";
 import { RecurringBills } from "./RecurringBills";
+import Spinner from "../Spinner";
 
 export default function RecurringBillsDetails() {
-  const { data } = RecurringBills();
-
-  const recurringBills = data.transactions.filter(
-    (transac) => transac.recurring === true
-  );
+  const { recurringBillsDetails } = RecurringBills();
 
   return (
     <div className="mx-5">
@@ -18,7 +13,7 @@ export default function RecurringBillsDetails() {
         <span className="flex sm:hidden">Due Date</span>
         <span className="flex">Amount</span>
       </div>
-      {recurringBills.map((recurring, id) => {
+      {recurringBillsDetails.map((recurring, id) => {
         return (
           <div
             className="flex justify-between items-center border-b py-5"
@@ -27,46 +22,48 @@ export default function RecurringBillsDetails() {
             <div className="flex items-center sm:flex-col">
               <div className="flex items-center gap-5">
                 <img
-                  src={`${recurring.avatar}`}
-                  alt={`${recurring.name}`}
+                  src={`${recurring.billImage}`}
+                  alt={`${recurring.billTitle}`}
                   className="rounded-full w-[40px] h-[40px]"
                 />
                 <span className="font-myFontBold text-grey-900 text-[14px]">
-                  {recurring.name}
+                  {recurring.billTitle}
                 </span>
               </div>
+              {/* Due Date output. Only display in Mobile*/}
               <div className="hidden items-center w-[210px]  sm:flex">
                 <p
                   className={`font-myFontRegular text-[12px] ${
-                    new Date(recurring.date).getDate() >= 19 &&
-                    new Date(recurring.date).getDate() <= 24
+                    +recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
+                    +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24
                       ? "text-red"
                       : "text-green"
                   } mr-2`}
                 >
-                  Monthly-{getDayOnly(recurring.date)}
+                  Monthly-{recurring.date}
                 </p>
-                {new Date(recurring.date).getDate() >= 19 &&
-                new Date(recurring.date).getDate() <= 24 ? (
+                {+recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
+                +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24 ? (
                   <BillDue className="text-red" />
                 ) : (
                   <BillPaid className="text-green" />
                 )}
               </div>
             </div>
+            {/* Due Date output. Only display in Desktop */}
             <div className="flex items-center w-[210px] sm:hidden">
               <p
                 className={`font-myFontRegular text-[12px] ${
-                  new Date(recurring.date).getDate() >= 19 &&
-                  new Date(recurring.date).getDate() <= 24
+                  +recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
+                  +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24
                     ? "text-red"
                     : "text-green"
                 } mr-2`}
               >
-                Monthly-{getDayOnly(recurring.date)}
+                Monthly-{recurring.date}
               </p>
-              {new Date(recurring.date).getDate() >= 19 &&
-              new Date(recurring.date).getDate() <= 24 ? (
+              {+recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
+              +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24 ? (
                 <BillDue className="text-red" />
               ) : (
                 <BillPaid className="text-green" />
@@ -75,13 +72,13 @@ export default function RecurringBillsDetails() {
             <div>
               <p
                 className={`font-myFontBold ${
-                  new Date(recurring.date).getDate() >= 19 &&
-                  new Date(recurring.date).getDate() <= 24
+                  +recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
+                  +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24
                     ? "text-red"
                     : "text-grey-900"
                 } text-[14px]`}
               >
-                {formatCurrency(recurring.amount).replace("-", "")}
+                {recurring.amount}
               </p>
             </div>
           </div>
