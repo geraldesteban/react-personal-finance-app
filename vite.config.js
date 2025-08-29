@@ -4,4 +4,8 @@ import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
   plugins: [react(), svgr()],
+  server: {
+    // This ensures SPA fallback on development server
+    historyApiFallback: true,
+  },
 });
