@@ -1,7 +1,7 @@
 export default function Error({ error }) {
   return (
-    <div>
-      <p>{error}</p>
+    <div className="flex justify-center items-center">
+      <p className="text-red">{error}</p>
     </div>
   );
 }
