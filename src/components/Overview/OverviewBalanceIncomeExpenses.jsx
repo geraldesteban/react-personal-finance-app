@@ -8,7 +8,7 @@ export default function OverviewBalanceIncomeExpenses() {
 
   if (isLoading)
     return (
-      <div className="flex flex-wrap gap-5 mb-5 sm:flex-col mt-10">
+      <div className="flex flex-wrap gap-5 mb-5 ssm:flex-col mt-10">
         <div className={`flex-1 p-7 rounded-xl text-white bg-grey-900 lg:p-5`}>
           <Spinner />
         </div>
@@ -36,9 +36,6 @@ export default function OverviewBalanceIncomeExpenses() {
       </div>
     );
 
-  const [balanceData] = balances;
-  const { balance, income, expenses } = balanceData;
-
   return (
     <div className="flex flex-wrap gap-5 mb-5 sm:flex-col mt-10">
       <div className={`flex-1 p-7 rounded-xl text-white bg-grey-900 lg:p-5`}>
@@ -46,7 +43,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Current Balance
         </h2>
         <p className={`font-myFontBold text-[32px] text-white`}>
-          {formatCurrency(balance, "USD")}
+          {formatCurrency(balances.balance, "USD")}
         </p>
       </div>
       <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
@@ -54,7 +51,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Income
         </h2>
         <p className={`font-myFontBold text-[32px] text-grey-900`}>
-          {formatCurrency(income, "USD")}
+          {formatCurrency(balances.income, "USD")}
         </p>
       </div>
       <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
@@ -62,7 +59,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Expenses
         </h2>
         <p className={`font-myFontBold text-[32px] text-grey-900`}>
-          {formatCurrency(expenses, "USD")}
+          {formatCurrency(balances.expenses, "USD")}
         </p>
       </div>
     </div>

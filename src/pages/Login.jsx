@@ -1,9 +1,9 @@
-import AuthenticationLayout from "../components/Authentication/AuthenticationLayout";
+import AuthenticationLogin from "../components/Authentication/AuthenticationLogin";
 
 export default function Login() {
   return (
-    <div className="bg-[#F8F4F0]">
-      <AuthenticationLayout />
+    <div className="flex justify-center items-center bg-[#F2F3F7] h-screen">
+      <AuthenticationLogin />
     </div>
   );
 }
