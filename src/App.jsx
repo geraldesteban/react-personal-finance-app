@@ -8,6 +8,7 @@ import Transactions from "./pages/Transactions";
 import Budgets from "./pages/Budgets";
 import Pots from "./pages/Pots";
 import RecurringBills from "./pages/RecurringBills";
+import Signup from "./pages/Signup";
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+
           <Route index element={<Navigate replace to="/login" />} />
           <Route path="/" element={<AppLayout />}>
             <Route path="overview" element={<Overview />} />
