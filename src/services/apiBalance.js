@@ -1,11 +1,21 @@
 import supabase from "./supabase";
 
 export async function getBalance() {
-  let query = supabase
-    .from("balances")
-    .select("id, balance, income, expenses, created_at");
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
 
-  const { data, error } = await query;
+  if (userError) {
+    console.error(userError);
+    throw new Error("User not logged in");
+  }
+
+  const { data, error } = await supabase
+    .from("balances")
+    .select("id, balance, income, expenses, created_at")
+    .eq("user_id", user.id)
+    .maybeSingle();
 
   if (error) {
     console.error(error);
