@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useLogin } from "./useLogin";
 import { NavLink } from "react-router-dom";
 import Spinner from "../Spinner";
+import Error from "../Error";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isPending } = useLogin();
+  const { login, isLogin, errorLogin } = useLogin();
 
   function handleHidePassword() {
     setShowPassword(!showPassword);
@@ -20,6 +21,8 @@ export default function Login() {
 
     login({ email, password });
   }
+
+  if (errorLogin) return <Error errorMessage={errorLogin} />;
 
   return (
     <form
@@ -50,10 +53,10 @@ export default function Login() {
       </span>
       <button
         type="submit"
-        disabled={isPending}
+        disabled={isLogin}
         className="font-myFontBold text-[14px] text-white bg-grey-900 py-5 rounded-xl w-full my-10"
       >
-        {isPending ? <Spinner /> : "Login"}
+        {isLogin ? <Spinner /> : "Login"}
       </button>
       <div className="text-center">
         <span className="font-myFontRegular text-[14px] text-grey-500 mr-2">

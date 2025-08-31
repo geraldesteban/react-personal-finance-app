@@ -1,6 +1,27 @@
+import { useState } from "react";
 import CloseModal from "../../assets/icon-close-modal.svg?react";
+import Spinner from "../Spinner";
+import { useAddMoney } from "./useAddMoney";
+import { usePot } from "./usePot";
+import { formatCurrency } from "../../utils/formatCurrency";
 
-export default function PotsAddMoney({ active, onClose }) {
+export default function PotsAddMoney({ active, onClose, potId }) {
+  const { addPotMoney, isAddPotMoney, errorAddPotMoney } = useAddMoney(onClose);
+  const { potData } = usePot(potId);
+  const targetMoney = potData?.targetMoney;
+
+  const [amountPotMoney, setAmountPotMoney] = useState(0);
+
+  function handleAddPotMoney(e) {
+    e.preventDefault();
+    addPotMoney({ pot_id: potId, amount: amountPotMoney });
+    setAmountPotMoney(0);
+  }
+
+  if (isAddPotMoney) return <Spinner />;
+
+  if (errorAddPotMoney) return <p>Error</p>;
+
   if (!active) return null;
 
   return (
@@ -24,7 +45,9 @@ export default function PotsAddMoney({ active, onClose }) {
           <p className="font-myFontRegular text-grey-500 text-[14px]">
             New Amount
           </p>
-          <p className="font-myFontBold text-grey-900 text-[32px]">$559.00</p>
+          <p className="font-myFontBold text-grey-900 text-[32px]">
+            {formatCurrency(targetMoney - amountPotMoney)}
+          </p>
         </div>
         <div className="w-full h-1 rounded-xl bg-black"></div>
         <div className="flex justify-between items-center my-1">
@@ -33,20 +56,26 @@ export default function PotsAddMoney({ active, onClose }) {
             Target of $2,000
           </p>
         </div>
-        <form>
+        <form onSubmit={handleAddPotMoney}>
           <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Amount to Add
           </label>
           <input
             type="text"
+            value={amountPotMoney}
+            onChange={(e) => setAmountPotMoney(Number(e.target.value))}
             placeholder="$"
             className="w-full border border-beige-500 rounded-xl py-2 pl-5 mb-5"
+            required
           />
+          <button
+            type="submit"
+            disabled={isAddPotMoney}
+            className="font-myFontBold text-[14px] w-full py-5 bg-grey-900 rounded-xl text-white"
+          >
+            Confirm Addition
+          </button>
         </form>
-
-        <button className="font-myFontBold text-[14px] w-full py-5 bg-grey-900 rounded-xl text-white">
-          Confirm Addition
-        </button>
       </div>
     </div>
   );

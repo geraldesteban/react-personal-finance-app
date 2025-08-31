@@ -6,6 +6,8 @@ import PotsWithdraw from "./PotsWithdraw";
 import PotsAddMoney from "./PotsAddMoney";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { usePots } from "./usePots";
+import Spinner from "../Spinner";
+import Error from "../Error";
 
 export default function PotsList() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -15,7 +17,7 @@ export default function PotsList() {
   const [withdrawModalActive, setWithdrawActive] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const [activePotName, setActivePotName] = useState("");
-  const { dataPots } = usePots();
+  const { potsData, isPots, errorPots } = usePots();
 
   function handleDelete(id, potName) {
     setActiveId(id);
@@ -23,14 +25,23 @@ export default function PotsList() {
     setDeleteModalActive(true);
   }
 
+  function handleAddPotMoney(id) {
+    setActiveId(id);
+    setAddMoneyActive(true);
+  }
+
+  if (isPots) return <Spinner />;
+
+  if (errorPots) return <Error />;
+
   return (
     <div className="flex flex-wrap gap-8 mt-10 lg:flex-col">
-      {dataPots?.length < 0
+      {potsData?.length < 0
         ? null
-        : dataPots?.map((pot, id) => (
+        : potsData?.map((pot) => (
             <div
               className="min-w-[calc(50%-1rem)] bg-white justify-between items-center p-5 rounded-xl"
-              key={id}
+              key={pot.id}
             >
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
@@ -43,15 +54,16 @@ export default function PotsList() {
                   <button
                     onClick={() =>
                       setActiveDropdown(
-                        activeDropdown === pot.potName ? null : pot.potName
+                        activeDropdown === pot.id ? null : pot.id
                       )
                     }
                   >
                     <Ellipsis className="text-grey-500 h-5 w-5" />
                   </button>
+
                   <div
                     className={`absolute right-0 bg-white shadow-2xl rounded-xl p-5 w-[145px] ${
-                      activeDropdown === pot.potName ? "" : "hidden"
+                      activeDropdown === pot.id ? "" : "hidden"
                     }`}
                   >
                     <button
@@ -80,7 +92,7 @@ export default function PotsList() {
                   Total Saved
                 </p>
                 <p className="font-myFontBold text-grey-900 text-[32px]">
-                  {formatCurrency(pot.targetMoney)}
+                  {formatCurrency(pot.potMoney)}
                 </p>
               </div>
               <div className="relative">
@@ -91,13 +103,13 @@ export default function PotsList() {
                   7.95%
                 </p>
                 <p className="font-myFontRegular text-grey-500 text-[12px] mt-3">
-                  Target of
+                  Target of {formatCurrency(pot.targetMoney)}
                 </p>
               </div>
               <div className="flex justify-between items-center gap-5">
                 <button
                   className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
-                  onClick={() => setAddMoneyActive(true)}
+                  onClick={() => handleAddPotMoney(pot.id)}
                 >
                   + Add Money
                 </button>
@@ -127,6 +139,7 @@ export default function PotsList() {
       <PotsAddMoney
         active={addMoneyModalActive}
         onClose={() => setAddMoneyActive(false)}
+        potId={activeId}
       />
     </div>
   );

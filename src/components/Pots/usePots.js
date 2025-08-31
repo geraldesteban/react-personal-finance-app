@@ -3,13 +3,13 @@ import { getPots } from "../../services/apiPots";
 
 export function usePots() {
   const {
-    data: dataPots,
-    isLoading,
-    error,
+    data: potsData,
+    isLoading: isPots,
+    error: errorPots,
   } = useQuery({
     queryKey: ["pots"],
     queryFn: getPots,
   });
 
-  return { dataPots, isLoading, error };
+  return { potsData, isPots, errorPots };
 }

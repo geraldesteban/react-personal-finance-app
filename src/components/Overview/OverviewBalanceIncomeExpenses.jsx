@@ -4,9 +4,9 @@ import Spinner from "../Spinner";
 import Error from "../Error";
 
 export default function OverviewBalanceIncomeExpenses() {
-  const { balances, isLoading, error } = useBalance();
+  const { balances, isBalances, errorBalances } = useBalance();
 
-  if (isLoading)
+  if (isBalances)
     return (
       <div className="flex flex-wrap gap-5 mb-5 ssm:flex-col mt-10">
         <div className={`flex-1 p-7 rounded-xl text-white bg-grey-900 lg:p-5`}>
@@ -21,17 +21,17 @@ export default function OverviewBalanceIncomeExpenses() {
       </div>
     );
 
-  if (error)
+  if (errorBalances)
     return (
       <div className="flex flex-wrap gap-5 mb-5 sm:flex-col mt-10">
         <div className={`flex-1 p-7 rounded-xl text-white bg-grey-900 lg:p-5`}>
-          <Error error={error.message} />
+          <Error error={errorBalances.message} />
         </div>
         <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
           <Error />
         </div>
         <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
-          <Error error={error.message} />
+          <Error error={errorBalances.message} />
         </div>
       </div>
     );
@@ -43,7 +43,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Current Balance
         </h2>
         <p className={`font-myFontBold text-[32px] text-white`}>
-          {formatCurrency(balances.balance, "USD")}
+          {formatCurrency(balances?.balance, "USD")}
         </p>
       </div>
       <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
@@ -51,7 +51,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Income
         </h2>
         <p className={`font-myFontBold text-[32px] text-grey-900`}>
-          {formatCurrency(balances.income, "USD")}
+          {formatCurrency(balances?.income, "USD")}
         </p>
       </div>
       <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
@@ -59,7 +59,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Expenses
         </h2>
         <p className={`font-myFontBold text-[32px] text-grey-900`}>
-          {formatCurrency(balances.expenses, "USD")}
+          {formatCurrency(balances?.expenses, "USD")}
         </p>
       </div>
     </div>

@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 export function useSignup() {
   const {
     mutate: signup,
-    isPending,
-    error,
+    isPending: isSignup,
+    error: errorSignup,
   } = useMutation({
     mutationFn: signUpFn,
     onSuccess: () => {
@@ -17,5 +17,5 @@ export function useSignup() {
     },
   });
 
-  return { signup, isPending, error };
+  return { signup, isSignup, errorSignup };
 }

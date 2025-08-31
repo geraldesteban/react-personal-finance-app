@@ -1,26 +1,19 @@
+import { GetCurrentUser } from "./apiGetCurrentUser";
 import supabase from "./supabase";
 
+/* Get the Balances of the current User */
 export async function getBalance() {
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
+  const currentUser = await GetCurrentUser();
 
-  if (userError) {
-    console.error(userError);
-    throw new Error("User not logged in");
-  }
-
-  const { data, error } = await supabase
+  const { data: balancesData, error: errorBalances } = await supabase
     .from("balances")
     .select("id, balance, income, expenses, created_at")
-    .eq("user_id", user.id)
+    .eq("user_id", currentUser.id)
     .maybeSingle();
 
-  if (error) {
-    console.error(error);
-    throw new Error("Balance could not be loaded");
+  if (errorBalances) {
+    throw new Error("Balances could not be loaded");
   }
 
-  return data;
+  return balancesData;
 }

@@ -8,8 +8,8 @@ export function useLogin() {
 
   const {
     mutate: login,
-    isPending,
-    error,
+    isPending: isLogin,
+    error: errorLogin,
   } = useMutation({
     mutationFn: loginFn,
     onSuccess: () => {
@@ -21,5 +21,5 @@ export function useLogin() {
     },
   });
 
-  return { login, isPending, error };
+  return { login, isLogin, errorLogin };
 }

@@ -14,6 +14,7 @@ export function useCreatePots(onClose) {
       addPots({ potName, targetMoney: Number(targetMoney) }),
     onSuccess: () => {
       toast.success("Pot added successfully!");
+
       queryClient.invalidateQueries(["pots"]);
 
       if (onClose) onClose();

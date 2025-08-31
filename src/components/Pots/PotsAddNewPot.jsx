@@ -5,14 +5,14 @@ import Spinner from "../Spinner";
 
 export default function BudgetsAddNewBudget({ active, onClose }) {
   const [potName, setPotName] = useState("");
-  const [targetMoney, setTargetMoney] = useState(null);
+  const [targetMoney, setTargetMoney] = useState(0);
   const { addPot, isPending } = useCreatePots(onClose);
 
   function handleAddPot(e) {
     e.preventDefault();
     addPot({ potName, targetMoney });
     setPotName("");
-    setTargetMoney(null);
+    setTargetMoney(0);
   }
 
   if (!active) return null;
@@ -34,7 +34,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
               onClick={() => {
                 onClose();
                 setPotName("");
-                setTargetMoney(null);
+                setTargetMoney(0);
               }}
             >
               <CloseModal />
@@ -54,8 +54,8 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
               type="text"
               value={potName}
               onChange={(e) => setPotName(e.target.value)}
-              placeholder=""
               className="w-full border border-grey-500 rounded-xl py-2 pl-5 mb-5"
+              required
             />
             <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
               Target
@@ -66,6 +66,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
               onChange={(e) => setTargetMoney(Number(e.target.value))}
               placeholder="$ e.g.2000"
               className="w-full border border-grey-500 rounded-xl py-2 pl-5 mb-5"
+              required
             />
 
             {/* <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">

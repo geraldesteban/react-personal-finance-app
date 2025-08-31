@@ -4,12 +4,12 @@ import { getBalance } from "../../services/apiBalance";
 export function useBalance() {
   const {
     data: balances,
-    isLoading,
-    error,
+    isLoading: isBalances,
+    error: errorBalances,
   } = useQuery({
     queryKey: ["balance"],
     queryFn: getBalance,
   });
 
-  return { balances, isLoading, error };
+  return { balances, isBalances, errorBalances };
 }

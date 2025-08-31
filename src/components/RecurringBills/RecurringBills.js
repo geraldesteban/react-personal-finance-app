@@ -17,8 +17,6 @@ export function RecurringBills() {
     }))
     .filter((rec) => rec.recurring === true);
 
-  console.log(recurringBillsDetails);
-
   /* Formatted Amounts, Date, and Recurring */
   const amountDateRecurring = data.transactions.map((val) => ({
     amount: Math.abs(val.amount),

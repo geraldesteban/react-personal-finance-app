@@ -5,8 +5,6 @@ import Spinner from "../Spinner";
 export default function PotsDeletePot({ active, onClose, potName, potId }) {
   const { isDeleting, deletePot } = useDeletePot(onClose);
 
-  console.log(isDeleting);
-
   if (!active) return null;
 
   return (
