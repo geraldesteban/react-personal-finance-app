@@ -10,8 +10,8 @@ export function useCreatePots(onClose) {
     isPending,
     error,
   } = useMutation({
-    mutationFn: ({ potName, targetMoney }) =>
-      addPots({ potName, targetMoney: Number(targetMoney) }),
+    mutationFn: ({ potName, targetMoney, potTheme }) =>
+      addPots({ potName, targetMoney: Number(targetMoney), potTheme }),
     onSuccess: () => {
       toast.success("Pot added successfully!");
 

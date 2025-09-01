@@ -8,6 +8,7 @@ import { formatCurrency } from "../../utils/formatCurrency";
 export default function PotsAddMoney({ active, onClose, potId }) {
   const { addPotMoney, isAddPotMoney, errorAddPotMoney } = useAddMoney(onClose);
   const { potData } = usePot(potId);
+  const potMoney = potData?.potMoney;
   const targetMoney = potData?.targetMoney;
 
   const [amountPotMoney, setAmountPotMoney] = useState(0);
@@ -46,14 +47,14 @@ export default function PotsAddMoney({ active, onClose, potId }) {
             New Amount
           </p>
           <p className="font-myFontBold text-grey-900 text-[32px]">
-            {formatCurrency(targetMoney - amountPotMoney)}
+            {formatCurrency(potMoney + amountPotMoney)}
           </p>
         </div>
         <div className="w-full h-1 rounded-xl bg-black"></div>
         <div className="flex justify-between items-center my-1">
           <p className="font-myFontRegular text-green text-[12px]">27.95%</p>
           <p className="font-myFontRegular text-grey-500 text-[12px]">
-            Target of $2,000
+            Target of {formatCurrency(targetMoney - amountPotMoney)}
           </p>
         </div>
         <form onSubmit={handleAddPotMoney}>
@@ -61,7 +62,7 @@ export default function PotsAddMoney({ active, onClose, potId }) {
             Amount to Add
           </label>
           <input
-            type="text"
+            type="number"
             value={amountPotMoney}
             onChange={(e) => setAmountPotMoney(Number(e.target.value))}
             placeholder="$"

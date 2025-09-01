@@ -1,23 +1,24 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addPotMoneyFromBalance } from "../../services/apiPots";
+import { withdrawMoneyFromPot } from "../../services/apiPots";
 import toast from "react-hot-toast";
 
-export function useAddMoney(onClose) {
+export function useWithdrawMoney(onClose) {
   const queryClient = useQueryClient();
 
   const {
-    mutate: addPotMoney,
-    isPending: isAddPotMoney,
-    error: errorAddPotMoney,
+    mutate: withdrawPotMoney,
+    isPending: isWithdrawPotMoney,
+    error: errorWithdrawPotMoney,
     reset,
   } = useMutation({
     mutationFn: ({ pot_id, amount }) =>
-      addPotMoneyFromBalance({ pot_id, amount }),
+      withdrawMoneyFromPot({ pot_id, amount }),
     onSuccess: () => {
-      toast.success("Money added to Pot");
+      toast.success("Withdraw money from Pot");
 
       queryClient.invalidateQueries(["balances"]);
       queryClient.invalidateQueries(["pots"]);
+
       if (onClose) onClose();
     },
     onError: (err) => {
@@ -27,8 +28,8 @@ export function useAddMoney(onClose) {
   });
 
   return {
-    addPotMoney,
-    isAddPotMoney,
-    errorAddPotMoney,
+    withdrawPotMoney,
+    isWithdrawPotMoney,
+    errorWithdrawPotMoney,
   };
 }

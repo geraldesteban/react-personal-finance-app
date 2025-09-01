@@ -30,6 +30,11 @@ export default function PotsList() {
     setAddMoneyActive(true);
   }
 
+  function handleWithdrawPotMoney(id) {
+    setActiveId(id);
+    setWithdrawActive(true);
+  }
+
   if (isPots) return <Spinner />;
 
   if (errorPots) return <Error />;
@@ -45,7 +50,9 @@ export default function PotsList() {
             >
               <div className="flex justify-between items-center">
                 <div className="flex items-center">
-                  <div className="w-4 h-4 bg-black rounded-full mr-5"></div>
+                  <div
+                    className={`w-4 h-4 ${pot.potTheme} rounded-full mr-5`}
+                  ></div>
                   <h2 className="font-myFontBold text-grey-900 text-[20px]">
                     {pot.potName}
                   </h2>
@@ -115,7 +122,7 @@ export default function PotsList() {
                 </button>
                 <button
                   className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
-                  onClick={() => setWithdrawActive(true)}
+                  onClick={() => handleWithdrawPotMoney(pot.id)}
                 >
                   With Draw
                 </button>
@@ -135,6 +142,7 @@ export default function PotsList() {
       <PotsWithdraw
         active={withdrawModalActive}
         onClose={() => setWithdrawActive(false)}
+        potId={activeId}
       />
       <PotsAddMoney
         active={addMoneyModalActive}

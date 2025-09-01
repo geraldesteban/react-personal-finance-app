@@ -1,6 +1,30 @@
 import CloseModal from "../../assets/icon-close-modal.svg?react";
+import { useWithdrawMoney } from "./useWithdrawMoney";
+import Spinner from "../Spinner";
+import Error from "../Error";
+import { useState } from "react";
+import { usePot } from "./usePot";
+import { formatCurrency } from "../../utils/formatCurrency";
 
-export default function PotsWithdraw({ active, onClose }) {
+export default function PotsWithdraw({ active, onClose, potId }) {
+  const { withdrawPotMoney, isWithdrawPotMoney, errorWithdrawPotMoney } =
+    useWithdrawMoney(onClose);
+  const { potData } = usePot(potId);
+  const potMoney = potData?.potMoney;
+  const targetMoney = potData?.targetMoney;
+
+  const [amountWithdrawPotMoney, setAmountWithdrawPotMoney] = useState(0);
+
+  function handleWithdrawPotMoney(e) {
+    e.preventDefault();
+    withdrawPotMoney({ pot_id: potId, amount: amountWithdrawPotMoney });
+    setAmountWithdrawPotMoney(0);
+  }
+
+  if (isWithdrawPotMoney) return <Spinner />;
+
+  if (errorWithdrawPotMoney) return <Error />;
+
   if (!active) return null;
 
   return (
@@ -26,30 +50,35 @@ export default function PotsWithdraw({ active, onClose }) {
             New Amount
           </p>
           <p className="font-myFontBold text-grey-900 text-[32px] font-bold">
-            $139.00
+            {formatCurrency(potMoney - amountWithdrawPotMoney)}
           </p>
         </div>
         <div className="w-full h-1 rounded-xl bg-black"></div>
         <div className="flex justify-between items-center my-1">
           <p className="font-myFontRegular text-red text-[12px]">5.95%</p>
           <p className="font-myFontRegular text-grey-500 text-[12px]">
-            Target of $2,000
+            Target of {formatCurrency(targetMoney + amountWithdrawPotMoney)}
           </p>
         </div>
-        <form>
+        <form onSubmit={handleWithdrawPotMoney}>
           <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
             Amount to Withdraw
           </label>
           <input
-            type="text"
+            type="number"
+            value={amountWithdrawPotMoney}
+            onChange={(e) => setAmountWithdrawPotMoney(Number(e.target.value))}
             placeholder="$"
             className="w-full border border-beige-500 rounded-xl py-2 pl-5 mb-5"
+            required
           />
+          <button
+            type="submit"
+            className="font-myFontBold text-[14px] w-full py-5 bg-grey-900 rounded-xl text-white font-bold"
+          >
+            Confirm Withdrawal
+          </button>
         </form>
-
-        <button className="font-myFontBold text-[14px] w-full py-5 bg-grey-900 rounded-xl text-white font-bold">
-          Confirm Withdrawal
-        </button>
       </div>
     </div>
   );

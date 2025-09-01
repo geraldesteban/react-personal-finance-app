@@ -38,7 +38,10 @@ export default function PotsDeletePot({ active, onClose, potName, potId }) {
           >
             Yes, Confirm Deletion
           </button>
-          <button className="font-myFontRegular w-full py-5 text-[14px] text-grey-500">
+          <button
+            className="font-myFontRegular w-full py-5 text-[14px] text-grey-500"
+            onClick={onClose}
+          >
             No, Go Back
           </button>
         </div>
