@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSignup } from "./useSignup";
 import { NavLink } from "react-router-dom";
 import Spinner from "../Spinner";
-import Error from "../Error";
+import ErrorMessage from "../ErrorMessage";
 
 export default function AuthenticationSignup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +22,7 @@ export default function AuthenticationSignup() {
     signup({ email, password });
   }
 
-  if (errorSignup) return <Error errorMessage={errorSignup} />;
+  if (errorSignup) return <ErrorMessage errorMessage={errorSignup} />;
 
   return (
     <form

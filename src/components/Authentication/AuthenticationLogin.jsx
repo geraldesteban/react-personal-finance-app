@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLogin } from "./useLogin";
 import { NavLink } from "react-router-dom";
 import Spinner from "../Spinner";
-import Error from "../Error";
+import ErrorMessage from "../ErrorMessage";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +22,7 @@ export default function Login() {
     login({ email, password });
   }
 
-  if (errorLogin) return <Error errorMessage={errorLogin} />;
+  if (errorLogin) return <ErrorMessage errorMessage={errorLogin} />;
 
   return (
     <form

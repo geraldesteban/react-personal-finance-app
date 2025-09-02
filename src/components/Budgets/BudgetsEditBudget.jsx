@@ -1,12 +1,44 @@
+import { useState } from "react";
 import CloseModal from "../../assets/icon-close-modal.svg?react";
+import SelectBudgetCategory from "../SelectBudgetCategory";
+import SelectThemeColor from "../SelectThemeColor";
+import { useUpdateBudget } from "./useUpdateBudget";
+import Spinner from "../Spinner";
+import ErrorMessage from "../ErrorMessage";
 
-export default function BudgetsEditBudget({ active, onClose }) {
+export default function BudgetsEditBudget({ active, onClose, budgetId }) {
+  const [editCategory, setEditCategory] = useState("Entertainment");
+  const [editMaximumSpend, setEditMaximumSpend] = useState(0);
+  const [editTheme, setEditTheme] = useState("bg-green");
+
+  const { updateBudget, isUpdateBudget, errorUpdateBudget } =
+    useUpdateBudget(onClose);
+
+  function handleDeleteBudget(e) {
+    e.preventDefault();
+
+    updateBudget({
+      budgetId: budgetId,
+      editBudgetName: editCategory,
+      editMaximumSpend: editMaximumSpend,
+      editBudgetTheme: editTheme,
+    });
+
+    setEditCategory("Entertainment");
+    setEditMaximumSpend(0);
+    setEditTheme("bg-green");
+  }
+
   if (!active) return null;
+
+  if (isUpdateBudget) return <Spinner />;
+
+  if (errorUpdateBudget)
+    return <ErrorMessage errorMessage={errorUpdateBudget} />;
 
   return (
     <div className="fixed inset-0 z-10 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/70"></div>
-
       <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 md:mx-10 sm:mx-5">
         <div className="flex justify-between items-center mb-5">
           <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
@@ -16,69 +48,37 @@ export default function BudgetsEditBudget({ active, onClose }) {
             <CloseModal />
           </button>
         </div>
-
         <p className="font-myFontRegular text-grey-500 text-[14px] mb-5">
           As your budgets change, feel free to update your spending limits.
         </p>
-
-        <form>
-          <label className="block font-myFontBold text-grey-500 text-[12px] font-bold mb-2">
-            Budget Category
-          </label>
-          <select
-            name="budgets"
-            id="budgets"
-            className="w-full border border-beige-500] rounded-xl py-2 cursor-pointer pl-5 mb-5"
-          >
-            <option value="Entertainment">Entertainment</option>
-            <option value="Bills">Bills</option>
-            <option value="Groceries">Groceries</option>
-            <option value="Dining Out">Dining Out</option>
-            <option value="Transportation">Transportation</option>
-            <option value="Personal Care">Personal Care</option>
-            <option value="Education">Education</option>
-            <option value="Lifestyle">Lifestyle</option>
-            <option value="Shopping">Shopping</option>
-            <option value="General">General</option>
-          </select>
-
+        <form onSubmit={handleDeleteBudget}>
+          <SelectBudgetCategory
+            label={"Category"}
+            value={editCategory}
+            onChange={(e) => setEditCategory(e.target.value)}
+          />
           <label className="block font-myFontBold text-grey-500 text-[12px] font-bold mb-2">
             Maximum Spend
           </label>
           <input
-            type="text"
+            type="number"
+            value={editMaximumSpend}
+            onChange={(e) => setEditMaximumSpend(e.target.value)}
             placeholder="$"
             className="w-full border border-beige-500 rounded-xl py-2 pl-5 mb-5"
           />
-
-          <label className="block font-myFontBold text-grey-500 text-[12px] font-bold mb-2">
-            Theme
-          </label>
-          <select
-            name="theme"
-            id="theme"
-            className="w-full border border-beige-500 rounded-xl py-2 cursor-pointer pl-5 mb-5"
+          <SelectThemeColor
+            label={"Theme"}
+            value={editTheme}
+            onChange={(e) => setEditTheme(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="font-myFontBold text-[14px] text-white w-full py-5 bg-grey-900 rounded-xl  font-bold"
           >
-            <option value="green">Green</option>
-            <option value="beige">Beige</option>
-            <option value="cyan">Cyan</option>
-            <option value="navy">Navy</option>
-            <option value="red">Red</option>
-            <option value="purple">Purple</option>
-            <option value="turquoise">Turquoise</option>
-            <option value="brown">Brown</option>
-            <option value="magenta">Magenta</option>
-            <option value="blue">Blue</option>
-            <option value="grey">Grey</option>
-            <option value="army">Army</option>
-            <option value="pink">Pink</option>
-            <option value="orange">Orange</option>
-          </select>
+            Save Changes
+          </button>
         </form>
-
-        <button className="font-myFontBold text-[14px] text-white w-full py-5 bg-grey-900 rounded-xl  font-bold">
-          Save Changes
-        </button>
       </div>
     </div>
   );

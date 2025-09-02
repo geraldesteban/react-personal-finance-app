@@ -1,61 +1,67 @@
 import PotIcon from "../../assets/icon-pot.svg?react";
 import CheckDetails from "../CheckDetails";
+import { usePots } from "../Pots/usePots";
+import { formatCurrency } from "../../utils/formatCurrency";
+import Spinner from "../Spinner";
+import ErrorMessage from "../ErrorMessage";
 
 function OverviewPots() {
+  const { potsData, isPots, errorPots } = usePots();
+
+  const totalSaved = potsData
+    ?.map((val) => val.potMoney)
+    .reduce((acc, curr) => acc + curr, 0);
+
+  if (isPots)
+    return (
+      <div className="bg-white p-10 rounded-xl lg:p-5">
+        <CheckDetails heading="Pots" span="See Details" seeDetails="pots" />
+        <Spinner />
+      </div>
+    );
+
+  if (errorPots) return <ErrorMessage />;
+
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5">
       <CheckDetails heading="Pots" span="See Details" seeDetails="pots" />
       <div className="flex items-center justify-between sm:flex-col sm:items-start">
-        <div className="flex flex-1 items-center bg-[#F8F4F0] rounded-xl py-5 pr-5 sm:w-full sm:pr-0 sm:mb-5">
+        <div
+          className={`flex flex-1 items-center bg-[#F8F4F0] ${
+            potsData?.length ? "mr-5" : ""
+          } rounded-xl py-5 pr-5 sm:w-full sm:pr-0 sm:mb-5`}
+        >
           <PotIcon className="w-[25px] h-[35px] mx-5" />
           <div>
             <h2 className="font-myFontRegular text-grey-500 text-[14px] mb-1">
               Total Saved
             </h2>
-            <p className="font-myFontBold text-grey-900 text-[32px]">$850</p>
+            <p className="font-myFontBold text-grey-900 text-[32px]">
+              {formatCurrency(totalSaved)}
+            </p>
           </div>
         </div>
-        <div className="flex ml-5 sm:ml-0">
-          <div>
-            <div className="relative mb-5">
-              <div className="absolute bg-green w-1 h-full rounded-xl"></div>
-              <h2 className="font-myFontRegular text-grey-500 text-[12px] ml-5 mb-1">
-                Savings
-              </h2>
-              <p className="font-myFontBold text-grey-900 text-[14px] ml-5">
-                $159
-              </p>
+        <div className="grid grid-cols-2">
+          {potsData?.slice(0, 4).map((pot, index) => (
+            <div
+              key={pot.id}
+              className={`relative flex items-center ${
+                index < 2 ? "mb-4 mr-5 sm:mr-16" : ""
+              }`}
+            >
+              <div
+                className={`absolute ${pot.potTheme} w-1 h-full rounded-xl`}
+              ></div>
+              <div className="ml-5">
+                <p className="font-myFontRegular text-grey-500 text-[12px] mb-2">
+                  {pot.potName}
+                </p>
+                <p className="font-myFontBold text-grey-900 text-[14px]">
+                  {formatCurrency(pot.potMoney)}
+                </p>
+              </div>
             </div>
-            <div className="relative mr-5 sm:mr-16">
-              <div className="absolute bg-navy w-1 h-full rounded-xl"></div>
-              <h2 className="font-myFontRegular text-grey-500 text-[12px] ml-5 mb-1">
-                Concert Ticket
-              </h2>
-              <p className="font-myFontBold text-grey-900 text-[14px] ml-5">
-                $110
-              </p>
-            </div>
-          </div>
-          <div>
-            <div className="relative mb-5">
-              <div className="absolute bg-cyan w-1 h-full rounded-xl"></div>
-              <h2 className="font-myFontRegular text-grey-500 text-[12px] ml-5 mb-1">
-                Gift
-              </h2>
-              <p className="font-myFontBold text-grey-900 text-[14px] ml-5">
-                $40
-              </p>
-            </div>
-            <div className="relative">
-              <div className="absolute bg-yellow w-1 h-full rounded-xl"></div>
-              <h2 className="font-myFontRegular text-grey-500 text-[12px] ml-5 mb-1">
-                New Laptop
-              </h2>
-              <p className="font-myFontBold text-grey-900 text-[14px] ml-5">
-                $10
-              </p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

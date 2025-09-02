@@ -1,7 +1,7 @@
 import CloseModal from "../../assets/icon-close-modal.svg?react";
 import { useWithdrawMoney } from "./useWithdrawMoney";
 import Spinner from "../Spinner";
-import Error from "../Error";
+import ErrorMessage from "../ErrorMessage";
 import { useState } from "react";
 import { usePot } from "./usePot";
 import { formatCurrency } from "../../utils/formatCurrency";
@@ -23,7 +23,8 @@ export default function PotsWithdraw({ active, onClose, potId }) {
 
   if (isWithdrawPotMoney) return <Spinner />;
 
-  if (errorWithdrawPotMoney) return <Error />;
+  if (errorWithdrawPotMoney)
+    return <ErrorMessage errorMessage={errorWithdrawPotMoney} />;
 
   if (!active) return null;
 

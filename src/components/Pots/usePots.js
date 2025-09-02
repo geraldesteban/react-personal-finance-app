@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPots } from "../../services/apiPots";
+import { apiReadPots } from "../../services/apiPot/apiReadPots";
 
 export function usePots() {
   const {
@@ -8,7 +8,7 @@ export function usePots() {
     error: errorPots,
   } = useQuery({
     queryKey: ["pots"],
-    queryFn: getPots,
+    queryFn: apiReadPots,
   });
 
   return { potsData, isPots, errorPots };

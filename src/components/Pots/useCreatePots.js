@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addPots } from "../../services/apiPots";
+import { addPots } from "../../services/apiPot/apiCreatePot";
 import toast from "react-hot-toast";
 
 export function useCreatePots(onClose) {
@@ -10,10 +10,9 @@ export function useCreatePots(onClose) {
     isPending,
     error,
   } = useMutation({
-    mutationFn: ({ potName, targetMoney, potTheme }) =>
-      addPots({ potName, targetMoney: Number(targetMoney), potTheme }),
+    mutationFn: addPots,
     onSuccess: () => {
-      toast.success("Pot added successfully!");
+      toast.success("Pot added successfully");
 
       queryClient.invalidateQueries(["pots"]);
 

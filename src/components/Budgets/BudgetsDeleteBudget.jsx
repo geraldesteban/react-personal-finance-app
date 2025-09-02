@@ -1,7 +1,22 @@
 import CloseModal from "../../assets/icon-close-modal.svg?react";
+import { useDeleteBudget } from "./useDeleteBudget";
+import Spinner from "../Spinner";
+import ErrorMessage from "../ErrorMessage";
 
-export default function BudgetsDeleteBudget({ active, onClose }) {
+export default function BudgetsDeleteBudget({ active, onClose, budgetId }) {
+  const { deleteBudget, isDeleteBudget, errorDeleteBudget } =
+    useDeleteBudget(onClose);
+
+  function handleDeleteBudget(id) {
+    deleteBudget(id);
+  }
+
   if (!active) return null;
+
+  if (isDeleteBudget) return <Spinner />;
+
+  if (errorDeleteBudget)
+    return <ErrorMessage errorMessage={errorDeleteBudget.message} />;
 
   return (
     <div className="fixed inset-0 z-10 flex items-center justify-center">
@@ -22,10 +37,18 @@ export default function BudgetsDeleteBudget({ active, onClose }) {
           reversed, and all the data inside it will be remove forever.
         </p>
 
-        <button className="font-myFontBold text-[14px] text-white w-full py-5  bg-red rounded-xl  font-bold hover:opacity-80">
+        <button
+          className="font-myFontBold text-[14px] text-white w-full py-5  bg-red rounded-xl  font-bold hover:opacity-80"
+          onClick={() => {
+            handleDeleteBudget(budgetId);
+          }}
+        >
           Yes, Confirm Deletion
         </button>
-        <button className="font-myFontRegular text-[14px] w-full py-5 text-grey-500">
+        <button
+          className="font-myFontRegular text-[14px] w-full py-5 text-grey-500"
+          onClick={onClose}
+        >
           No, Go Back
         </button>
       </div>

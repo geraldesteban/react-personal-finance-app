@@ -3,7 +3,7 @@ import { useDeletePot } from "./useDeletePot";
 import Spinner from "../Spinner";
 
 export default function PotsDeletePot({ active, onClose, potName, potId }) {
-  const { isDeleting, deletePot } = useDeletePot(onClose);
+  const { deletePot, isDeleting } = useDeletePot(onClose);
 
   if (!active) return null;
 

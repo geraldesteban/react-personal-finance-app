@@ -18,9 +18,13 @@ export default function BudgetsLayout() {
           + Add New Budget
         </button>
       </div>
-      <div className="mt-10 rounded-xl flex gap-10 lg:flex-col">
-        <BudgetsSpendingSummary />
-        <BudgetsList />
+      <div className="grid grid-cols-2 gap-10 mt-10 rounded-xl lg:grid-cols-1">
+        <div>
+          <BudgetsSpendingSummary />
+        </div>
+        <div className="grid grid-cols-1 gap-10">
+          <BudgetsList />
+        </div>
       </div>
       <BudgetsAddNewBudget active={active} onClose={() => setActive(false)} />
     </div>

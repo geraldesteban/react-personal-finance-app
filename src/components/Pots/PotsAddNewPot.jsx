@@ -12,6 +12,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
 
   function handleAddPot(e) {
     e.preventDefault();
+
     addPot({ potName, targetMoney, potTheme });
     setPotName("");
     setPotTheme("");
@@ -32,11 +33,11 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
               Add New Pot
             </h2>
             <button
-              disabled={isPending}
               onClick={() => {
                 onClose();
                 setPotName("");
                 setTargetMoney(0);
+                setPotTheme("bg-green");
               }}
             >
               <CloseModal />
@@ -71,6 +72,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
               required
             />
             <SelectThemeColor
+              label={"Theme"}
               value={potTheme}
               onChange={(e) => setPotTheme(e.target.value)}
             />

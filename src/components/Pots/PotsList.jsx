@@ -2,12 +2,12 @@ import { useState } from "react";
 import Ellipsis from "../../assets/icon-ellipsis.svg?react";
 import PotsEditPot from "./PotsEditPot";
 import PotsDeletePot from "./PotsDeletePot";
-import PotsWithdraw from "./PotsWithdraw";
 import PotsAddMoney from "./PotsAddMoney";
+import PotsWithdraw from "./PotsWithdraw";
+import Spinner from "../Spinner";
+import ErrorMessage from "../ErrorMessage";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { usePots } from "./usePots";
-import Spinner from "../Spinner";
-import Error from "../Error";
 
 export default function PotsList() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -15,14 +15,23 @@ export default function PotsList() {
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [addMoneyModalActive, setAddMoneyActive] = useState(false);
   const [withdrawModalActive, setWithdrawActive] = useState(false);
+
   const [activeId, setActiveId] = useState(null);
   const [activePotName, setActivePotName] = useState("");
   const { potsData, isPots, errorPots } = usePots();
+
+  function handleEditPot(id) {
+    setActiveId(id);
+    setEditModalActive(true);
+    setEditModalActive(true);
+    setActiveDropdown(null);
+  }
 
   function handleDelete(id, potName) {
     setActiveId(id);
     setActivePotName(potName);
     setDeleteModalActive(true);
+    setActiveDropdown(null);
   }
 
   function handleAddPotMoney(id) {
@@ -37,7 +46,7 @@ export default function PotsList() {
 
   if (isPots) return <Spinner />;
 
-  if (errorPots) return <Error />;
+  if (errorPots) return <ErrorMessage errorMessage={errorPots} />;
 
   return (
     <div className="flex flex-wrap gap-8 mt-10 lg:flex-col">
@@ -73,21 +82,13 @@ export default function PotsList() {
                       activeDropdown === pot.id ? "" : "hidden"
                     }`}
                   >
-                    <button
-                      onClick={() => {
-                        setEditModalActive(true);
-                        setActiveDropdown(null);
-                      }}
-                    >
+                    <button onClick={() => handleEditPot(pot.id)}>
                       Edit Pot
                     </button>
                     <hr className="my-2" />
                     <button
                       className="text-red"
-                      onClick={() => {
-                        setActiveDropdown(null);
-                        handleDelete(pot.id, pot.potName);
-                      }}
+                      onClick={() => handleDelete(pot.id, pot.potName)}
                     >
                       Delete Pot
                     </button>
@@ -132,6 +133,7 @@ export default function PotsList() {
       <PotsEditPot
         active={editModalActive}
         onClose={() => setEditModalActive(false)}
+        potId={activeId}
       />
       <PotsDeletePot
         active={deleteModalActive}

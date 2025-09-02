@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CloseModal from "../../assets/icon-close-modal.svg?react";
 import Spinner from "../Spinner";
+import ErrorMessage from "../ErrorMessage";
 import { useAddMoney } from "./useAddMoney";
 import { usePot } from "./usePot";
 import { formatCurrency } from "../../utils/formatCurrency";
@@ -8,8 +9,6 @@ import { formatCurrency } from "../../utils/formatCurrency";
 export default function PotsAddMoney({ active, onClose, potId }) {
   const { addPotMoney, isAddPotMoney, errorAddPotMoney } = useAddMoney(onClose);
   const { potData } = usePot(potId);
-  const potMoney = potData?.potMoney;
-  const targetMoney = potData?.targetMoney;
 
   const [amountPotMoney, setAmountPotMoney] = useState(0);
 
@@ -21,7 +20,7 @@ export default function PotsAddMoney({ active, onClose, potId }) {
 
   if (isAddPotMoney) return <Spinner />;
 
-  if (errorAddPotMoney) return <p>Error</p>;
+  if (errorAddPotMoney) return <ErrorMessage errorMessage={errorAddPotMoney} />;
 
   if (!active) return null;
 
@@ -47,14 +46,14 @@ export default function PotsAddMoney({ active, onClose, potId }) {
             New Amount
           </p>
           <p className="font-myFontBold text-grey-900 text-[32px]">
-            {formatCurrency(potMoney + amountPotMoney)}
+            {formatCurrency(potData?.potMoney + amountPotMoney)}
           </p>
         </div>
         <div className="w-full h-1 rounded-xl bg-black"></div>
         <div className="flex justify-between items-center my-1">
           <p className="font-myFontRegular text-green text-[12px]">27.95%</p>
           <p className="font-myFontRegular text-grey-500 text-[12px]">
-            Target of {formatCurrency(targetMoney - amountPotMoney)}
+            Target of {formatCurrency(potData?.targetMoney - amountPotMoney)}
           </p>
         </div>
         <form onSubmit={handleAddPotMoney}>

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addPotMoneyFromBalance } from "../../services/apiPots";
+import { apiAddMoneyToPot } from "../../services/apiPot/apiAddMoneyToPot";
 import toast from "react-hot-toast";
 
 export function useAddMoney(onClose) {
@@ -11,8 +11,7 @@ export function useAddMoney(onClose) {
     error: errorAddPotMoney,
     reset,
   } = useMutation({
-    mutationFn: ({ pot_id, amount }) =>
-      addPotMoneyFromBalance({ pot_id, amount }),
+    mutationFn: apiAddMoneyToPot,
     onSuccess: () => {
       toast.success("Money added to Pot");
 

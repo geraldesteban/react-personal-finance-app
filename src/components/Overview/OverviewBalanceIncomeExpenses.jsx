@@ -1,7 +1,7 @@
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useBalance } from "./useBalance";
 import Spinner from "../Spinner";
-import Error from "../Error";
+import ErrorMessage from "../ErrorMessage";
 
 export default function OverviewBalanceIncomeExpenses() {
   const { balances, isBalances, errorBalances } = useBalance();
@@ -25,13 +25,13 @@ export default function OverviewBalanceIncomeExpenses() {
     return (
       <div className="flex flex-wrap gap-5 mb-5 sm:flex-col mt-10">
         <div className={`flex-1 p-7 rounded-xl text-white bg-grey-900 lg:p-5`}>
-          <Error error={errorBalances.message} />
+          <ErrorMessage error={errorBalances.message} />
         </div>
         <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
-          <Error />
+          <ErrorMessage />
         </div>
         <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
-          <Error error={errorBalances.message} />
+          <ErrorMessage error={errorBalances.message} />
         </div>
       </div>
     );

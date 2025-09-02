@@ -1,8 +1,8 @@
-export default function SelectThemeColor({ value, onChange }) {
+export default function SelectThemeColor({ label, value, onChange }) {
   return (
     <>
       <label className="block font-myFontBold text-grey-500 text-[12px] mb-2">
-        Theme
+        {label}
       </label>
       <select
         name="theme"
@@ -10,7 +10,6 @@ export default function SelectThemeColor({ value, onChange }) {
         className="w-full border border-grey-500 rounded-xl py-2 cursor-pointer pl-5 mb-5"
         value={value}
         onChange={onChange}
-        required
       >
         <option value="bg-green">Green</option>
         <option value="bg-beige-500">Beige</option>
