@@ -7,8 +7,8 @@ export function useCreatePots(onClose) {
 
   const {
     mutate: addPot,
-    isPending,
-    error,
+    isPending: isAddPot,
+    error: errorAddPot,
   } = useMutation({
     mutationFn: addPots,
     onSuccess: () => {
@@ -23,5 +23,5 @@ export function useCreatePots(onClose) {
     },
   });
 
-  return { addPot, isPending, error };
+  return { addPot, isAddPot, errorAddPot };
 }

@@ -31,37 +31,44 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
 
   if (errorPotData) throw new Error(errorPotData.message);
 
+  /* No current Pot Money */
   if (!potData.potMoney || potData.potMoney < 0) {
     throw new Error("You currently have no Pot Money");
   }
 
+  /* Amount higher than current Pot Money */
   if (amount > potData.potMoney) {
     throw new Error("Withdrawal amount is higher than current Pot Money");
   }
 
+  /* Updated Balance and Pot data */
+  const updatedBalance = balanceData.balance + amount;
+  const updatedPotMoney = potData.potMoney - amount;
+  const updatedTargetMoney = potData.targetMoney + amount;
+
   /* Update Balance of the User */
-  const { error: balancesError } = await supabase
+  const { error: balanceError } = await supabase
     .from("balances")
-    .update({ balance: balanceData.balance + amount })
+    .update({ balance: updatedBalance })
     .eq("user_id", user.id);
 
-  if (balancesError) throw new Error(balancesError.message);
+  if (balanceError) throw new Error(balanceError.message);
 
   /* Update Pot Money and Target Money of the User */
-  const { error: potsError } = await supabase
+  const { error: potMoneyError } = await supabase
     .from("pots")
     .update({
-      potMoney: potData.potMoney - amount,
-      targetMoney: potData.targetMoney + amount,
+      potMoney: updatedPotMoney,
+      targetMoney: updatedTargetMoney,
     })
     .eq("user_id", user.id)
     .eq("id", pot_id);
 
-  if (potsError) throw new Error(potsError.message);
+  if (potMoneyError) throw new Error(potMoneyError.message);
 
   return {
-    newBalance: balanceData.balance - amount,
-    newPotMoney: potData.potMoney - amount,
-    newTargetMoney: potData.targetMoney + amount,
+    updatedBalance,
+    updatedPotMoney,
+    updatedTargetMoney,
   };
 }

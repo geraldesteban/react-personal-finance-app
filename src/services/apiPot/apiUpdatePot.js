@@ -15,17 +15,26 @@ export async function apiUpdatePot({
 
   if (newTargetMoney <= 0) throw new Error("Invalid Target Money");
 
-  const { data: potData, error: potError } = await supabase
+  /* Updated Pot data */
+  const updatedPotName = newPotName;
+  const updatedTargetMoney = newTargetMoney;
+  const updatedPotTheme = newPotTheme;
+
+  const { error: potError } = await supabase
     .from("pots")
     .update({
-      potName: newPotName,
-      targetMoney: newTargetMoney,
-      potTheme: newPotTheme,
+      potName: updatedPotName,
+      targetMoney: updatedTargetMoney,
+      potTheme: updatedPotTheme,
     })
     .eq("user_id", user.id)
     .eq("id", potId);
 
   if (potError) throw new Error(potError.message);
 
-  return { potData };
+  return {
+    updatedPotName,
+    updatedTargetMoney,
+    updatedPotTheme,
+  };
 }

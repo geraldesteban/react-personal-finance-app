@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { formatCurrency } from "../../utils/formatCurrency";
 import Ellipsis from "../../assets/icon-ellipsis.svg?react";
-import CaretRight from "../../assets/icon-caret-right.svg?react";
 import BudgetsEditBudget from "./BudgetsEditBudget";
 import BudgetsDeleteBudget from "./BudgetsDeleteBudget";
+import BudgetsLatestSpendings from "./BudgetsLatestSpendings";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
 import { useReadBudgets } from "./useReadBudgets";
-import { formatCurrency } from "../../utils/formatCurrency";
 
 export default function BudgetsList() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -108,6 +108,8 @@ export default function BudgetsList() {
                   </div>
                 </div>
               </div>
+              {/* Latest Spendings */}
+              <BudgetsLatestSpendings />
             </div>
           ))}
       <BudgetsEditBudget
@@ -123,35 +125,3 @@ export default function BudgetsList() {
     </>
   );
 }
-
-/* 
-   <div className="p-5 bg-beige-100 rounded-xl">
-          <div className="flex items-center justify-between">
-            <h2 className="font-myFontBold">Latest Spending</h2>
-            <button className="flex items-center font-myFontRegular text-[#696868] text-[14px] gap-5">
-              <span>See All</span>
-              <CaretRight />
-            </button>
-          </div>
-          <div className="flex justify-between items-center border-b border-grey-50text-grey-500 py-3">
-            <div className="flex items-center">
-              <img
-                alt="gerald"
-                className="w-[40px] h-[40px] rounded-full mr-5 sm:hidden"
-              />
-              <h2 className="font-myFontBold text-grey-900 text-[12px]">
-                James Thomson
-              </h2>
-            </div>
-            <div>
-              <p className="text-right font-myFontBold text-grey-900 text-[12px]">
-                -$5.00
-              </p>
-              <p className="font-myFontRegular text-grey-500 text-[12px]">
-                11 Aug 2024
-              </p>
-            </div>
-          </div>
-        </div>
-
-*/

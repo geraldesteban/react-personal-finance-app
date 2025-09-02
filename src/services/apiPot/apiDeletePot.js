@@ -1,5 +1,6 @@
 import supabase from "../supabase";
 
+/* Update Balance and Delete Pot */
 export async function apiDeletePot(potId) {
   /* Get current User */
   const {
@@ -29,16 +30,19 @@ export async function apiDeletePot(potId) {
   if (errorBalance) throw new Error("Balance could not be read");
   console.log(errorBalance);
 
+  /* Updated Balance */
   const newBalance = dataBalance.balance + potData.potMoney;
 
   /* Update Balance */
   const { error: errorUpdateBalance } = await supabase
     .from("balances")
     .update({ balance: newBalance })
-    .eq("user_id", user.id);
+    .eq("user_id", user.id)
+    .single();
 
   if (errorUpdateBalance) throw new Error("Balance could not be updated");
 
+  /* Delete Pot */
   const { error: errorPot } = await supabase
     .from("pots")
     .delete()

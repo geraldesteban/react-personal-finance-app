@@ -3,13 +3,13 @@ import { getTransactions } from "../../services/apiTransactions";
 
 export function useTransactions() {
   const {
-    data: transactionstest,
-    isLoading,
-    error,
+    data: transactionsData,
+    isLoading: isTransactionsData,
+    error: errorTransactionsData,
   } = useQuery({
     queryKey: ["transactions"],
     queryFn: getTransactions,
   });
 
-  return { transactionstest, isLoading, error };
+  return { transactionsData, isTransactionsData, errorTransactionsData };
 }

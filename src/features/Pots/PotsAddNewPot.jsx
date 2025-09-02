@@ -9,7 +9,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
   const [potName, setPotName] = useState("");
   const [targetMoney, setTargetMoney] = useState(0);
   const [potTheme, setPotTheme] = useState("bg-green");
-  const { addPot, isPending } = useCreatePots(onClose);
+  const { addPot, isAddPot, errorAddPot } = useCreatePots(onClose);
 
   function handleAddPot(e) {
     e.preventDefault();
@@ -22,10 +22,12 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
 
   if (!active) return null;
 
+  if (errorAddPot) return <ErrorMessage errorMessage={errorAddPot.message} />;
+
   return (
     <div className="fixed inset-0 z-10 flex items-center justify-center">
       <div className="absolute inset-0 bg-black/70"></div>
-      {isPending ? (
+      {isAddPot ? (
         <Spinner />
       ) : (
         <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 md:mx-10 sm:mx-5">
@@ -79,7 +81,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
             />
             <button
               type="submit"
-              disabled={isPending}
+              disabled={isAddPot}
               className="font-myFontBold text-[14] w-full py-5 bg-grey-900 rounded-xl text-white"
             >
               Add Pot

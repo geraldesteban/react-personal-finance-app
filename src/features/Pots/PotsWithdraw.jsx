@@ -10,14 +10,19 @@ export default function PotsWithdraw({ active, onClose, potId }) {
   const { withdrawPotMoney, isWithdrawPotMoney, errorWithdrawPotMoney } =
     useWithdrawMoney(onClose);
   const { potData } = usePot(potId);
-  const potMoney = potData?.potMoney;
   const targetMoney = potData?.targetMoney;
+  const potMoney = potData?.potMoney;
 
   const [amountWithdrawPotMoney, setAmountWithdrawPotMoney] = useState(0);
 
   function handleWithdrawPotMoney(e) {
     e.preventDefault();
     withdrawPotMoney({ pot_id: potId, amount: amountWithdrawPotMoney });
+    setAmountWithdrawPotMoney(0);
+  }
+
+  function handleCloseModal() {
+    onClose();
     setAmountWithdrawPotMoney(0);
   }
 
@@ -37,7 +42,7 @@ export default function PotsWithdraw({ active, onClose, potId }) {
           <h2 className="font-myFontBold text-grey-900 text-[32px]">
             Withdraw from `Savings`
           </h2>
-          <button onClick={onClose}>
+          <button onClick={handleCloseModal}>
             <CloseModal />
           </button>
         </div>
@@ -48,17 +53,30 @@ export default function PotsWithdraw({ active, onClose, potId }) {
         </p>
         <div className="flex justify-between items-center my-3">
           <p className="font-myFontRegular text-grey-500 text-[14px]">
-            New Amount
+            Pot Money
           </p>
           <p className="font-myFontBold text-grey-900 text-[32px] font-bold">
-            {formatCurrency(potMoney - amountWithdrawPotMoney)}
+            {formatCurrency(
+              amountWithdrawPotMoney < 0
+                ? 0
+                : amountWithdrawPotMoney >= potMoney
+                ? 0
+                : potMoney - amountWithdrawPotMoney
+            )}
           </p>
         </div>
         <div className="w-full h-1 rounded-xl bg-black"></div>
         <div className="flex justify-between items-center my-1">
           <p className="font-myFontRegular text-red text-[12px]">5.95%</p>
           <p className="font-myFontRegular text-grey-500 text-[12px]">
-            Target of {formatCurrency(targetMoney + amountWithdrawPotMoney)}
+            Target of{" "}
+            {formatCurrency(
+              amountWithdrawPotMoney < 0
+                ? targetMoney
+                : amountWithdrawPotMoney <= targetMoney
+                ? targetMoney + amountWithdrawPotMoney
+                : targetMoney
+            )}
           </p>
         </div>
         <form onSubmit={handleWithdrawPotMoney}>

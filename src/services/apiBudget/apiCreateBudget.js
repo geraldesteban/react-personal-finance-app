@@ -5,6 +5,7 @@ export async function apiCreateBudget({
   maximumSpend,
   budgetThemeColor,
 }) {
+  if (!budgetName) return null;
   const {
     data: { user: currentUser },
     error: errorUser,
@@ -25,7 +26,11 @@ export async function apiCreateBudget({
     },
   ]);
 
-  if (budgetError) throw new Error(budgetError.message);
+  if (budgetError) throw new Error("Budget could not be Created");
 
-  return { addedBudgetName, addedMaximumSpend, addedBudgetThemeColor };
+  return {
+    addedBudgetName,
+    addedMaximumSpend,
+    addedBudgetThemeColor,
+  };
 }

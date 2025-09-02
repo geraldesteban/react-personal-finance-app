@@ -21,17 +21,20 @@ export async function apiAddMoneyToPot({ pot_id, amount }) {
   if (!balanceData || balanceData.balance < 0)
     throw new Error("You currently have no Balance");
 
-  if (amount > balanceData.balance) {
+  /* Amount is higher than current Balance */
+  if (amount > balanceData.balance || amount < 0) {
     throw new Error(
-      "Amount Pot money to be added is higher than current Balance"
+      "Amount Pot money to be added is higher or lower than current Balance"
     );
   }
 
   /* Update Balance of the User */
-  await supabase
+  const { error: errorBalance } = await supabase
     .from("balances")
     .update({ balance: balanceData.balance - amount })
     .eq("user_id", user.id);
+
+  if (errorBalance) throw new Error(errorBalance.message);
 
   /* Get current Pot Money of the User */
   const { data: potData, error: potPotMoneyError } = await supabase
@@ -43,8 +46,11 @@ export async function apiAddMoneyToPot({ pot_id, amount }) {
 
   if (potPotMoneyError) throw new Error(potPotMoneyError.message);
 
+  if (amount > potData.targetMoney)
+    throw new Error("Amount is higher than Target money");
+
   /* Update Pot Money and Target Money of the User */
-  await supabase
+  const { error: errorPot } = await supabase
     .from("pots")
     .update({
       potMoney: potData.potMoney + amount,
@@ -52,6 +58,8 @@ export async function apiAddMoneyToPot({ pot_id, amount }) {
     })
     .eq("user_id", user.id)
     .eq("id", pot_id);
+
+  if (errorPot) throw new Error(errorPot.message);
 
   return {
     newBalance: balanceData.balance - amount,

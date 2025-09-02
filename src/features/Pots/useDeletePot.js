@@ -5,7 +5,11 @@ import toast from "react-hot-toast";
 export function useDeletePot(onClose) {
   const queryClient = useQueryClient();
 
-  const { isPending: isDeleting, mutate: deletePot } = useMutation({
+  const {
+    mutate: deletePot,
+    isPending: isDeletingPot,
+    error: errorDeletingPot,
+  } = useMutation({
     mutationFn: apiDeletePot,
     onSuccess: () => {
       toast.success("Pot deleted");
@@ -20,5 +24,5 @@ export function useDeletePot(onClose) {
     },
   });
 
-  return { isDeleting, deletePot };
+  return { deletePot, isDeletingPot, errorDeletingPot };
 }

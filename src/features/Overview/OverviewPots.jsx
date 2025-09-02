@@ -20,7 +20,13 @@ function OverviewPots() {
       </div>
     );
 
-  if (errorPots) return <ErrorMessage />;
+  if (errorPots)
+    return (
+      <div className="bg-white p-10 rounded-xl lg:p-5">
+        <CheckDetails heading="Pots" span="See Details" seeDetails="pots" />
+        <ErrorMessage />;
+      </div>
+    );
 
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5">

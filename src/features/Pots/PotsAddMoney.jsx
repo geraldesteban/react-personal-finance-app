@@ -9,12 +9,18 @@ import { formatCurrency } from "../../utils/formatCurrency";
 export default function PotsAddMoney({ active, onClose, potId }) {
   const { addPotMoney, isAddPotMoney, errorAddPotMoney } = useAddMoney(onClose);
   const { potData } = usePot(potId);
-
+  const targetMoney = potData?.targetMoney;
+  const potMoney = potData?.potMoney;
   const [amountPotMoney, setAmountPotMoney] = useState(0);
 
   function handleAddPotMoney(e) {
     e.preventDefault();
+
     addPotMoney({ pot_id: potId, amount: amountPotMoney });
+    setAmountPotMoney(0);
+  }
+  function handleCloseModal() {
+    onClose();
     setAmountPotMoney(0);
   }
 
@@ -33,7 +39,7 @@ export default function PotsAddMoney({ active, onClose, potId }) {
           <h2 className="font-myFontBold text-grey-900 text-[32px]">
             Add to `Savings`
           </h2>
-          <button onClick={onClose}>
+          <button onClick={handleCloseModal}>
             <CloseModal />
           </button>
         </div>
@@ -43,17 +49,24 @@ export default function PotsAddMoney({ active, onClose, potId }) {
         </p>
         <div className="flex justify-between items-center my-3">
           <p className="font-myFontRegular text-grey-500 text-[14px]">
-            New Amount
+            Pot Money
           </p>
           <p className="font-myFontBold text-grey-900 text-[32px]">
-            {formatCurrency(potData?.potMoney + amountPotMoney)}
+            {formatCurrency(amountPotMoney < 0 ? 0 : potMoney + amountPotMoney)}
           </p>
         </div>
         <div className="w-full h-1 rounded-xl bg-black"></div>
         <div className="flex justify-between items-center my-1">
           <p className="font-myFontRegular text-green text-[12px]">27.95%</p>
           <p className="font-myFontRegular text-grey-500 text-[12px]">
-            Target of {formatCurrency(potData?.targetMoney - amountPotMoney)}
+            Target of{" "}
+            {formatCurrency(
+              amountPotMoney < 0
+                ? targetMoney
+                : amountPotMoney <= targetMoney
+                ? targetMoney - amountPotMoney
+                : targetMoney
+            )}
           </p>
         </div>
         <form onSubmit={handleAddPotMoney}>

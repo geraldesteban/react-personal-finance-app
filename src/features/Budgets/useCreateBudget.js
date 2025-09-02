@@ -15,8 +15,12 @@ export function useCreateBudget(onClose) {
       toast.success("Budget added successfully");
 
       queryClient.invalidateQueries(["budgets"]);
+      queryClient.invalidateQueries(["transactions"]);
 
       if (onClose) onClose();
+    },
+    onError: (error) => {
+      toast.error(error);
     },
   });
 

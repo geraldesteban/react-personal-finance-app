@@ -1,10 +1,7 @@
 import supabase from "./supabase";
 
 export async function getTransactions() {
-  let query = supabase
-    .from("transactions")
-    .select("id, avatar, name, category, date, amount, recurring")
-    .order("name", { ascending: true });
+  let query = supabase.from("transactions").select("*");
 
   const { data, error } = await query;
 
