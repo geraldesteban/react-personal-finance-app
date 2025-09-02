@@ -1,4 +1,4 @@
-import TransactionsLayout from "../components/Transactions/TransactionsLayout";
+import TransactionsLayout from "../features/Transactions/TransactionsLayout";
 
 export default function Transactions() {
   return (

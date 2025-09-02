@@ -1,4 +1,4 @@
-import PotsLayout from "../components/Pots/PotsLayout";
+import PotsLayout from "../features/Pots/PotsLayout";
 
 export default function Pots() {
   return (

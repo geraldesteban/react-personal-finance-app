@@ -1,4 +1,4 @@
-import OverviewLayout from "../components/Overview/OverviewLayout";
+import OverviewLayout from "../features/Overview/OverviewLayout";
 
 export default function Overview() {
   return (

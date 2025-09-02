@@ -1,4 +1,4 @@
-import RecurringBillsLayout from "../components/RecurringBills/RecurringBillsLayout";
+import RecurringBillsLayout from "../features/RecurringBills/RecurringBillsLayout";
 
 export default function RecurringBills() {
   return (

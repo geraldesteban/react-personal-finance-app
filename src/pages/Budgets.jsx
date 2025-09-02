@@ -1,4 +1,4 @@
-import BudgetsLayout from "../components/Budgets/BudgetsLayout";
+import BudgetsLayout from "../features/Budgets/BudgetsLayout";
 
 export default function Budgets() {
   return (
