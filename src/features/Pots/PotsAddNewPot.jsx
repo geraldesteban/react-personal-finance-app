@@ -2,7 +2,7 @@ import { useState } from "react";
 import CloseModal from "../../assets/icon-close-modal.svg?react";
 import { useCreatePots } from "../Pots/useCreatePots";
 import Spinner from "../../ui/Spinner";
-import ErrorMessage from "../../ui/Spinner";
+import ErrorMessage from "../../ui/ErrorMessage";
 import SelectThemeColor from "../../ui/SelectThemeColor";
 
 export default function BudgetsAddNewBudget({ active, onClose }) {
@@ -15,12 +15,15 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
     e.preventDefault();
 
     addPot({ potName, targetMoney, potTheme });
+
     setPotName("");
     setPotTheme("");
     setTargetMoney(0);
   }
 
   if (!active) return null;
+
+  if (isAddPot) return <Spinner />;
 
   if (errorAddPot) return <ErrorMessage errorMessage={errorAddPot.message} />;
 
@@ -67,7 +70,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
               Target
             </label>
             <input
-              type="text"
+              type="number"
               value={targetMoney}
               onChange={(e) => setTargetMoney(Number(e.target.value))}
               placeholder="$ e.g.2000"

@@ -1,8 +1,8 @@
-import { GetCurrentUser } from "./apiGetCurrentUser";
-import supabase from "./supabase";
+import { GetCurrentUser } from "../apiGetCurrentUser";
+import supabase from "../supabase";
 
 /* Get the Balances of the current User */
-export async function getBalance() {
+export async function apiReadBalances() {
   const currentUser = await GetCurrentUser();
 
   const { data: balancesData, error: errorBalances } = await supabase

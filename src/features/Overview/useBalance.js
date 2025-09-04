@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getBalance } from "../../services/apiBalance";
+import { apiReadBalances } from "../../services/apiBalance/apiReadBalances";
 
 export function useBalance() {
   const {
@@ -8,7 +8,7 @@ export function useBalance() {
     error: errorBalances,
   } = useQuery({
     queryKey: ["balance"],
-    queryFn: getBalance,
+    queryFn: apiReadBalances,
   });
 
   return { balances, isBalances, errorBalances };

@@ -4,13 +4,14 @@ import CloseModal from "../../assets/icon-close-modal.svg?react";
 import SelectThemeColor from "../../ui/SelectThemeColor";
 import SelectBudgetCategory from "../../ui/SelectBudgetCategory";
 import Spinner from "../../ui/Spinner";
-import ErrorMessage from "../../ui/Spinner";
+import ErrorMessage from "../../ui/ErrorMessage";
 
 export default function BudgetsAddNewBudget({ active, onClose }) {
   const { createBudget, isBudget, budgetError } = useCreateBudget(onClose);
   const [budgetName, setBudgetName] = useState("Entertainment");
   const [maximumSpend, setMaximumSpend] = useState(0);
   const [budgetThemeColor, setBudgetTheme] = useState("bg-green");
+  console.log(budgetName);
 
   function handleCreateBudget(e) {
     e.preventDefault();
@@ -25,7 +26,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
 
   if (isBudget) return <Spinner />;
 
-  if (budgetError) return <ErrorMessage errorMessage={budgetError} />;
+  if (budgetError) return <ErrorMessage errorMessage={budgetError.message} />;
 
   return (
     <div className="fixed inset-0 z-10 flex items-center justify-center">

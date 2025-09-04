@@ -9,7 +9,7 @@ export default function BudgetsLayout() {
 
   return (
     <div className="m-10 lg:m-5">
-      <div className="flex justify-between items-center relative">
+      <div className="flex justify-between items-center">
         <Heading>Budgets</Heading>
         <button
           className="font-myFontBold text-[14px] text-white bg-grey-900 p-4 rounded-xl transition duration-500 hover:bg-grey-500"
@@ -18,7 +18,7 @@ export default function BudgetsLayout() {
           + Add New Budget
         </button>
       </div>
-      <div className="grid grid-cols-2 gap-10 mt-10 rounded-xl lg:grid-cols-1">
+      <div className="grid grid-cols-2 grid-flow-col-dense gap-10 mt-10 rounded-xl lg:grid-cols-1">
         <div>
           <BudgetsSpendingSummary />
         </div>

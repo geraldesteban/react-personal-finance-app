@@ -1,9 +1,9 @@
-import CheckDetails from "../../ui/CheckDetails";
+import ViewDetails from "../../ui/ViewDetails";
 
 export default function OverviewRecurringBills() {
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5">
-      <CheckDetails
+      <ViewDetails
         heading="Recurring Bills"
         span="See Details"
         seeDetails="recurringbills"

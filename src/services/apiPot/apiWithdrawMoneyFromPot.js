@@ -4,7 +4,7 @@ import supabase from "../supabase";
 export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
   /* Get current Login User */
   const {
-    data: { user },
+    data: { user: currentUser },
     error: userError,
   } = await supabase.auth.getUser();
 
@@ -14,18 +14,19 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
   const { data: balanceData, error: errorBalance } = await supabase
     .from("balances")
     .select("balance")
-    .eq("user_id", user.id)
+    .eq("user_id", currentUser.id)
     .single();
 
-  if (errorBalance) throw new Error(errorBalance.message);
+  if (errorBalance) throw new Error("Balance could not be Read");
+
   if (!balanceData || balanceData.balance < 0)
     throw new Error("You currently have no Balance");
 
   /* Get current Pot Money of the User */
   const { data: potData, error: errorPotData } = await supabase
     .from("pots")
-    .select("potMoney, targetMoney")
-    .eq("user_id", user.id)
+    .select("potName, potMoney, targetMoney")
+    .eq("user_id", currentUser.id)
     .eq("id", pot_id)
     .single();
 
@@ -41,18 +42,25 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
     throw new Error("Withdrawal amount is higher than current Pot Money");
   }
 
+  /* Invalid Amount */
+  if (amount <= 0) throw new Error("Invalid Amount to Withdraw");
+
   /* Updated Balance and Pot data */
   const updatedBalance = balanceData.balance + amount;
   const updatedPotMoney = potData.potMoney - amount;
   const updatedTargetMoney = potData.targetMoney + amount;
 
+  /* Get Pot Name */
+  const potName = potData.potName;
+  console.log(potName);
+
   /* Update Balance of the User */
   const { error: balanceError } = await supabase
     .from("balances")
     .update({ balance: updatedBalance })
-    .eq("user_id", user.id);
+    .eq("user_id", currentUser.id);
 
-  if (balanceError) throw new Error(balanceError.message);
+  if (balanceError) throw new Error("Balance could not be updated");
 
   /* Update Pot Money and Target Money of the User */
   const { error: potMoneyError } = await supabase
@@ -61,12 +69,15 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
       potMoney: updatedPotMoney,
       targetMoney: updatedTargetMoney,
     })
-    .eq("user_id", user.id)
+    .eq("user_id", currentUser.id)
     .eq("id", pot_id);
 
-  if (potMoneyError) throw new Error(potMoneyError.message);
+  if (potMoneyError)
+    throw new Error("Pot Money or Target Money could not be updated");
 
   return {
+    amount,
+    potName,
     updatedBalance,
     updatedPotMoney,
     updatedTargetMoney,

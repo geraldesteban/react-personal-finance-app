@@ -9,6 +9,8 @@ export function useCreateBudget(onClose) {
     mutate: createBudget,
     isPending: isBudget,
     error: budgetError,
+    data: spents,
+    reset,
   } = useMutation({
     mutationFn: apiCreateBudget,
     onSuccess: () => {
@@ -20,9 +22,11 @@ export function useCreateBudget(onClose) {
       if (onClose) onClose();
     },
     onError: (error) => {
-      toast.error(error);
+      toast.error(error.message);
+
+      reset();
     },
   });
 
-  return { createBudget, isBudget, budgetError };
+  return { createBudget, isBudget, budgetError, spents };
 }

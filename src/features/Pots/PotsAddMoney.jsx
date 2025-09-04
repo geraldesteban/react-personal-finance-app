@@ -6,7 +6,7 @@ import { useAddMoney } from "./useAddMoney";
 import { usePot } from "./usePot";
 import { formatCurrency } from "../../utils/formatCurrency";
 
-export default function PotsAddMoney({ active, onClose, potId }) {
+export default function PotsAddMoney({ active, onClose, potId, potName }) {
   const { addPotMoney, isAddPotMoney, errorAddPotMoney } = useAddMoney(onClose);
   const { potData } = usePot(potId);
   const targetMoney = potData?.targetMoney;
@@ -37,7 +37,7 @@ export default function PotsAddMoney({ active, onClose, potId }) {
       <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 lg:mx-10 sm:mx-5">
         <div className="flex justify-between items-center mb-5 sm:text-[20px]">
           <h2 className="font-myFontBold text-grey-900 text-[32px]">
-            Add to `Savings`
+            Add to `{potName.replace(/\b\w/g, (char) => char.toUpperCase())}`
           </h2>
           <button onClick={handleCloseModal}>
             <CloseModal />

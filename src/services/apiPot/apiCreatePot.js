@@ -1,6 +1,6 @@
 import supabase from "../supabase";
 
-export async function addPots({ potName, targetMoney, potTheme }) {
+export async function apiCreatePot({ potName, targetMoney, potTheme }) {
   const {
     data: { user },
     error: userError,
@@ -14,6 +14,8 @@ export async function addPots({ potName, targetMoney, potTheme }) {
   const addedTargetMoney = targetMoney;
   const addedPotTheme = potTheme;
 
+  if (addedTargetMoney <= 0) throw new Error("Invalid amount");
+
   const { error: potError } = await supabase.from("pots").insert([
     {
       user_id: user.id,
@@ -23,7 +25,7 @@ export async function addPots({ potName, targetMoney, potTheme }) {
     },
   ]);
 
-  if (potError) throw new Error(potError.message);
+  if (potError) throw new Error("Pot could not be Insert");
 
   return { addedPotName, addedTargetMoney, addedPotTheme };
 }

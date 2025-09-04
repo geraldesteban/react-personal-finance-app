@@ -1,14 +1,13 @@
+import { formatDate } from "../../utils/formatDate";
 import CaretRight from "../../assets/icon-caret-right.svg?react";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
 import { useTransactions } from "../Transactions/useTransactions";
-import { useReadBudgets } from "./useReadBudgets";
+import { formatCurrency } from "../../utils/formatCurrency";
 
-export default function BudgetsLatestSpendings() {
-  const { dataBudgets } = useReadBudgets();
+export default function BudgetsLatestSpendings({ activeBudgetName }) {
   const { transactionsData, isTransactionsData, errorTransactionsData } =
     useTransactions();
-
   if (isTransactionsData) return <Spinner />;
 
   if (errorTransactionsData)
@@ -24,10 +23,8 @@ export default function BudgetsLatestSpendings() {
         </button>
       </div>
       {transactionsData
-        ?.filter((td) =>
-          dataBudgets?.some(
-            (db) => td.category.toLowerCase() === db.budgetName.toLowerCase()
-          )
+        ?.filter(
+          (tsx) => tsx.category.toLowerCase() === activeBudgetName.toLowerCase()
         )
         .slice(0, 3)
         .map((ls) => (
@@ -47,10 +44,10 @@ export default function BudgetsLatestSpendings() {
             </div>
             <div>
               <p className="text-right font-myFontBold text-grey-900 text-[12px]">
-                {ls.amount}
+                {formatCurrency(ls.amount)}
               </p>
               <p className="font-myFontRegular text-grey-500 text-[12px]">
-                {ls.date}
+                {formatDate(ls.date)}
               </p>
             </div>
           </div>

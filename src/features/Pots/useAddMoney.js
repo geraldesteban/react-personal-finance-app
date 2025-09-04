@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiAddMoneyToPot } from "../../services/apiPot/apiAddMoneyToPot";
+import { formatCurrency } from "../../utils/formatCurrency";
 import toast from "react-hot-toast";
 
 export function useAddMoney(onClose) {
@@ -12,8 +13,13 @@ export function useAddMoney(onClose) {
     reset,
   } = useMutation({
     mutationFn: apiAddMoneyToPot,
-    onSuccess: () => {
-      toast.success("Money added to Pot");
+    onSuccess: (result) => {
+      toast.success(
+        `${formatCurrency(result.amount)} added to the ${result.potName.replace(
+          /\b\w/g,
+          (char) => char.toUpperCase()
+        )} Pot`
+      );
 
       queryClient.invalidateQueries(["balances"]);
       queryClient.invalidateQueries(["pots"]);

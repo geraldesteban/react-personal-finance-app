@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { formatCurrency } from "../../utils/formatCurrency";
 import Ellipsis from "../../assets/icon-ellipsis.svg?react";
 import BudgetsEditBudget from "./BudgetsEditBudget";
 import BudgetsDeleteBudget from "./BudgetsDeleteBudget";
@@ -7,6 +6,7 @@ import BudgetsLatestSpendings from "./BudgetsLatestSpendings";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
 import { useReadBudgets } from "./useReadBudgets";
+import BudgetsSpentRemaining from "./BudgetsSpentRemaining";
 
 export default function BudgetsList() {
   const [activeDropDown, setActiveDropDown] = useState(false);
@@ -78,38 +78,10 @@ export default function BudgetsList() {
                   </div>
                 </div>
               </div>
-              <div>
-                <h2 className="font-myFontRegular text-grey-500 text-[14px] mb-5">
-                  Maximum of {formatCurrency(budgets.maximumSpend)}
-                </h2>
-                <div className="w-full h-5 rounded-md bg-black"></div>
-              </div>
-              <div className="flex justify-between items-center my-5">
-                <div className="flex flex-1 relative">
-                  <div className="absolute w-1 h-full bg-green rounded-xl"></div>
-                  <div className="ml-5">
-                    <p className="font-myFontRegular text-grey-500 text-[12px]">
-                      Spent
-                    </p>
-                    <p className="font-myFontBold text-grey-900 text-[14px]">
-                      {formatCurrency(budgets.budgetSpent)}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-1 relative">
-                  <div className="absolute w-1 h-full bg-beige-100 rounded-xl"></div>
-                  <div className="ml-5">
-                    <p className="font-myFontRegular text-grey-500 text-[12px]">
-                      Remaining
-                    </p>
-                    <p className="font-myFontBold text-grey-900 text-[14px]">
-                      $35.00
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {/* Spent and Remaining */}
+              <BudgetsSpentRemaining activeBudgetName={budgets.budgetName} />
               {/* Latest Spendings */}
-              <BudgetsLatestSpendings />
+              <BudgetsLatestSpendings activeBudgetName={budgets.budgetName} />
             </div>
           ))}
       <BudgetsEditBudget

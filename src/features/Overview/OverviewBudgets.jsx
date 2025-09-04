@@ -1,4 +1,4 @@
-import CheckDetails from "../../ui/CheckDetails";
+import ViewDetails from "../../ui/ViewDetails";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useReadBudgets } from "../Budgets/useReadBudgets";
 import Spinner from "../../ui/Spinner";
@@ -23,7 +23,7 @@ export default function OverviewBudgets() {
 
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5">
-      <CheckDetails heading="Budgets" span="See Details" seeDetails="budgets" />
+      <ViewDetails heading="Budgets" span="See Details" seeDetails="budgets" />
       <div className="flex items-center justify-between sm:flex-col sm:items-start">
         <div className="flex flex-col justify-center text-center mb-5">
           <h2 className="font-myFontBold text-[32px] text-grey-900">$338</h2>

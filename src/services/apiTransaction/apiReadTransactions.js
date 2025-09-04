@@ -1,9 +1,7 @@
-import supabase from "./supabase";
+import supabase from "../supabase";
 
 export async function getTransactions() {
-  let query = supabase.from("transactions").select("*");
-
-  const { data, error } = await query;
+  const { data, error } = await supabase.from("transactions").select("*");
 
   if (error) {
     console.error(error);

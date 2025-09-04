@@ -8,7 +8,7 @@ export default function PotsLayout() {
 
   return (
     <div className="m-10 lg:m-5">
-      <div className="flex justify-between items-center relative">
+      <div className="flex justify-between items-center">
         <Heading>Pots</Heading>
         <button
           className="font-myFontBold text-[14px] text-white p-4 bg-grey-900 rounded-xl hover:bg-grey-500"

@@ -1,15 +1,30 @@
 import { formatCurrency } from "../../utils/formatCurrency";
-import { RecurringBills } from "./RecurringBills";
+import { useRecurringBills } from "./useRecurringBills";
+import Spinner from "../../ui/Spinner";
+import ErrorMessage from "../../ui/Spinner";
 
 export default function RecurringBillsSummary() {
   const {
-    paidBills,
-    paidBillsLength,
-    totalUpcoming,
-    totalUpcomingLength,
-    dueSoon,
-    dueSoonLength,
-  } = RecurringBills();
+    numberPaidBills,
+    numberUpcomingBills,
+    numberDueSoonBills,
+    totalPaidbills,
+    totalUpcomingBills,
+    totalDueSoonBills,
+    isTransactionsData,
+    errorTransactionsData,
+  } = useRecurringBills();
+
+  if (isTransactionsData)
+    return (
+      <div className="bg-white p-5 rounded-xl lg:flex-1">
+        <h2 className="font-myFontBoldtext-grey-900 text-[16px]">Summary</h2>
+        <Spinner />
+      </div>
+    );
+
+  if (errorTransactionsData)
+    return <ErrorMessage errorMessage={errorTransactionsData.message} />;
 
   return (
     <div className="bg-white p-5 rounded-xl lg:flex-1">
@@ -20,10 +35,10 @@ export default function RecurringBillsSummary() {
         </p>
         <div className="flex items-center">
           <p className="font-myFontBold text-grey-900 text-[12px] mr-1">
-            {paidBillsLength}
+            {numberPaidBills}
           </p>
           <p className="font-myFontBold text-grey-900 text-[12px]">
-            ({formatCurrency(paidBills)})
+            ({formatCurrency(totalPaidbills)})
           </p>
         </div>
       </div>
@@ -33,19 +48,21 @@ export default function RecurringBillsSummary() {
         </p>
         <div className="flex items-center">
           <p className="font-myFontBold text-grey-900 text-[12px] mr-1">
-            {totalUpcomingLength}
+            {numberUpcomingBills}
           </p>
           <p className="font-myFontBold text-grey-900 text-[12px]">
-            ({formatCurrency(totalUpcoming)})
+            ({formatCurrency(totalUpcomingBills)})
           </p>
         </div>
       </div>
       <div className="text-red flex justify-between items-center py-2">
         <p className="font-myFontRegular text-[12px]">Due Soon</p>
         <div className="flex items-center">
-          <p className="font-myFontBoldtext-[12px]">{dueSoonLength}</p>
+          <p className="font-myFontBoldtext-[12px] mr-1">
+            {numberDueSoonBills}
+          </p>
           <p className="font-myFontBoldtext-[12px]">
-            ({formatCurrency(dueSoon)})
+            ({formatCurrency(totalDueSoonBills)})
           </p>
         </div>
       </div>

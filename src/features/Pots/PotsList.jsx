@@ -34,13 +34,15 @@ export default function PotsList() {
     setActiveDropdown(null);
   }
 
-  function handleAddPotMoney(id) {
+  function handleAddPotMoney(id, potName) {
     setActiveId(id);
+    setActivePotName(potName);
     setAddMoneyActive(true);
   }
 
-  function handleWithdrawPotMoney(id) {
+  function handleWithdrawPotMoney(id, potName) {
     setActiveId(id);
+    setActivePotName(potName);
     setWithdrawActive(true);
   }
 
@@ -63,7 +65,7 @@ export default function PotsList() {
                     className={`w-4 h-4 ${pot.potTheme} rounded-full mr-5`}
                   ></div>
                   <h2 className="font-myFontBold text-grey-900 text-[20px]">
-                    {pot.potName}
+                    {pot.potName.replace(/\b\w/g, (char) => char.toUpperCase())}
                   </h2>
                 </div>
                 <div className="relative z-10">
@@ -117,13 +119,13 @@ export default function PotsList() {
               <div className="flex justify-between items-center gap-5">
                 <button
                   className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
-                  onClick={() => handleAddPotMoney(pot.id)}
+                  onClick={() => handleAddPotMoney(pot.id, pot.potName)}
                 >
                   + Add Money
                 </button>
                 <button
                   className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
-                  onClick={() => handleWithdrawPotMoney(pot.id)}
+                  onClick={() => handleWithdrawPotMoney(pot.id, pot.potName)}
                 >
                   With Draw
                 </button>
@@ -141,15 +143,17 @@ export default function PotsList() {
         potId={activeId}
         potName={activePotName}
       />
-      <PotsWithdraw
-        active={withdrawModalActive}
-        onClose={() => setWithdrawActive(false)}
-        potId={activeId}
-      />
       <PotsAddMoney
         active={addMoneyModalActive}
         onClose={() => setAddMoneyActive(false)}
         potId={activeId}
+        potName={activePotName}
+      />
+      <PotsWithdraw
+        active={withdrawModalActive}
+        onClose={() => setWithdrawActive(false)}
+        potId={activeId}
+        potName={activePotName}
       />
     </div>
   );

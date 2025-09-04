@@ -6,7 +6,7 @@ import { useState } from "react";
 import { usePot } from "./usePot";
 import { formatCurrency } from "../../utils/formatCurrency";
 
-export default function PotsWithdraw({ active, onClose, potId }) {
+export default function PotsWithdraw({ active, onClose, potId, potName }) {
   const { withdrawPotMoney, isWithdrawPotMoney, errorWithdrawPotMoney } =
     useWithdrawMoney(onClose);
   const { potData } = usePot(potId);
@@ -40,7 +40,8 @@ export default function PotsWithdraw({ active, onClose, potId }) {
       <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 lg:mx-10 sm:mx-5">
         <div className="flex justify-between items-center mb-5">
           <h2 className="font-myFontBold text-grey-900 text-[32px]">
-            Withdraw from `Savings`
+            Withdraw from `
+            {potName.replace(/\b\w/g, (char) => char.toUpperCase())}`?
           </h2>
           <button onClick={handleCloseModal}>
             <CloseModal />

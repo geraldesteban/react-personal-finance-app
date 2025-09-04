@@ -1,5 +1,5 @@
 import OverviewTransactionsProfileDetails from "./OverviewTransactionsProfileDetails";
-import CheckDetails from "../../ui/CheckDetails";
+import ViewDetails from "../../ui/ViewDetails";
 import { DATAURL } from "../../utils/constants";
 import useFetchData from "../../hooks/useFetchData";
 
@@ -10,7 +10,7 @@ function OverviewTransactions() {
 
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5 lg:w-full">
-      <CheckDetails
+      <ViewDetails
         heading="Transactions"
         span="View All"
         seeDetails="transactions"

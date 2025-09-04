@@ -1,5 +1,5 @@
 import PotIcon from "../../assets/icon-pot.svg?react";
-import CheckDetails from "../../ui/CheckDetails";
+import ViewDetails from "../../ui/ViewDetails";
 import { usePots } from "../Pots/usePots";
 import { formatCurrency } from "../../utils/formatCurrency";
 import Spinner from "../../ui/Spinner";
@@ -15,7 +15,7 @@ function OverviewPots() {
   if (isPots)
     return (
       <div className="bg-white p-10 rounded-xl lg:p-5">
-        <CheckDetails heading="Pots" span="See Details" seeDetails="pots" />
+        <ViewDetails heading="Pots" span="See Details" seeDetails="pots" />
         <Spinner />
       </div>
     );
@@ -23,14 +23,14 @@ function OverviewPots() {
   if (errorPots)
     return (
       <div className="bg-white p-10 rounded-xl lg:p-5">
-        <CheckDetails heading="Pots" span="See Details" seeDetails="pots" />
+        <ViewDetails heading="Pots" span="See Details" seeDetails="pots" />
         <ErrorMessage />;
       </div>
     );
 
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5">
-      <CheckDetails heading="Pots" span="See Details" seeDetails="pots" />
+      <ViewDetails heading="Pots" span="See Details" seeDetails="pots" />
       <div className="flex items-center justify-between sm:flex-col sm:items-start">
         <div
           className={`flex flex-1 items-center bg-[#F8F4F0] ${

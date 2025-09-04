@@ -1,11 +1,19 @@
 import BillPaid from "../../assets/icon-bill-paid.svg?react";
 import BillDue from "../../assets/icon-bill-due.svg?react";
-import { RecurringBills } from "./RecurringBills";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
+import { useTransactions } from "../Transactions/useTransactions";
+import { formatCurrency } from "../../utils/formatCurrency";
+import { format } from "date-fns";
 
 export default function RecurringBillsDetails() {
-  const { recurringBillsDetails } = RecurringBills();
+  const { transactionsData, isTransactionsData, errorTransactionsData } =
+    useTransactions();
+
+  if (isTransactionsData) return <Spinner />;
+
+  if (errorTransactionsData)
+    return <ErrorMessage errorMessage={errorTransactionsData.message} />;
 
   return (
     <div className="mx-5">
@@ -14,77 +22,78 @@ export default function RecurringBillsDetails() {
         <span className="flex sm:hidden">Due Date</span>
         <span className="flex">Amount</span>
       </div>
-      {recurringBillsDetails.map((recurring, id) => {
-        return (
+      {transactionsData
+        ?.filter((tsx) => tsx.recurring === true)
+        .filter(
+          (tsx, index, self) =>
+            index === self.findIndex((t) => t.name === tsx.name)
+        )
+        .map((tsx) => (
           <div
             className="flex justify-between items-center border-b py-5"
-            key={id}
+            key={tsx.id}
           >
             <div className="flex items-center sm:flex-col">
               <div className="flex items-center gap-5">
                 <img
-                  src={`${recurring.billImage}`}
-                  alt={`${recurring.billTitle}`}
+                  src={tsx.avatar}
+                  alt=""
                   className="rounded-full w-[40px] h-[40px]"
                 />
                 <span className="font-myFontBold text-grey-900 text-[14px]">
-                  {recurring.billTitle}
+                  {tsx.name}
                 </span>
               </div>
-              {/* Due Date output. Only display in Mobile*/}
+              {/* Mobile */}
               <div className="hidden items-center w-[210px]  sm:flex">
                 <p
-                  className={`font-myFontRegular text-[12px] ${
-                    +recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
-                    +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24
-                      ? "text-red"
-                      : "text-green"
-                  } mr-2`}
+                  className={`font-myFontRegular text-[12px] mr-2 ${
+                    format(tsx.date, "M") === "8"
+                      ? "text-green"
+                      : "text-grey-500"
+                  }`}
                 >
-                  Monthly-{recurring.date}
+                  Monthly-{format(new Date(tsx.date), "do")}
                 </p>
-                {+recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
-                +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24 ? (
-                  <BillDue className="text-red" />
-                ) : (
+                {format(tsx.date, "M") === "8" ? (
                   <BillPaid className="text-green" />
+                ) : (
+                  <BillDue className="text-red" />
                 )}
               </div>
             </div>
-            {/* Due Date output. Only display in Desktop */}
+            {/* Desktop */}
             <div className="flex items-center w-[210px] sm:hidden">
               <p
-                className={`font-myFontRegular text-[12px] ${
-                  +recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
-                  +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24
-                    ? "text-red"
-                    : "text-green"
-                } mr-2`}
+                className={`font-myFontRegular text-[12px] mr-2 ${
+                  format(tsx.date, "M") === "8" ? "text-green" : "text-grey-500"
+                }`}
               >
-                Monthly-{recurring.date}
+                Monthly-{format(new Date(tsx.date), "do")}
               </p>
-              {+recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
-              +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24 ? (
+              {format(tsx.date, "M") === "8" ? (
+                <BillPaid className="text-green" />
+              ) : Number(format(new Date(tsx.date), "d")) >= 19 &&
+                Number(format(new Date(tsx.date), "d")) <= 23 ? (
                 <BillDue className="text-red" />
               ) : (
-                <BillPaid className="text-green" />
+                ""
               )}
             </div>
             <div>
               <p
-                className={`font-myFontBold ${
-                  +recurring.date.replace(/(st|nd|rd|th)$/i, "") >= 19 &&
-                  +recurring.date.replace(/(st|nd|rd|th)$/i, "") <= 24
+                className={`font-myFontBold text-[14px] ${
+                  Number(format(new Date(tsx.date), "d")) >= 19 &&
+                  Number(format(new Date(tsx.date), "d")) <= 23
                     ? "text-red"
                     : "text-grey-900"
-                } text-[14px]`}
+                }`}
               >
-                {recurring.amount}
+                {formatCurrency(Math.abs(tsx.amount))}
               </p>
             </div>
           </div>
-        );
-      })}
+        ))}
     </div>
   );
 }
