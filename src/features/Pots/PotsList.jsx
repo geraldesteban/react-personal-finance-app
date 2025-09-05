@@ -105,12 +105,17 @@ export default function PotsList() {
                   {formatCurrency(pot.potMoney)}
                 </p>
               </div>
-              <div className="relative">
-                <div className="absolute w-full h-1 rounded-xl bg-black"></div>
+              <div className="w-full h-3 rounded-md bg-beige-100 flex items-center">
+                <div
+                  className={`h-2 rounded-md ${pot.potTheme}`}
+                  style={{
+                    width: `${(pot.potMoney / pot.targetMoney) * 100}%`,
+                  }}
+                ></div>
               </div>
               <div className="flex justify-between items-center mb-5">
                 <p className="font-myFontBold text-grey-500 text-[12px] mt-3">
-                  7.95%
+                  {((pot.potMoney / pot.targetMoney) * 100).toFixed(1)}%
                 </p>
                 <p className="font-myFontRegular text-grey-500 text-[12px] mt-3">
                   Target of {formatCurrency(pot.targetMoney)}

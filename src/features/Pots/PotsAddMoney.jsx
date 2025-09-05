@@ -59,14 +59,7 @@ export default function PotsAddMoney({ active, onClose, potId, potName }) {
         <div className="flex justify-between items-center my-1">
           <p className="font-myFontRegular text-green text-[12px]">27.95%</p>
           <p className="font-myFontRegular text-grey-500 text-[12px]">
-            Target of{" "}
-            {formatCurrency(
-              amountPotMoney < 0
-                ? targetMoney
-                : amountPotMoney <= targetMoney
-                ? targetMoney - amountPotMoney
-                : targetMoney
-            )}
+            Target of {formatCurrency(targetMoney)}
           </p>
         </div>
         <form onSubmit={handleAddPotMoney}>

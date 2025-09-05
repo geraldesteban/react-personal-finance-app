@@ -73,8 +73,8 @@ export async function apiCreateBudget({
   const { error: errorUpdateBudget } = await supabase
     .from("budgets")
     .update({
-      budgetSpent: Math.round(totalSpent),
-      budgetRemaining: Math.round(remaining),
+      budgetSpent: totalSpent,
+      budgetRemaining: remaining <= 0 ? 0 : remaining,
     })
     .eq("user_id", currentUser.id)
     .eq("id", budgetId);

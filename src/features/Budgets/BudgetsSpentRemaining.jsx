@@ -16,7 +16,14 @@ export default function BudgetsSpentRemaining({ activeBudgetName }) {
               <h2 className="font-myFontRegular text-grey-500 text-[14px] mb-5">
                 Maximum of {formatCurrency(db.maximumSpend)}
               </h2>
-              <div className="w-full h-5 rounded-md bg-black"></div>
+              <div className="w-full h-8 rounded-md bg-beige-100 flex items-center">
+                <div
+                  className={`h-6 rounded-sm ${db.budgetThemeColor} ml-1`}
+                  style={{
+                    width: `${(db.budgetSpent / db.maximumSpend) * 100}%`,
+                  }}
+                ></div>
+              </div>
             </div>
             <div className="flex justify-between items-center my-5">
               <div className="flex flex-1 relative">

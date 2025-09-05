@@ -18,7 +18,7 @@ export default function BudgetsLayout() {
           + Add New Budget
         </button>
       </div>
-      <div className="grid grid-cols-2 grid-flow-col-dense gap-10 mt-10 rounded-xl lg:grid-cols-1">
+      <div className="grid grid-cols-2 gap-10 mt-10 rounded-xl lg:grid-cols-1">
         <div>
           <BudgetsSpendingSummary />
         </div>

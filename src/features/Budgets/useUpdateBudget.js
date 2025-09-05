@@ -9,6 +9,7 @@ export function useUpdateBudget(onClose) {
     mutate: updateBudget,
     isPending: isUpdateBudget,
     error: errorUpdateBudget,
+    reset,
   } = useMutation({
     mutationFn: apiUpdateBudget,
     onSuccess: () => {
@@ -20,6 +21,8 @@ export function useUpdateBudget(onClose) {
     },
     onError: (error) => {
       toast.error(error.message);
+
+      reset();
     },
   });
 

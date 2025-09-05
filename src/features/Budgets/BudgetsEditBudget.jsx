@@ -14,7 +14,7 @@ export default function BudgetsEditBudget({ active, onClose, budgetId }) {
   const { updateBudget, isUpdateBudget, errorUpdateBudget } =
     useUpdateBudget(onClose);
 
-  function handleDeleteBudget(e) {
+  function handleEditBudget(e) {
     e.preventDefault();
 
     updateBudget({
@@ -51,7 +51,7 @@ export default function BudgetsEditBudget({ active, onClose, budgetId }) {
         <p className="font-myFontRegular text-grey-500 text-[14px] mb-5">
           As your budgets change, feel free to update your spending limits.
         </p>
-        <form onSubmit={handleDeleteBudget}>
+        <form onSubmit={handleEditBudget}>
           <SelectBudgetCategory
             label={"Category"}
             value={editCategory}

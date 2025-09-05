@@ -44,7 +44,8 @@ export default function BudgetsList() {
               <div className="flex justify-between items-center mb-5">
                 <div className="flex items-center">
                   <div
-                    className={`w-4 h-4 ${budgets.budgetThemeColor} rounded-full mr-5`}
+                    className="w-4 h-4 rounded-full mr-5"
+                    style={{ backgroundColor: budgets.budgetThemeColor }}
                   ></div>
                   <h2 className="font-myFontBold text-grey-900 text-[20px]">
                     {budgets.budgetName}

@@ -8,6 +8,7 @@ import { formatCurrency } from "../../utils/formatCurrency";
 export default function BudgetsLatestSpendings({ activeBudgetName }) {
   const { transactionsData, isTransactionsData, errorTransactionsData } =
     useTransactions();
+
   if (isTransactionsData) return <Spinner />;
 
   if (errorTransactionsData)

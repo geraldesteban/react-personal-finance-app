@@ -13,7 +13,8 @@ export async function apiReadPots() {
 
   const { data, error } = await supabase
     .from("pots")
-    .select("id, potName, targetMoney, potMoney, created_at, potTheme")
+    .select("id, potName, targetMoney, potMoney, potTheme")
+    .order("created_at", { ascending: true })
     .eq("user_id", user.id);
 
   if (error) throw new Error("Pots could not be loaded");

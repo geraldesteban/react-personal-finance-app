@@ -13,6 +13,7 @@ export async function apiReadBudgets() {
     .select(
       "id, budgetName, maximumSpend, budgetThemeColor, budgetSpent, budgetRemaining"
     )
+    .order("created_at", { ascending: true })
     .eq("user_id", currentUser.id);
 
   if (errorBudgets) throw new Error("Budgets could not be read");

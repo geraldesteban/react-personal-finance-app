@@ -60,7 +60,7 @@ function OverviewPots() {
               ></div>
               <div className="ml-5">
                 <p className="font-myFontRegular text-grey-500 text-[12px] mb-2">
-                  {pot.potName}
+                  {pot.potName.replace(/\b\w/g, (char) => char.toUpperCase())}
                 </p>
                 <p className="font-myFontBold text-grey-900 text-[14px]">
                   {formatCurrency(pot.potMoney)}
