@@ -11,7 +11,6 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
   const [budgetName, setBudgetName] = useState("Entertainment");
   const [maximumSpend, setMaximumSpend] = useState(0);
   const [budgetThemeColor, setBudgetTheme] = useState("bg-green");
-  console.log(budgetName);
 
   function handleCreateBudget(e) {
     e.preventDefault();

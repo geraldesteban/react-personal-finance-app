@@ -1,12 +1,13 @@
 import { format } from "date-fns";
 import supabase from "../supabase";
 
+/* Create Budget and Update Budget Spent and Budget Remaining */
 export async function apiCreateBudget({
   budgetName,
   maximumSpend,
   budgetThemeColor,
 }) {
-  if (!budgetName) return null;
+  /* Get current User */
   const {
     data: { user: currentUser },
     error: errorUser,
@@ -14,12 +15,33 @@ export async function apiCreateBudget({
 
   if (errorUser) throw new Error("User not logged in");
 
+  /* New Budget data */
   const addedBudgetName = budgetName;
   const addedMaximumSpend = maximumSpend;
   const addedBudgetThemeColor = budgetThemeColor;
 
   if (addedMaximumSpend <= 0) throw new Error("Invalid Maximum Spend");
 
+  /* Get Transactions data */
+  const { data: dataTsx, error: errorTsx } = await supabase
+    .from("transactions")
+    .select("*");
+
+  if (errorTsx) throw new Error("Transaction could not be read");
+
+  /* Get Budget Name */
+  const { data: dataBudget, error: errorBudget } = await supabase
+    .from("budgets")
+    .select("budgetName")
+    .eq("user_id", currentUser.id);
+
+  if (errorBudget) throw new Error("Budget could not be Read");
+
+  /* Check if Budget Name already exist */
+  if (dataBudget.some((db) => db.budgetName === addedBudgetName))
+    throw new Error(`${addedBudgetName} is already exists`);
+
+  /* Create New Budget */
   const { data: budgetInsert, error: budgetError } = await supabase
     .from("budgets")
     .insert([
@@ -36,12 +58,6 @@ export async function apiCreateBudget({
   const budgetId = insertedBudget.id;
 
   if (budgetError) throw new Error("Budget could not be Created");
-
-  const { data: dataTsx, error: errorTsx } = await supabase
-    .from("transactions")
-    .select("*");
-
-  if (errorTsx) throw new Error("Transaction could not be read");
 
   /* Total Spents */
   const totalSpent = dataTsx

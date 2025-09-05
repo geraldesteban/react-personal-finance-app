@@ -31,7 +31,7 @@ export default function OverviewBudgets() {
             of $975 limit
           </p>
         </div>
-        <div className="grid grid-cols-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2">
           {dataBudgets?.slice(0, 4).map((budgets) => (
             <div className="relative mb-5 sm:mr-16" key={budgets.id}>
               <div
