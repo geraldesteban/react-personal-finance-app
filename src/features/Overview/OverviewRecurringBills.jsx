@@ -1,6 +1,42 @@
 import ViewDetails from "../../ui/ViewDetails";
+import Spinner from "../../ui/Spinner";
+import ErrorMessage from "../../ui/Spinner";
+import { useRecurringBills } from "../RecurringBills/useRecurringBills";
+import { formatCurrency } from "../../utils/formatCurrency";
 
 export default function OverviewRecurringBills() {
+  const {
+    totalPaidbills,
+    totalUpcomingBills,
+    totalDueSoonBills,
+    isTransactionsData,
+    errorTransactionsData,
+  } = useRecurringBills();
+
+  if (isTransactionsData)
+    return (
+      <div className="bg-white p-10 rounded-xl lg:p-5">
+        <ViewDetails
+          heading="Recurring Bills"
+          span="See Details"
+          seeDetails="recurringbills"
+        />
+        <Spinner />
+      </div>
+    );
+
+  if (errorTransactionsData)
+    return (
+      <div className="bg-white p-10 rounded-xl lg:p-5">
+        <ViewDetails
+          heading="Recurring Bills"
+          span="See Details"
+          seeDetails="recurringbills"
+        />
+        <ErrorMessage errorMessage={errorTransactionsData.message} />
+      </div>
+    );
+
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5">
       <ViewDetails
@@ -15,7 +51,7 @@ export default function OverviewRecurringBills() {
             Paid Bills
           </h2>
           <p className="font-myFontBold text-grey-900 text-[14px] mr-5">
-            $190.00
+            {formatCurrency(totalPaidbills)}
           </p>
         </div>
         <div className="flex relative justify-between items-center bg-beige-100 rounded-xl py-5 mb-5">
@@ -24,7 +60,7 @@ export default function OverviewRecurringBills() {
             Total Upcoming
           </h2>
           <p className="font-myFontBold text-grey-900 text-[14px] mr-5">
-            $194.98
+            {formatCurrency(totalUpcomingBills)}
           </p>
         </div>
         <div className="flex relative justify-between items-center bg-beige-100 rounded-xl py-5">
@@ -33,7 +69,7 @@ export default function OverviewRecurringBills() {
             Due Soon
           </h2>
           <p className="font-myFontBold text-grey-900 text-[14px] mr-5">
-            $59.98
+            {formatCurrency(totalDueSoonBills)}
           </p>
         </div>
       </div>

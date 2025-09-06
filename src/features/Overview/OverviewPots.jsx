@@ -8,10 +8,6 @@ import ErrorMessage from "../../ui/Spinner";
 function OverviewPots() {
   const { potsData, isPots, errorPots } = usePots();
 
-  const totalSaved = potsData
-    ?.map((val) => val.potMoney)
-    .reduce((acc, curr) => acc + curr, 0);
-
   if (isPots)
     return (
       <div className="bg-white p-10 rounded-xl lg:p-5">
@@ -31,7 +27,7 @@ function OverviewPots() {
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5">
       <ViewDetails heading="Pots" span="See Details" seeDetails="pots" />
-      <div className="flex items-center justify-between sm:flex-col sm:items-start">
+      <div className="flex items-center justify-between flex-wrap sm:flex-col sm:items-start">
         <div
           className={`flex flex-1 items-center bg-[#F8F4F0] ${
             potsData?.length ? "mr-5" : ""
@@ -43,11 +39,15 @@ function OverviewPots() {
               Total Saved
             </h2>
             <p className="font-myFontBold text-grey-900 text-[32px]">
-              {formatCurrency(totalSaved)}
+              {formatCurrency(
+                potsData
+                  ?.map((val) => val.potMoney)
+                  .reduce((acc, curr) => acc + curr, 0)
+              )}
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 xxl:mt-5">
           {potsData?.slice(0, 4).map((pot, index) => (
             <div
               key={pot.id}
@@ -56,7 +56,8 @@ function OverviewPots() {
               }`}
             >
               <div
-                className={`absolute ${pot.potTheme} w-1 h-full rounded-xl`}
+                className="absolute w-1 h-full rounded-xl"
+                style={{ backgroundColor: pot.potTheme }}
               ></div>
               <div className="ml-5">
                 <p className="font-myFontRegular text-grey-500 text-[12px] mb-2">

@@ -1,9 +1,20 @@
 import PieChartBudget from "../../ui/PieChartBudget";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { useReadBudgets } from "./useReadBudgets";
+import Spinner from "../../ui/Spinner";
+import ErrorMessage from "../../ui/Spinner";
 
 export default function BudgetsSpendingSummary() {
-  const { dataBudgets } = useReadBudgets();
+  const { dataBudgets, isDataBudgets, errorDataBudgets } = useReadBudgets();
+
+  if (isDataBudgets)
+    return (
+      <div className="flex-1 bg-white rounded-xl p-15 lg:justify-between sm:block p-10">
+        <Spinner />
+      </div>
+    );
+
+  if (errorDataBudgets) return <ErrorMessage errorMessage={errorDataBudgets} />;
 
   return (
     <div className="flex-1 bg-white rounded-xl p-15 lg:justify-between sm:block">

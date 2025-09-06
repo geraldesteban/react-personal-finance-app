@@ -8,7 +8,7 @@ import SelectThemeColor from "../../ui/SelectThemeColor";
 export default function BudgetsAddNewBudget({ active, onClose }) {
   const [potName, setPotName] = useState("");
   const [targetMoney, setTargetMoney] = useState(0);
-  const [potTheme, setPotTheme] = useState("bg-green");
+  const [potTheme, setPotTheme] = useState("#277C78");
   const { addPot, isAddPot, errorAddPot } = useCreatePots(onClose);
 
   function handleAddPot(e) {
@@ -43,7 +43,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
                 onClose();
                 setPotName("");
                 setTargetMoney(0);
-                setPotTheme("bg-green");
+                setPotTheme("#277C78");
               }}
             >
               <CloseModal />

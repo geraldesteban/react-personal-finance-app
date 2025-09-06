@@ -11,6 +11,11 @@ export default function OverviewBudgets() {
   if (isDataBudgets)
     return (
       <div className="bg-white p-10 rounded-xl lg:p-5">
+        <ViewDetails
+          heading="Budgets"
+          span="See Details"
+          seeDetails="budgets"
+        />
         <Spinner />
       </div>
     );
@@ -18,6 +23,11 @@ export default function OverviewBudgets() {
   if (errorDataBudgets)
     return (
       <div className="bg-white p-10 rounded-xl lg:p-5">
+        <ViewDetails
+          heading="Budgets"
+          span="See Details"
+          seeDetails="budgets"
+        />
         <ErrorMessage errorMessage={errorDataBudgets.message} />
       </div>
     );
@@ -25,7 +35,7 @@ export default function OverviewBudgets() {
   return (
     <div className="bg-white p-10 rounded-xl lg:p-5">
       <ViewDetails heading="Budgets" span="See Details" seeDetails="budgets" />
-      <div className="flex items-center justify-between flex-wrap sm:block">
+      <div className="flex items-center justify-between sm:block">
         <PieChartBudget />
         <div className="grid grid-cols-1 sm:grid-cols-2">
           {dataBudgets?.slice(0, 4).map((budgets) => (

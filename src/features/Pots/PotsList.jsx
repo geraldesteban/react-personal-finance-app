@@ -63,6 +63,7 @@ export default function PotsList() {
                 <div className="flex items-center">
                   <div
                     className={`w-4 h-4 ${pot.potTheme} rounded-full mr-5`}
+                    style={{ backgroundColor: pot.potTheme }}
                   ></div>
                   <h2 className="font-myFontBold text-grey-900 text-[20px]">
                     {pot.potName.replace(/\b\w/g, (char) => char.toUpperCase())}
@@ -110,6 +111,7 @@ export default function PotsList() {
                   className={`h-2 rounded-md ${pot.potTheme}`}
                   style={{
                     width: `${(pot.potMoney / pot.targetMoney) * 100}%`,
+                    backgroundColor: pot.potTheme,
                   }}
                 ></div>
               </div>

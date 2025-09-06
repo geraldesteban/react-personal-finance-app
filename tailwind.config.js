@@ -37,6 +37,9 @@ export default {
       },
     },
     screens: {
+      // for some ui
+      xxl: { max: "1352px" },
+
       // ↓ 1279px and below (laptops, small desktops)
       xl: { max: "1279px" },
 

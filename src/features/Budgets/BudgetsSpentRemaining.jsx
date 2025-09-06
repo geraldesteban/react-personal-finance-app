@@ -18,9 +18,10 @@ export default function BudgetsSpentRemaining({ activeBudgetName }) {
               </h2>
               <div className="w-full h-8 rounded-md bg-beige-100 flex items-center">
                 <div
-                  className={`h-6 rounded-sm ${db.budgetThemeColor} ml-1`}
+                  className="h-7 rounded-md ml-1"
                   style={{
                     width: `${(db.budgetSpent / db.maximumSpend) * 100}%`,
+                    backgroundColor: db.budgetThemeColor,
                   }}
                 ></div>
               </div>

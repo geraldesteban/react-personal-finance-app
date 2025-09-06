@@ -28,9 +28,19 @@ export default function BudgetsList() {
     setActiveDropDown(false);
   }
 
-  if (isDataBudgets) return <Spinner />;
+  if (isDataBudgets)
+    return (
+      <div className="flex-1 bg-white rounded-xl p-10 sm:p-5">
+        <Spinner />
+      </div>
+    );
 
-  if (errorDataBudgets) return <ErrorMessage errorMessage={errorDataBudgets} />;
+  if (errorDataBudgets)
+    return (
+      <div className="flex-1 bg-white rounded-xl p-10 sm:p-5">
+        <ErrorMessage errorMessage={errorDataBudgets} />
+      </div>
+    );
 
   return (
     <>
@@ -79,9 +89,7 @@ export default function BudgetsList() {
                   </div>
                 </div>
               </div>
-              {/* Spent and Remaining */}
               <BudgetsSpentRemaining activeBudgetName={budgets.budgetName} />
-              {/* Latest Spendings */}
               <BudgetsLatestSpendings activeBudgetName={budgets.budgetName} />
             </div>
           ))}
