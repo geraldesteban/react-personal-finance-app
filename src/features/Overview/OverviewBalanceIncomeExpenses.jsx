@@ -61,7 +61,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Current Balance
         </h2>
         <p className={`font-myFontBold text-[32px] text-white`}>
-          {formatCurrency(balances?.balance, "USD")}
+          {formatCurrency(balances?.balance)}
         </p>
       </div>
       <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
@@ -69,7 +69,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Income
         </h2>
         <p className={`font-myFontBold text-[32px] text-grey-900`}>
-          {formatCurrency(balances?.income, "USD")}
+          {formatCurrency(balances?.income)}
         </p>
       </div>
       <div className={`flex-1 p-7 rounded-xl bg-white lg:p-5`}>
@@ -77,7 +77,7 @@ export default function OverviewBalanceIncomeExpenses() {
           Expenses
         </h2>
         <p className={`font-myFontBold text-[32px] text-grey-900`}>
-          {formatCurrency(balances?.expenses, "USD")}
+          {formatCurrency(balances?.expenses)}
         </p>
       </div>
     </div>
