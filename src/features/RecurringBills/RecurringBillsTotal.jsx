@@ -16,7 +16,11 @@ export default function RecurringBillsTotal() {
     );
 
   if (errorTransactionsData)
-    return <ErrorMessage errorMessage={errorTransactionsData.message} />;
+    return (
+      <div className="bg-grey-900 p-10 rounded-xl lg:p-5 lg:flex-1">
+        <ErrorMessage errorMessage={errorTransactionsData.message} />
+      </div>
+    );
 
   return (
     <div className="bg-grey-900 p-10 rounded-xl lg:p-5 lg:flex-1">

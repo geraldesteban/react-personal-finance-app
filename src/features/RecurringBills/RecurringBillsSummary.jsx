@@ -24,7 +24,12 @@ export default function RecurringBillsSummary() {
     );
 
   if (errorTransactionsData)
-    return <ErrorMessage errorMessage={errorTransactionsData.message} />;
+    return (
+      <div className="bg-white p-5 rounded-xl lg:flex-1">
+        <h2 className="font-myFontBoldtext-grey-900 text-[16px]">Summary</h2>
+        <ErrorMessage errorMessage={errorTransactionsData.message} />
+      </div>
+    );
 
   return (
     <div className="bg-white p-5 rounded-xl lg:flex-1">
