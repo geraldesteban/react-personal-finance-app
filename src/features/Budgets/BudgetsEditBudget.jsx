@@ -9,7 +9,7 @@ import ErrorMessage from "../../ui/Spinner";
 export default function BudgetsEditBudget({ active, onClose, budgetId }) {
   const [editCategory, setEditCategory] = useState("Entertainment");
   const [editMaximumSpend, setEditMaximumSpend] = useState(0);
-  const [editTheme, setEditTheme] = useState("bg-green");
+  const [editTheme, setEditTheme] = useState("#277C78");
 
   const { updateBudget, isUpdateBudget, errorUpdateBudget } =
     useUpdateBudget(onClose);
@@ -26,7 +26,7 @@ export default function BudgetsEditBudget({ active, onClose, budgetId }) {
 
     setEditCategory("Entertainment");
     setEditMaximumSpend(0);
-    setEditTheme("bg-green");
+    setEditTheme("#277C78");
   }
 
   if (!active) return null;

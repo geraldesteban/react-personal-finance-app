@@ -18,7 +18,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
     createBudget({ budgetName, maximumSpend, budgetThemeColor });
     setBudgetName("Entertainment");
     setMaximumSpend(0);
-    setBudgetTheme("bg-green");
+    setBudgetTheme("#277C78");
   }
 
   if (!active) return null;
@@ -40,7 +40,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
               onClose();
               setBudgetName("Entertainment");
               setMaximumSpend(0);
-              setBudgetTheme("bg-green");
+              setBudgetTheme("#277C78");
             }}
           >
             <CloseModal />

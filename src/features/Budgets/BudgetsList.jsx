@@ -13,6 +13,7 @@ export default function BudgetsList() {
   const [editModalActive, setEditModalActive] = useState(false);
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [activeId, setActiveId] = useState(null);
+  const [activeName, setActiveName] = useState("");
 
   const { dataBudgets, isDataBudgets, errorDataBudgets } = useReadBudgets();
 
@@ -22,10 +23,11 @@ export default function BudgetsList() {
     setActiveDropDown(false);
   }
 
-  function handleDeleteBudget(id) {
+  function handleDeleteBudget(id, name) {
     setActiveId(id);
     setDeleteModalActive(true);
     setActiveDropDown(false);
+    setActiveName(name);
   }
 
   if (isDataBudgets)
@@ -82,7 +84,9 @@ export default function BudgetsList() {
                     <hr className="my-2" />
                     <button
                       className="text-red"
-                      onClick={() => handleDeleteBudget(budgets.id)}
+                      onClick={() =>
+                        handleDeleteBudget(budgets.id, budgets.budgetName)
+                      }
                     >
                       Delete Budget
                     </button>
@@ -102,6 +106,7 @@ export default function BudgetsList() {
         active={deleteModalActive}
         onClose={() => setDeleteModalActive(false)}
         budgetId={activeId}
+        budgetName={activeName}
       />
     </>
   );

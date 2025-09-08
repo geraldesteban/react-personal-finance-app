@@ -3,7 +3,12 @@ import { useDeleteBudget } from "./useDeleteBudget";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
 
-export default function BudgetsDeleteBudget({ active, onClose, budgetId }) {
+export default function BudgetsDeleteBudget({
+  active,
+  onClose,
+  budgetId,
+  budgetName,
+}) {
   const { deleteBudget, isDeleteBudget, errorDeleteBudget } =
     useDeleteBudget(onClose);
 
@@ -25,7 +30,7 @@ export default function BudgetsDeleteBudget({ active, onClose, budgetId }) {
       <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 md:mx-10 sm:mx-5">
         <div className="flex justify-between items-center mb-5">
           <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
-            Delete 'Entertainment'
+            Delete '{budgetName}'
           </h2>
           <button onClick={onClose}>
             <CloseModal />
