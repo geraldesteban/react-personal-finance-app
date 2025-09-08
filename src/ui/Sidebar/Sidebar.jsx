@@ -24,7 +24,7 @@ function Sidebar() {
       {/* Navigation Sidebar */}
       <nav className="text-grey-300">
         {/* Logo */}
-        <NavLink>
+        <NavLink to={"/overview"}>
           {active ? (
             <LogoLargeIcon className="mb-16 ml-10 lg:hidden lg:mb-0 lg:ml-0" />
           ) : (
