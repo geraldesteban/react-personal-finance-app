@@ -11,7 +11,7 @@ export default function TransactionsDetails() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const sortBy = searchParams.get("sortBy") || "latest";
-  const category = searchParams.get("categoryBy") || "alltransactions";
+  const category = searchParams.get("categoryBy") || "all_transactions";
   const search = searchParams.get("search") || "";
 
   const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
@@ -94,14 +94,40 @@ export default function TransactionsDetails() {
             Prev
           </span>
         </button>
-        <div className="flex mx-2 sm:flex-wrap sm:mx-[2px]">
+        {/* Desktop to Tablet pagination buttons */}
+        <div className="flex mx-2 sm:flex-wrap sm:mx-[2px] sm:hidden">
           {[...Array(pageCount)].map((_, i) => (
             <button
               key={i}
-              className="text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 transition duration-500"
+              className={`text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 transition duration-500 ${
+                page === i + 1 ? "bg-grey-900 text-white border-grey-900" : ""
+              }`}
               onClick={() => goToPage(i + 1)}
             >
               {i + 1}
+            </button>
+          ))}
+        </div>
+        {/* Mobile pagination buttons */}
+        <div className="hidden mx-2 sm:flex-wrap sm:mx-[2px] sm:flex">
+          {[...Array(pageCount)].map((_, i) => (
+            <button
+              className={`text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 transition duration-500 ${
+                page === i + 1 ? "bg-grey-900 text-white border-grey-900" : ""
+              } ${i + 1 === 4 ? "sm:hidden" : ""} sm:py-1 sm:px-3`}
+              onClick={() => goToPage(i + 1)}
+              key={i}
+              disabled={i + 1 === 3}
+            >
+              {i + 1 === 3 ? (
+                <>
+                  <span className="font-myFontRegular text-[14px] hidden sm:block">
+                    ...
+                  </span>
+                </>
+              ) : (
+                i + 1
+              )}
             </button>
           ))}
         </div>
@@ -119,8 +145,3 @@ export default function TransactionsDetails() {
     </>
   );
 }
-
-/* 
- <span className="font-myFontRegular text-[14px] sm:hidden"></span>
-            <span className="font-myFontRegular text-[14px] hidden sm:block"></span>
-*/

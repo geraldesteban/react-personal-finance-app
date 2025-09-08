@@ -1,1 +1,1 @@
-export const DATAURL = "./data/data.json";
+export const PAGE_SIZE = 10;

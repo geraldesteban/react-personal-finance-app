@@ -24,7 +24,9 @@ export default function TransactionsSortby() {
           onClick={() => setActive(!active)}
         >
           <span className="font-myFontRegular text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">
-            {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}
+            {sortBy
+              .replaceAll("_", " ")
+              .replace(/\b\w/g, (char) => char.toUpperCase())}
           </span>
           <CaretDown
             className={`${active ? "rotate-[-180deg]" : ""} sm:hidden`}

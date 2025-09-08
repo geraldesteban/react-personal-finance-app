@@ -9,6 +9,7 @@ import Budgets from "./pages/Budgets";
 import Pots from "./pages/Pots";
 import RecurringBills from "./pages/RecurringBills";
 import Signup from "./pages/Signup";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -17,17 +18,23 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-
-          <Route index element={<Navigate replace to="/login" />} />
-          <Route path="/" element={<AppLayout />}>
+          <Route
+            element={
+              <ProtectedRoute>
+                <AppLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<Navigate replace to="overview" />} />
             <Route path="overview" element={<Overview />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="budgets" element={<Budgets />} />
             <Route path="pots" element={<Pots />} />
             <Route path="recurringbills" element={<RecurringBills />} />
           </Route>
+
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
       <Toaster

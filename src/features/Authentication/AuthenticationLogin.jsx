@@ -7,7 +7,7 @@ import ErrorMessage from "../../ui/Spinner";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const { login, isLogin, errorLogin } = useLogin();
+  const { login, isLogin } = useLogin();
 
   function handleHidePassword() {
     setShowPassword(!showPassword);
@@ -21,8 +21,6 @@ export default function Login() {
 
     login({ email, password });
   }
-
-  if (errorLogin) return <ErrorMessage errorMessage={errorLogin} />;
 
   return (
     <form

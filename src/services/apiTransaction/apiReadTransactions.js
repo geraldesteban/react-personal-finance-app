@@ -1,14 +1,13 @@
+import { PAGE_SIZE } from "../../utils/constants";
 import supabase from "../supabase";
 
 export async function apiReadTransactions(
   search = "",
   sort = "latest",
-  category = "alltransactions",
+  category = "all_transactions",
   page = 1,
   getAll = false
 ) {
-  const PAGE_SIZE = 10;
-
   let query = supabase.from("transactions").select("*", { count: "exact" });
 
   /* Search */
@@ -45,13 +44,13 @@ export async function apiReadTransactions(
     entertainment: "Entertainment",
     bills: "Bills",
     groceries: "Groceries",
-    diningout: "Dining Out",
+    dining_out: "Dining Out",
     transportation: "Transportation",
-    personalcare: "Personal Care",
+    personal_care: "Personal Care",
   };
 
   /* Category */
-  if (category !== "alltransactions") {
+  if (category !== "all_transactions") {
     const dbCategory = categoryMap[category];
     if (dbCategory) {
       query = query.eq("category", dbCategory);

@@ -2,12 +2,11 @@ import supabase from "./supabase";
 
 /* Get Current User */
 export async function GetCurrentUser() {
-  const {
-    data: { user: currentUser },
-    error: errorCurrentUser,
-  } = await supabase.auth.getUser();
+  const { data: sessionData, error } = await supabase.auth.getSession();
 
-  if (errorCurrentUser) throw new Error("Current User not logged in");
+  if (error) throw new Error("Failed to get session");
+  if (!sessionData.session || !sessionData.session.user)
+    throw new Error("User not logged in");
 
-  return currentUser;
+  return sessionData.session.user;
 }

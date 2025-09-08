@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 export default function TransactionsCategory() {
   const [active, setActive] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const category = searchParams.get("categoryBy") || "alltransactions";
+  const category = searchParams.get("categoryBy") || "all_transactions";
 
   function handleSetCategory(newCategory) {
     const params = new URLSearchParams(searchParams);
@@ -26,7 +26,9 @@ export default function TransactionsCategory() {
           onClick={() => setActive(!active)}
         >
           <span className="font-myFontRegular text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">
-            {category.charAt(0).toUpperCase() + category.slice(1)}
+            {category
+              .replaceAll("_", " ")
+              .replace(/\b\w/g, (char) => char.toUpperCase())}
           </span>
           <CaretDown
             className={`${active ? "rotate-[-180deg]" : ""} sm:hidden`}
@@ -45,7 +47,7 @@ export default function TransactionsCategory() {
           <div>
             <button
               className="mb-2 font-bold"
-              onClick={() => handleSetCategory("alltransactions")}
+              onClick={() => handleSetCategory("all_transactions")}
             >
               All Transactions
             </button>
@@ -78,7 +80,7 @@ export default function TransactionsCategory() {
           <div>
             <button
               className="mb-2"
-              onClick={() => handleSetCategory("diningout")}
+              onClick={() => handleSetCategory("dining_out")}
             >
               Dining Out
             </button>
@@ -96,7 +98,7 @@ export default function TransactionsCategory() {
           <div>
             <button
               className="mb-2"
-              onClick={() => handleSetCategory("personalcare")}
+              onClick={() => handleSetCategory("personal_care")}
             >
               Personal Care
             </button>
