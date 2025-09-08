@@ -7,7 +7,7 @@ import { formatCurrency } from "../../utils/formatCurrency";
 
 export default function BudgetsLatestSpendings({ activeBudgetName }) {
   const { transactionsData, isTransactionsData, errorTransactionsData } =
-    useTransactions();
+    useTransactions("", "latest", "alltransactions", "1", true);
 
   if (isTransactionsData) return <Spinner />;
 

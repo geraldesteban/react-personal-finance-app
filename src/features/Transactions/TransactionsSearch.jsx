@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchIcon from "../../assets/icon-search.svg?react";
+import { useSearchParams } from "react-router-dom";
 
 export default function TransactionsSearch() {
   const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const search = searchParams.get("search") || "";
+    setQuery(search);
+  }, [searchParams]);
 
   function getQuery(e) {
     setQuery(e.target.value);
+    setSearchParams({ search: e.target.value });
   }
 
   return (

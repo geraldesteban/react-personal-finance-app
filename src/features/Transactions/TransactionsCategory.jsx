@@ -1,9 +1,19 @@
 import { useState } from "react";
 import CaretDown from "../../assets/icon-caret-down.svg?react";
 import FilterMobile from "../../assets/icon-filter-mobile.svg?react";
+import { useSearchParams } from "react-router-dom";
 
 export default function TransactionsCategory() {
   const [active, setActive] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("categoryBy") || "alltransactions";
+
+  function handleSetCategory(newCategory) {
+    const params = new URLSearchParams(searchParams);
+    params.set("categoryBy", newCategory);
+    setSearchParams(params);
+    setActive(false);
+  }
 
   return (
     <div className="flex items-center">
@@ -16,7 +26,7 @@ export default function TransactionsCategory() {
           onClick={() => setActive(!active)}
         >
           <span className="font-myFontRegular text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">
-            All Transactions
+            {category.charAt(0).toUpperCase() + category.slice(1)}
           </span>
           <CaretDown
             className={`${active ? "rotate-[-180deg]" : ""} sm:hidden`}
@@ -33,31 +43,63 @@ export default function TransactionsCategory() {
             <hr className="mb-2 hidden sm:block" />
           </div>
           <div>
-            <h2 className="mb-2 font-bold">All Transactions</h2>
+            <button
+              className="mb-2 font-bold"
+              onClick={() => handleSetCategory("alltransactions")}
+            >
+              All Transactions
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Entertainment</h2>
+            <button
+              className="mb-2"
+              onClick={() => handleSetCategory("entertainment")}
+            >
+              Entertainment
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Bills</h2>
+            <button className="mb-2" onClick={() => handleSetCategory("bills")}>
+              Bills
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Groceries</h2>
+            <button
+              className="mb-2"
+              onClick={() => handleSetCategory("groceries")}
+            >
+              Groceries
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Dining Out</h2>
+            <button
+              className="mb-2"
+              onClick={() => handleSetCategory("diningout")}
+            >
+              Dining Out
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Transportation</h2>
+            <button
+              className="mb-2"
+              onClick={() => handleSetCategory("transportation")}
+            >
+              Transportation
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Personal Care</h2>
+            <button
+              className="mb-2"
+              onClick={() => handleSetCategory("personalcare")}
+            >
+              Personal Care
+            </button>
           </div>
         </div>
       </div>

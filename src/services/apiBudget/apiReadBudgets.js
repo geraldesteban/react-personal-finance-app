@@ -1,12 +1,8 @@
+import { GetCurrentUser } from "../apiGetCurrentUser";
 import supabase from "../supabase";
 
 export async function apiReadBudgets() {
-  const {
-    data: { user: currentUser },
-    error: userError,
-  } = await supabase.auth.getUser();
-
-  if (userError) throw new Error("User not logged in");
+  const currentUser = await GetCurrentUser();
 
   const { data: dataBudgets, error: errorBudgets } = await supabase
     .from("budgets")

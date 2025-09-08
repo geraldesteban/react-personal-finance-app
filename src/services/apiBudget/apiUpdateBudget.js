@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import supabase from "../supabase";
+import { GetCurrentUser } from "../apiGetCurrentUser";
 
 /* Update current Budget */
 export async function apiUpdateBudget({
@@ -8,12 +9,7 @@ export async function apiUpdateBudget({
   editMaximumSpend,
   editBudgetTheme,
 }) {
-  const {
-    data: { user: currentUser },
-    error: userError,
-  } = await supabase.auth.getUser();
-
-  if (userError) throw new Error("User not logged in");
+  const currentUser = await GetCurrentUser();
 
   const { data: dataTsx, error: errorTsx } = await supabase
     .from("transactions")

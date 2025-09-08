@@ -5,10 +5,15 @@ import ErrorMessage from "../../ui/Spinner";
 import { useTransactions } from "../Transactions/useTransactions";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { format } from "date-fns";
+import { useSearchParams } from "react-router-dom";
 
 export default function RecurringBillsDetails() {
+  const [searchParams] = useSearchParams();
+  const sortBy = searchParams.get("sortBy") || "latest";
+  const search = searchParams.get("search") || "";
+
   const { transactionsData, isTransactionsData, errorTransactionsData } =
-    useTransactions();
+    useTransactions(search, sortBy, "alltransactions", "1", true);
 
   if (isTransactionsData) return <Spinner />;
 

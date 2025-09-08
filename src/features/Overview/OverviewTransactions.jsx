@@ -7,7 +7,7 @@ import { useTransactions } from "../Transactions/useTransactions";
 
 function OverviewTransactions() {
   const { transactionsData, isTransactionsData, errorTransactionsData } =
-    useTransactions();
+    useTransactions("", "latest", "alltransactions", "1");
 
   if (isTransactionsData)
     return (

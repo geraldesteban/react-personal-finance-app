@@ -3,7 +3,7 @@ import { useTransactions } from "../Transactions/useTransactions";
 
 export function useRecurringBills() {
   const { transactionsData, isTransactionsData, errorTransactionsData } =
-    useTransactions();
+    useTransactions("", "latest", "alltransactions", "1", true);
 
   /* Months used based on the given data */
   const august = "8";

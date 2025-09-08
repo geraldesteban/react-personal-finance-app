@@ -1,14 +1,10 @@
+import { GetCurrentUser } from "../apiGetCurrentUser";
 import supabase from "../supabase";
 
 /* Update Balance and Pot Money */
 export async function apiAddMoneyToPot({ pot_id, amount }) {
   /* Get current Login User */
-  const {
-    data: { user: currentUser },
-    error: userError,
-  } = await supabase.auth.getUser();
-
-  if (userError) throw new Error("User not logged in");
+  const currentUser = await GetCurrentUser();
 
   /* Get current Balance of the User */
   const { data: balanceData, error: balanceError } = await supabase

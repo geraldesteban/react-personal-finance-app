@@ -1,9 +1,17 @@
 import { useState } from "react";
 import CaretDown from "../../assets/icon-caret-down.svg?react";
 import SortMobile from "../../assets/icon-sort-mobile.svg?react";
+import { useSearchParams } from "react-router-dom";
 
 export default function TransactionsSortby() {
   const [active, setActive] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const sortBy = searchParams.get("sortBy") || "latest";
+
+  function handleSetSortBy(sort) {
+    setSearchParams({ sortBy: sort });
+    setActive(false);
+  }
 
   return (
     <div className="flex items-center mr-5">
@@ -16,7 +24,7 @@ export default function TransactionsSortby() {
           onClick={() => setActive(!active)}
         >
           <span className="font-myFontRegular text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">
-            Latest
+            {sortBy.charAt(0).toUpperCase() + sortBy.slice(1)}
           </span>
           <CaretDown
             className={`${active ? "rotate-[-180deg]" : ""} sm:hidden`}
@@ -33,27 +41,42 @@ export default function TransactionsSortby() {
             <hr className="mb-2 hidden sm:block" />
           </div>
           <div>
-            <h2 className="mb-2 font-bold">Latest</h2>
+            <button
+              className="mb-2 font-bold"
+              onClick={() => handleSetSortBy("latest")}
+            >
+              Latest
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Oldest</h2>
+            <button className="mb-2" onClick={() => handleSetSortBy("oldest")}>
+              Oldest
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">A to Z</h2>
+            <button className="mb-2" onClick={() => handleSetSortBy("a_to_z")}>
+              A to Z
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Z to A</h2>
+            <button className="mb-2" onClick={() => handleSetSortBy("z_to_a")}>
+              Z to A
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Highest</h2>
+            <button className="mb-2" onClick={() => handleSetSortBy("highest")}>
+              Highest
+            </button>
             <hr className="mb-2" />
           </div>
           <div>
-            <h2 className="mb-2">Lowest</h2>
+            <button className="mb-2" onClick={() => handleSetSortBy("lowest")}>
+              Lowest
+            </button>
           </div>
         </div>
       </div>

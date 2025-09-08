@@ -1,3 +1,4 @@
+import { GetCurrentUser } from "../apiGetCurrentUser";
 import supabase from "../supabase";
 
 export async function apiUpdatePot({
@@ -6,12 +7,8 @@ export async function apiUpdatePot({
   newTargetMoney,
   newPotTheme,
 }) {
-  const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-
-  if (userError || !user) throw new Error("User not logged in");
+  /* Get current Login User */
+  const currentUser = await GetCurrentUser();
 
   if (newTargetMoney <= 0) throw new Error("Invalid Target Money");
 
@@ -27,7 +24,7 @@ export async function apiUpdatePot({
       targetMoney: updatedTargetMoney,
       potTheme: updatedPotTheme,
     })
-    .eq("user_id", user.id)
+    .eq("user_id", currentUser.id)
     .eq("id", potId);
 
   if (potError) throw new Error(potError.message);

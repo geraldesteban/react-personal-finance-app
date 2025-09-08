@@ -1,15 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-import { getTransactions } from "../../services/apiTransaction/apiReadTransactions";
+import { apiReadTransactions } from "../../services/apiTransaction/apiReadTransactions";
 
-export function useTransactions() {
+export function useTransactions(
+  search = "",
+  sort = "latest",
+  category = "alltransactions",
+  page = 1,
+  getAll = false
+) {
   const {
-    data: transactionsData,
+    data,
     isLoading: isTransactionsData,
     error: errorTransactionsData,
   } = useQuery({
-    queryKey: ["transactions"],
-    queryFn: getTransactions,
+    queryKey: ["transactions", search, sort, category, page, getAll],
+    queryFn: () => apiReadTransactions(search, sort, category, page, getAll),
+    keepPreviousData: true,
   });
 
-  return { transactionsData, isTransactionsData, errorTransactionsData };
+  return {
+    transactionsData: data?.dataTransactions ?? [],
+    count: data?.count ?? 0,
+    pageCount: data?.pageCount ?? 1,
+    isTransactionsData,
+    errorTransactionsData,
+  };
 }
