@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useSignup } from "./useSignup";
 import { NavLink } from "react-router-dom";
 import PasswordHideIcon from "../../assets/icon-password-hide.svg?react";
+import PasswordShowIcon from "../../assets/icon-password-show.svg?react";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
+import { useSignup } from "./useSignup";
 
 export default function AuthenticationSignup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,10 +17,11 @@ export default function AuthenticationSignup() {
   function handleCreateAccount(e) {
     e.preventDefault();
 
+    const username = e.target.username.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    signup({ email, password });
+    signup({ username, email, password });
   }
 
   if (errorSignup) return <ErrorMessage errorMessage={errorSignup} />;
@@ -32,6 +34,15 @@ export default function AuthenticationSignup() {
       <h2 className="font-myFontBold text-[32px] text-grey-900 mb-10">
         Signup
       </h2>
+
+      <label className="font-myFontBold text-[12px] text-grey-500">
+        Username
+      </label>
+      <input
+        name="username"
+        type="username"
+        className="px-5 py-3 border border-beige-500 outline-none rounded-xl w-full mt-2 mb-4"
+      />
 
       <label className="font-myFontBold text-[12px] text-grey-500">Email</label>
       <input
@@ -51,7 +62,11 @@ export default function AuthenticationSignup() {
         className="absolute right-0 mt-6 mr-[50px] cursor-pointer"
         onClick={handleHidePassword}
       >
-        <PasswordHideIcon className="h-5 w-5" />
+        {showPassword ? (
+          <PasswordHideIcon className="h-5 w-5" />
+        ) : (
+          <PasswordShowIcon className="h-5 w-5" />
+        )}
       </span>
       <button
         type="submit"

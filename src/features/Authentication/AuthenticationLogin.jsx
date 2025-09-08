@@ -1,9 +1,9 @@
 import PasswordHideIcon from "../../assets/icon-password-hide.svg?react";
+import PasswordShowIcon from "../../assets/icon-password-show.svg?react";
 import { useState } from "react";
 import { useLogin } from "./useLogin";
 import { NavLink } from "react-router-dom";
 import Spinner from "../../ui/Spinner";
-import ErrorMessage from "../../ui/Spinner";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,6 +33,7 @@ export default function Login() {
       <input
         name="email"
         type="email"
+        defaultValue="ge@gmail.com"
         className="px-5 py-3 border border-beige-500 outline-none rounded-xl w-full mt-2 mb-4"
       />
       <label className="font-myFontBold text-[12px] text-grey-500">
@@ -41,13 +42,18 @@ export default function Login() {
       <input
         name="password"
         type={`${showPassword ? "text" : "password"}`}
+        defaultValue="ge12345"
         className="px-5 py-3 border border-beige-500 outline-none rounded-xl w-full mt-2 pr-10"
       />
       <span
         className="absolute right-0 mt-6 mr-[50px] cursor-pointer"
         onClick={handleHidePassword}
       >
-        <PasswordHideIcon className="h-5 w-5" />
+        {showPassword ? (
+          <PasswordHideIcon className="h-5 w-5" />
+        ) : (
+          <PasswordShowIcon className="h-5 w-5" />
+        )}
       </span>
       <button
         type="submit"
