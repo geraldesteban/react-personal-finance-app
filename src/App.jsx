@@ -10,6 +10,7 @@ import Pots from "./pages/Pots";
 import RecurringBills from "./pages/RecurringBills";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import AuthenticationLayout from "./features/Authentication/AuthenticationLayout";
 
 const queryClient = new QueryClient();
 
@@ -33,8 +34,10 @@ function App() {
             <Route path="recurringbills" element={<RecurringBills />} />
           </Route>
 
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
+          <Route element={<AuthenticationLayout />}>
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+          </Route>
         </Routes>
       </BrowserRouter>
       <Toaster
