@@ -40,7 +40,7 @@ export async function apiReadTransactions(
       query = query.order("date", { ascending: false });
   }
 
-  /* Category mapping (UI → DB) */
+  /* To read the categories properly */
   const categoryMap = {
     entertainment: "Entertainment",
     bills: "Bills",
