@@ -1,8 +1,15 @@
 import supabase from "../supabase";
 
 /* Signup and Insert Balance*/
-export async function apiSignUp({ email, password }) {
-  const { data, error } = await supabase.auth.signUp({ email, password });
+export async function apiSignUp({ username, email, password }) {
+  const { data, error } = await supabase.auth.signUp({
+    username,
+    email,
+    password,
+    options: {
+      data: { display_name: username },
+    },
+  });
 
   if (error) throw new Error(error.message);
 
