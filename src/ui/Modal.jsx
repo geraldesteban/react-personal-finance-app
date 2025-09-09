@@ -1,0 +1,10 @@
+export default function Modal({ children }) {
+  return (
+    <div className="fixed inset-0 z-10 flex items-center justify-center">
+      <div className="absolute inset-0 bg-black/70"></div>
+      <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 md:mx-10 sm:mx-5">
+        {children}
+      </div>
+    </div>
+  );
+}
