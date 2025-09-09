@@ -1,9 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import CaretRight from "../assets/icon-caret-right.svg?react";
 
 export default function OverviewViewDetails({ heading, span, seeDetails }) {
-  const navigate = useNavigate();
-
   return (
     <div className="flex justify-between mb-5">
       <h2
@@ -12,17 +10,15 @@ export default function OverviewViewDetails({ heading, span, seeDetails }) {
       >
         {heading}
       </h2>
-      <button
+      <NavLink
         className="text-[14px] flex items-center group transition-all delay-1000"
-        onClick={() => {
-          navigate(`/${seeDetails}`);
-        }}
+        to={`/${seeDetails}`}
       >
         <span className="font-myFontRegular text-grey-500 text-[14px] mr-5 group-hover:text-grey-900 transition-colors duration-500">
           {span}
         </span>
         <CaretRight className="text-grey-500 group-hover:text-grey-900 transition-colors duration-500" />
-      </button>
+      </NavLink>
     </div>
   );
 }
