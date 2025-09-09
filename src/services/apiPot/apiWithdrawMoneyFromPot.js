@@ -44,7 +44,6 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
   /* Updated Balance and Pot data */
   const updatedBalance = balanceData.balance + amount;
   const updatedPotMoney = potData.potMoney - amount;
-  const updatedTargetMoney = potData.targetMoney + amount;
 
   /* Get Pot Name */
   const potName = potData.potName;
@@ -63,7 +62,6 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
     .from("pots")
     .update({
       potMoney: updatedPotMoney,
-      targetMoney: updatedTargetMoney,
     })
     .eq("user_id", currentUser.id)
     .eq("id", pot_id);
@@ -76,6 +74,5 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
     potName,
     updatedBalance,
     updatedPotMoney,
-    updatedTargetMoney,
   };
 }

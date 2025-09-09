@@ -39,13 +39,13 @@ export async function apiAddMoneyToPot({ pot_id, amount }) {
   /* Invalid Amount */
   if (amount <= 0) throw new Error("Invalid Amount to Add");
 
+  /* Amount is higher than Target money */
   if (amount > potData.targetMoney)
     throw new Error("Amount is higher than Target money");
 
   /* Updated Balance, Pot Money, and Target Money */
   const updatedBalance = balanceData.balance - amount;
   const updatedPotMoney = potData.potMoney + amount;
-  const updatedTargetMoney = potData.targetMoney - amount;
 
   /* Get Pot Name */
   const potName = potData.potName;
@@ -55,7 +55,6 @@ export async function apiAddMoneyToPot({ pot_id, amount }) {
     .from("pots")
     .update({
       potMoney: updatedPotMoney,
-      targetMoney: updatedTargetMoney,
     })
     .eq("user_id", currentUser.id)
     .eq("id", pot_id);
@@ -76,6 +75,5 @@ export async function apiAddMoneyToPot({ pot_id, amount }) {
     potName,
     updatedBalance,
     updatedPotMoney,
-    updatedTargetMoney,
   };
 }
