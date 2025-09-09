@@ -1,8 +1,8 @@
 import Heading from "../../ui/Heading";
+import SortBy from "../../ui/SortBy";
+import Search from "../../ui/Search";
 import TransactionsCategory from "./TransactionsCategory";
 import TransactionsDetails from "./TransactionsDetails";
-import TransactionsSearch from "./TransactionsSearch";
-import TransactionsSortby from "./TransactionsSortby";
 
 export default function TransactionsLayout() {
   return (
@@ -12,9 +12,9 @@ export default function TransactionsLayout() {
       </div>
       <div className="bg-white rounded-xl p-10 m-10 sm:m-5 lg:p-5">
         <div className="flex items-center justify-between">
-          <TransactionsSearch />
-          <div className="flex items-center mb-10">
-            <TransactionsSortby />
+          <Search />
+          <div className="flex items-center">
+            <SortBy />
             <TransactionsCategory />
           </div>
         </div>

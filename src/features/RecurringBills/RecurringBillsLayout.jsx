@@ -1,9 +1,9 @@
 import Heading from "../../ui/Heading";
-import RecurringBillsDetails from "./RecurringBillsDetails";
-import RecurringBillsSearch from "./RecurringBillsSearch";
-import RecurringBillsSortby from "./RecurringBillsSortby";
 import RecurringBillsSummary from "./RecurringBillsSummary";
 import RecurringBillsTotal from "./RecurringBillsTotal";
+import Search from "../../ui/Search";
+import SortBy from "../../ui/SortBy";
+import RecurringBillsDetails from "./RecurringBillsDetails";
 
 export default function RecurringBillsLayout() {
   return (
@@ -17,8 +17,8 @@ export default function RecurringBillsLayout() {
         <div className="flex-[2] p-10 bg-white rounded-xl sm:p-5">
           <div className="flex-auto">
             <div className="flex justify-between items-center mb-10">
-              <RecurringBillsSearch />
-              <RecurringBillsSortby />
+              <Search />
+              <SortBy />
             </div>
             <RecurringBillsDetails />
           </div>
