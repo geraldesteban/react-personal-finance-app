@@ -63,10 +63,10 @@ export default function RecurringBillsSummary() {
       <div className="text-red flex justify-between items-center py-2">
         <p className="font-myFontRegular text-[12px]">Due Soon</p>
         <div className="flex items-center">
-          <p className="font-myFontBoldtext-[12px] mr-1">
+          <p className="font-myFontBold text-[12px] mr-1">
             {numberDueSoonBills}
           </p>
-          <p className="font-myFontBoldtext-[12px]">
+          <p className="font-myFontBold text-[12px]">
             ({formatCurrency(totalDueSoonBills)})
           </p>
         </div>
