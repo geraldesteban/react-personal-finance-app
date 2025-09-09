@@ -14,7 +14,7 @@ export default function RecurringBillsLayout() {
           <RecurringBillsTotal />
           <RecurringBillsSummary />
         </div>
-        <div className="flex-[2] p-10 bg-white rounded-xl">
+        <div className="flex-[2] p-10 bg-white rounded-xl sm:p-5">
           <div className="flex-auto">
             <div className="flex justify-between items-center mb-10">
               <RecurringBillsSearch />
