@@ -4,6 +4,7 @@ import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
 import { useTransactions } from "../Transactions/useTransactions";
 import { formatCurrency } from "../../utils/formatCurrency";
+import { NavLink } from "react-router-dom";
 
 export default function BudgetsLatestSpendings({ activeBudgetName }) {
   const { transactionsData, isTransactionsData, errorTransactionsData } =
@@ -18,10 +19,17 @@ export default function BudgetsLatestSpendings({ activeBudgetName }) {
     <div className="p-5 bg-beige-100 rounded-xl">
       <div className="flex items-center justify-between">
         <h2 className="font-myFontBold">Latest Spending</h2>
-        <button className="flex items-center font-myFontRegular text-[#696868] text-[14px] gap-5">
-          <span>See All</span>
-          <CaretRight />
-        </button>
+        <NavLink
+          className="flex items-center font-myFontRegular text-grey-500 text-[14px] gap-5 group transition-all delay-1000"
+          to={`/transactions?categoryBy=${activeBudgetName
+            .replaceAll(" ", "_")
+            .toLowerCase()}`}
+        >
+          <span className="group-hover:text-grey-900 transition-colors duration-500">
+            See All
+          </span>
+          <CaretRight className="text-grey-500 group-hover:text-grey-900 transition-colors duration-500" />
+        </NavLink>
       </div>
       {transactionsData
         ?.filter(
