@@ -6,7 +6,13 @@ import { useAddMoney } from "./useAddMoney";
 import { usePot } from "./usePot";
 import { formatCurrency } from "../../utils/formatCurrency";
 
-export default function PotsAddMoney({ active, onClose, potId, potName }) {
+export default function PotsAddMoney({
+  active,
+  onClose,
+  potId,
+  potName,
+  maxAmount,
+}) {
   const { addPotMoney, isAddPotMoney, errorAddPotMoney } = useAddMoney(onClose);
   const { potData } = usePot(potId);
   const targetMoney = potData?.targetMoney;
@@ -69,7 +75,14 @@ export default function PotsAddMoney({ active, onClose, potId, potName }) {
           <input
             type="number"
             value={amountPotMoney}
-            onChange={(e) => setAmountPotMoney(Number(e.target.value))}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (value <= maxAmount) {
+                setAmountPotMoney(value);
+              } else {
+                setAmountPotMoney(maxAmount);
+              }
+            }}
             placeholder="$"
             className="w-full border border-beige-500 rounded-xl py-2 pl-5 mb-5"
             required

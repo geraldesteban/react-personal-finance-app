@@ -8,6 +8,7 @@ import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { usePots } from "./usePots";
+import { usePot } from "./usePot";
 
 export default function PotsList() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -19,6 +20,8 @@ export default function PotsList() {
   const [activeId, setActiveId] = useState(null);
   const [activePotName, setActivePotName] = useState("");
   const { potsData, isPots, errorPots } = usePots();
+
+  const { potData } = usePot(activeId);
 
   function handleEditPot(id) {
     setActiveId(id);
@@ -54,91 +57,113 @@ export default function PotsList() {
     <div className="flex flex-wrap gap-8 mt-10 lg:flex-col">
       {potsData?.length < 0
         ? null
-        : potsData?.map((pot) => (
-            <div
-              className="min-w-[calc(50%-1rem)] bg-white justify-between items-center p-5 rounded-xl"
-              key={pot.id}
-            >
-              <div className="flex justify-between items-center">
-                <div className="flex items-center">
-                  <div
-                    className={`w-4 h-4 ${pot.potTheme} rounded-full mr-5`}
-                    style={{ backgroundColor: pot.potTheme }}
-                  ></div>
-                  <h2 className="font-myFontBold text-grey-900 text-[20px]">
-                    {pot.potName.replace(/\b\w/g, (char) => char.toUpperCase())}
-                  </h2>
-                </div>
-                <div className="relative z-10">
-                  <button
-                    onClick={() =>
-                      setActiveDropdown(
-                        activeDropdown === pot.id ? null : pot.id
-                      )
-                    }
-                  >
-                    <Ellipsis className="text-grey-500 h-5 w-5" />
-                  </button>
+        : potsData?.map((pot) => {
+            const remaining = pot.targetMoney - pot.potMoney;
+            const isDone = remaining <= 0;
 
-                  <div
-                    className={`absolute right-0 bg-white shadow-2xl rounded-xl p-5 w-[145px] ${
-                      activeDropdown === pot.id ? "" : "hidden"
-                    }`}
-                  >
-                    <button onClick={() => handleEditPot(pot.id)}>
-                      Edit Pot
-                    </button>
-                    <hr className="my-2" />
+            return (
+              <div
+                className="min-w-[calc(50%-1rem)] bg-white justify-between items-center p-5 rounded-xl"
+                key={pot.id}
+              >
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    <div
+                      className={`w-4 h-4 ${pot.potTheme} rounded-full mr-5`}
+                      style={{ backgroundColor: pot.potTheme }}
+                    ></div>
+                    <h2 className="font-myFontBold text-grey-900 text-[20px]">
+                      {pot.potName.replace(/\b\w/g, (char) =>
+                        char.toUpperCase()
+                      )}
+                    </h2>
+                  </div>
+                  <div className="relative z-10">
                     <button
-                      className="text-red"
-                      onClick={() => handleDelete(pot.id, pot.potName)}
+                      onClick={() =>
+                        setActiveDropdown(
+                          activeDropdown === pot.id ? null : pot.id
+                        )
+                      }
+                      // disabled={isDone}
                     >
-                      Delete Pot
+                      <Ellipsis className="text-grey-500 h-5 w-5" />
                     </button>
+
+                    <div
+                      className={`absolute right-0 bg-white shadow-2xl rounded-xl p-5 w-[145px] ${
+                        activeDropdown === pot.id ? "" : "hidden"
+                      }`}
+                    >
+                      <button onClick={() => handleEditPot(pot.id)}>
+                        Edit Pot
+                      </button>
+                      <hr className="my-2" />
+                      <button
+                        className="text-red"
+                        onClick={() => handleDelete(pot.id, pot.potName)}
+                      >
+                        Delete Pot
+                      </button>
+                    </div>
                   </div>
                 </div>
+                <div className="flex items-center justify-between my-5">
+                  <p className="font-myFontRegular text-grey-500 text[14px]">
+                    Total Saved
+                  </p>
+                  <p className="font-myFontBold text-grey-900 text-[32px]">
+                    {formatCurrency(pot.potMoney)}
+                  </p>
+                </div>
+                <div className="w-full h-3 rounded-md bg-beige-100 flex items-center">
+                  <div
+                    className={`h-2 rounded-md ${pot.potTheme}`}
+                    style={{
+                      width: `${(pot.potMoney / pot.targetMoney) * 100}%`,
+                      backgroundColor: pot.potTheme,
+                    }}
+                  ></div>
+                </div>
+                <div className="flex justify-between items-center mb-5">
+                  <p className="font-myFontBold text-grey-500 text-[12px] mt-3">
+                    {((pot.potMoney / pot.targetMoney) * 100).toFixed(1)}%
+                  </p>
+                  <p className="font-myFontRegular text-grey-500 text-[12px] mt-3">
+                    Target of {formatCurrency(pot.targetMoney)}
+                  </p>
+                </div>
+                <div className="flex justify-between items-center gap-5">
+                  {isDone ? (
+                    <p className="font-myFontBold text-[32px] mx-auto">
+                      {pot.potName.replace(/\b\w/g, (char) =>
+                        char.toUpperCase()
+                      )}{" "}
+                      is done 🎉
+                    </p>
+                  ) : (
+                    <>
+                      <button
+                        className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
+                        onClick={() => handleAddPotMoney(pot.id, pot.potName)}
+                        disabled={isDone}
+                      >
+                        + Add Money
+                      </button>
+                      <button
+                        className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
+                        onClick={() =>
+                          handleWithdrawPotMoney(pot.id, pot.potName)
+                        }
+                      >
+                        With Draw
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
-              <div className="flex items-center justify-between my-5">
-                <p className="font-myFontRegular text-grey-500 text[14px]">
-                  Total Saved
-                </p>
-                <p className="font-myFontBold text-grey-900 text-[32px]">
-                  {formatCurrency(pot.potMoney)}
-                </p>
-              </div>
-              <div className="w-full h-3 rounded-md bg-beige-100 flex items-center">
-                <div
-                  className={`h-2 rounded-md ${pot.potTheme}`}
-                  style={{
-                    width: `${(pot.potMoney / pot.targetMoney) * 100}%`,
-                    backgroundColor: pot.potTheme,
-                  }}
-                ></div>
-              </div>
-              <div className="flex justify-between items-center mb-5">
-                <p className="font-myFontBold text-grey-500 text-[12px] mt-3">
-                  {((pot.potMoney / pot.targetMoney) * 100).toFixed(1)}%
-                </p>
-                <p className="font-myFontRegular text-grey-500 text-[12px] mt-3">
-                  Target of {formatCurrency(pot.targetMoney)}
-                </p>
-              </div>
-              <div className="flex justify-between items-center gap-5">
-                <button
-                  className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
-                  onClick={() => handleAddPotMoney(pot.id, pot.potName)}
-                >
-                  + Add Money
-                </button>
-                <button
-                  className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
-                  onClick={() => handleWithdrawPotMoney(pot.id, pot.potName)}
-                >
-                  With Draw
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
       <PotsEditPot
         active={editModalActive}
         onClose={() => setEditModalActive(false)}
@@ -155,6 +180,7 @@ export default function PotsList() {
         onClose={() => setAddMoneyActive(false)}
         potId={activeId}
         potName={activePotName}
+        maxAmount={potData ? potData?.targetMoney - potData?.potMoney : 0}
       />
       <PotsWithdraw
         active={withdrawModalActive}
