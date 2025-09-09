@@ -6,7 +6,7 @@ export async function apiLogin({ email, password }) {
     password,
   });
 
-  if (error) throw new Error("Email or Password is Incorrect!");
+  if (error) throw new Error(error.message);
 
   return data;
 }
