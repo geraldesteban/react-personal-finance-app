@@ -36,9 +36,9 @@ export default function TransactionsCategory() {
           <FilterMobile className="hidden sm:block" />
         </button>
         <div
-          className={`absolute px-6 py-3 bg-white mt-5 w-full rounded-xl shadow-2xl ${
+          className={`absolute px-6 py-3 bg-white mt-5 w-[170px] rounded-xl shadow-2xl ${
             active ? "" : "hidden"
-          } sm:w-fit sm:right-0`}
+          } right-0 sm:w-fit sm:right-0`}
         >
           <div>
             <h2 className="text-grey-500 mb-2 hidden sm:block">Category</h2>
