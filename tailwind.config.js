@@ -37,6 +37,9 @@ export default {
       },
     },
     screens: {
+      // for login ui
+      xxxl: { max: "1550px" },
+
       // for some ui
       xxl: { max: "1352px" },
 
