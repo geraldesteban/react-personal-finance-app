@@ -1,53 +1,50 @@
 import CloseModal from "../../assets/icon-close-modal.svg?react";
 import { useDeletePot } from "./useDeletePot";
 import Spinner from "../../ui/Spinner";
+import Paragraph from "../../ui/Paragraph";
+import Button from "../../ui/Button";
+import Modal from "../../ui/Modal";
 
 export default function PotsDeletePot({ active, onClose, potName, potId }) {
-  const { deletePot, isDeletingPot, errorDeletingPot } = useDeletePot(onClose);
+  const { deletePot, isDeletingPot } = useDeletePot(onClose);
 
   if (!active) return null;
 
-  if (errorDeletingPot) return <ErrorMessage errorMessage={errorDeletingPot} />;
+  if (isDeletingPot)
+    return (
+      <div className="fixed inset-0 z-10 flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
 
   return (
-    <div className="fixed inset-0 z-10 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/50"></div>
-
-      {isDeletingPot ? (
-        <Spinner />
-      ) : (
-        <div className="relative bg-white rounded-xl p-10 z-20 md:p-5 md:mx-10 sm:mx-5">
-          <div className="flex justify-between items-center mb-5">
-            <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
-              "Delete {potName.replace(/\b\w/g, (char) => char.toUpperCase())}"?
-            </h2>
-            <button onClick={onClose}>
-              <CloseModal />
-            </button>
-          </div>
-
-          <p className="font-myFontRegular text-grey-500 text-[14px] mb-5">
-            Are you sure you want to delete this pot? This action cannot be
-            reversed, and all the data inside it will be remove forever.
-          </p>
-
-          <button
-            disabled={isDeletingPot}
-            className="font-myFontBold w-full py-5 text-[14px] bg-red rounded-xl text-white hover:opacity-80"
-            onClick={() => {
-              deletePot(potId);
-            }}
-          >
-            Yes, Confirm Deletion
-          </button>
-          <button
-            className="font-myFontRegular w-full py-5 text-[14px] text-grey-500"
-            onClick={onClose}
-          >
-            No, Go Back
-          </button>
-        </div>
-      )}
-    </div>
+    <Modal>
+      <div className="flex justify-between items-center mb-5">
+        <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
+          "Delete {potName.replace(/\b\w/g, (char) => char.toUpperCase())}"?
+        </h2>
+        <Button onClick={onClose}>
+          <CloseModal />
+        </Button>
+      </div>
+      <Paragraph>
+        Are you sure you want to delete this pot? This action cannot be
+        reversed, and all the data inside it will be remove forever.
+      </Paragraph>
+      <Button
+        onClick={() => deletePot(potId)}
+        className={
+          "font-myFontBold text-[14px] text-white w-full py-5  bg-red rounded-xl  font-bold hover:opacity-80"
+        }
+      >
+        Yes, Confirm Deletion
+      </Button>
+      <Button
+        onClick={onClose}
+        className={"font-myFontRegular text-[14px] w-full py-5 text-grey-500"}
+      >
+        No, Go Back
+      </Button>
+    </Modal>
   );
 }

@@ -22,7 +22,7 @@ export default function PotsList() {
 
   const [activeId, setActiveId] = useState(null);
   const [activePotName, setActivePotName] = useState("");
-  const { potsData, isPots, errorPots } = usePots();
+  const { potsData, isPots } = usePots();
   const { donePot, isDonePot } = useDonePot();
 
   const { potData } = usePot(activeId);
@@ -53,9 +53,12 @@ export default function PotsList() {
     setWithdrawActive(true);
   }
 
-  if (isPots) return <Spinner />;
-
-  if (errorPots) return <ErrorMessage errorMessage={errorPots} />;
+  if (isPots)
+    return (
+      <div className="fixed inset-0 flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
 
   return (
     <div className="flex flex-wrap gap-8 mt-10 lg:flex-col">
