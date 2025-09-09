@@ -5,13 +5,17 @@ import OverviewBudgets from "./OverviewBudgets";
 import OverviewPots from "./OverviewPots";
 import OverviewRecurringBills from "./OverviewRecurringBills";
 import AuthenticationLogout from "../Authentication/AuthenticationLogout";
+import AuthenticationUsername from "../Authentication/AuthenticationUsername";
 
 export default function OverviewLayout() {
   return (
     <div className="m-10 lg:m-5">
       <div className="flex justify-between items-center">
         <Heading>Overview</Heading>
-        <AuthenticationLogout />
+        <div className="flex items-center">
+          <AuthenticationUsername />
+          <AuthenticationLogout />
+        </div>
       </div>
       <OverviewBalanceIncomeExpenses />
       <div className="flex gap-5 lg:flex-col">
