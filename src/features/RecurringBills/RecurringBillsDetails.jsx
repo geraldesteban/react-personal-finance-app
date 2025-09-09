@@ -22,10 +22,10 @@ export default function RecurringBillsDetails() {
 
   return (
     <div className="mx-5">
-      <div className="flex justify-between items-center font-myFontRegular text-grey-500 text-[12px] border-b py-5">
-        <span className="flex">Bill Title</span>
-        <span className="flex sm:hidden">Due Date</span>
-        <span className="flex">Amount</span>
+      <div className="grid grid-cols-3 font-myFontRegular text-grey-500 text-[12px] border-b py-5 sm:grid-cols-2">
+        <span className="text-left">Bill Title</span>
+        <span className="text-center sm:hidden">Due Date</span>
+        <span className="text-right">Amount</span>
       </div>
       {transactionsData
         ?.filter((tsx) => tsx.recurring === true)
@@ -35,11 +35,11 @@ export default function RecurringBillsDetails() {
         )
         .map((tsx) => (
           <div
-            className="flex justify-between items-center border-b py-5"
+            className="grid grid-cols-3 border-b py-5 sm:grid-cols-2"
             key={tsx.id}
           >
-            <div className="flex items-center sm:flex-col">
-              <div className="flex items-center gap-5">
+            <div className="grid grid-cols-1 text-left">
+              <div className="flex items-center gap-5 sm:mb-5 sm:gap-2">
                 <img
                   src={tsx.avatar}
                   alt=""
@@ -68,7 +68,7 @@ export default function RecurringBillsDetails() {
               </div>
             </div>
             {/* Desktop */}
-            <div className="flex items-center w-[210px] sm:hidden">
+            <div className="flex flex-row mx-auto sm:hidden ">
               <p
                 className={`font-myFontRegular text-[12px] mr-2 ${
                   format(tsx.date, "M") === "8" ? "text-green" : "text-grey-500"
@@ -85,7 +85,7 @@ export default function RecurringBillsDetails() {
                 ""
               )}
             </div>
-            <div>
+            <div className="text-right">
               <p
                 className={`font-myFontBold text-[14px] ${
                   Number(format(new Date(tsx.date), "d")) >= 19 &&
