@@ -1,6 +1,7 @@
 import { PAGE_SIZE } from "../../utils/constants";
 import supabase from "../supabase";
 
+/* Read Transactions data by Search, Sort, Category, Pagination, and All */
 export async function apiReadTransactions(
   search = "",
   sort = "latest",
