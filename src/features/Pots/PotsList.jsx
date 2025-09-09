@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Ellipsis from "../../assets/icon-ellipsis.svg?react";
+import IconDone from "../../assets/icon-done.svg?react";
+import { CheckIcon } from "@heroicons/react/24/outline";
+
 import PotsEditPot from "./PotsEditPot";
 import PotsDeletePot from "./PotsDeletePot";
 import PotsAddMoney from "./PotsAddMoney";
@@ -9,6 +12,7 @@ import ErrorMessage from "../../ui/Spinner";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { usePots } from "./usePots";
 import { usePot } from "./usePot";
+import { useDonePot } from "./useDonePot";
 
 export default function PotsList() {
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -20,6 +24,7 @@ export default function PotsList() {
   const [activeId, setActiveId] = useState(null);
   const [activePotName, setActivePotName] = useState("");
   const { potsData, isPots, errorPots } = usePots();
+  const { donePot, isDonePot } = useDonePot();
 
   const { potData } = usePot(activeId);
 
@@ -85,7 +90,7 @@ export default function PotsList() {
                           activeDropdown === pot.id ? null : pot.id
                         )
                       }
-                      // disabled={isDone}
+                      disabled={isDone}
                     >
                       <Ellipsis className="text-grey-500 h-5 w-5" />
                     </button>
@@ -135,12 +140,30 @@ export default function PotsList() {
                 </div>
                 <div className="flex justify-between items-center gap-5">
                   {isDone ? (
-                    <p className="font-myFontBold text-[32px] mx-auto">
-                      {pot.potName.replace(/\b\w/g, (char) =>
-                        char.toUpperCase()
-                      )}{" "}
-                      is done 🎉
-                    </p>
+                    <div className="flex items-center mx-auto">
+                      {isDonePot ? (
+                        <Spinner />
+                      ) : (
+                        <>
+                          <div
+                            className={`w-4 h-4 ${pot.potTheme} rounded-full mr-5`}
+                            style={{ backgroundColor: pot.potTheme }}
+                          ></div>
+                          <p className="font-myFontBold text-[32px]">
+                            {pot.potName.replace(/\b\w/g, (char) =>
+                              char.toUpperCase()
+                            )}{" "}
+                            is done
+                          </p>
+                          <button
+                            onClick={() => donePot(pot.id)}
+                            disabled={isDonePot}
+                          >
+                            <CheckIcon className="ml-5 w-8 h-8 rounded-full text-grey-900 border-[2px] border-grey-900 hover:text-green hover:border-green" />
+                          </button>
+                        </>
+                      )}
+                    </div>
                   ) : (
                     <>
                       <button
