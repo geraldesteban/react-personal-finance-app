@@ -7,6 +7,7 @@ export function useSignup() {
     mutate: signup,
     isPending: isSignup,
     error: errorSignup,
+    reset,
   } = useMutation({
     mutationFn: apiSignUp,
     onSuccess: () => {
@@ -14,6 +15,7 @@ export function useSignup() {
     },
     onError: (err) => {
       toast.error(err.message);
+      reset();
     },
   });
 
