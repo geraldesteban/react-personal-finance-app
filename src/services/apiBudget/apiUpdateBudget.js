@@ -22,6 +22,8 @@ export async function apiUpdateBudget({
   const newMaximumSpend = editMaximumSpend;
   const newBudgetTheme = editBudgetTheme;
 
+  if (newMaximumSpend <= 0) throw new Error("Invalid Maximum Spend");
+
   const { data: dataBudget, error: errorId } = await supabase
     .from("budgets")
     .select("id, budgetName")
