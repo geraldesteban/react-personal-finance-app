@@ -34,7 +34,7 @@ function OverviewTransactions() {
     );
 
   return (
-    <div className="bg-white p-10 rounded-xl lg:p-5 lg:w-full">
+    <div className="bg-white p-10 rounded-xl lg:p-5 lg:w-full flex-1">
       <ViewDetails
         heading="Transactions"
         span="View All"

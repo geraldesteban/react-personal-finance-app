@@ -38,7 +38,7 @@ export default function OverviewRecurringBills() {
     );
 
   return (
-    <div className="bg-white p-10 rounded-xl lg:p-5">
+    <div className="bg-white p-10 rounded-xl lg:p-5 flex-1">
       <ViewDetails
         heading="Recurring Bills"
         span="See Details"

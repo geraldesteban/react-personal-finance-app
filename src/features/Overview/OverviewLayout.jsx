@@ -18,8 +18,8 @@ export default function OverviewLayout() {
         </div>
       </div>
       <OverviewBalanceIncomeExpenses />
-      <div className="flex gap-5 lg:flex-col">
-        <div className="grid grid-rows-1 flex-1 gap-5 flex-wrap">
+      <div className="flex justify-between gap-5 lg:flex-col">
+        <div className="flex flex-col flex-1 gap-5 flex-wrap">
           <OverviewPots />
           <OverviewTransactions />
         </div>
