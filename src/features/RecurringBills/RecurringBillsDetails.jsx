@@ -1,7 +1,6 @@
 import BillPaid from "../../assets/icon-bill-paid.svg?react";
 import BillDue from "../../assets/icon-bill-due.svg?react";
 import Spinner from "../../ui/Spinner";
-import ErrorMessage from "../../ui/Spinner";
 import { useTransactions } from "../Transactions/useTransactions";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { format } from "date-fns";
