@@ -1,10 +1,10 @@
-import { formatDate } from "../../utils/formatDate";
 import CaretRight from "../../assets/icon-caret-right.svg?react";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
 import { useTransactions } from "../Transactions/useTransactions";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { NavLink } from "react-router-dom";
+import { format } from "date-fns";
 
 export default function BudgetsLatestSpendings({ activeBudgetName }) {
   const { transactionsData, isTransactionsData, errorTransactionsData } =
@@ -56,7 +56,7 @@ export default function BudgetsLatestSpendings({ activeBudgetName }) {
                 {formatCurrency(ls.amount)}
               </p>
               <p className="font-myFontRegular text-grey-500 text-[12px]">
-                {formatDate(ls.date)}
+                {format(ls.date, "dd MMM yyyy")}
               </p>
             </div>
           </div>

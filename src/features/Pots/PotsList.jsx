@@ -1,13 +1,11 @@
 import { useState } from "react";
 import Ellipsis from "../../assets/icon-ellipsis.svg?react";
 import { CheckIcon } from "@heroicons/react/24/outline";
-
 import PotsEditPot from "./PotsEditPot";
 import PotsDeletePot from "./PotsDeletePot";
 import PotsAddMoney from "./PotsAddMoney";
 import PotsWithdraw from "./PotsWithdraw";
 import Spinner from "../../ui/Spinner";
-import ErrorMessage from "../../ui/Spinner";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { usePots } from "./usePots";
 import { usePot } from "./usePot";
@@ -19,39 +17,11 @@ export default function PotsList() {
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [addMoneyModalActive, setAddMoneyActive] = useState(false);
   const [withdrawModalActive, setWithdrawActive] = useState(false);
-
   const [activeId, setActiveId] = useState(null);
   const [activePotName, setActivePotName] = useState("");
   const { potsData, isPots } = usePots();
   const { donePot, isDonePot } = useDonePot();
-
   const { potData } = usePot(activeId);
-
-  function handleEditPot(id) {
-    setActiveId(id);
-    setEditModalActive(true);
-    setEditModalActive(true);
-    setActiveDropdown(null);
-  }
-
-  function handleDelete(id, potName) {
-    setActiveId(id);
-    setActivePotName(potName);
-    setDeleteModalActive(true);
-    setActiveDropdown(null);
-  }
-
-  function handleAddPotMoney(id, potName) {
-    setActiveId(id);
-    setActivePotName(potName);
-    setAddMoneyActive(true);
-  }
-
-  function handleWithdrawPotMoney(id, potName) {
-    setActiveId(id);
-    setActivePotName(potName);
-    setWithdrawActive(true);
-  }
 
   if (isPots)
     return (
@@ -102,13 +72,25 @@ export default function PotsList() {
                         activeDropdown === pot.id ? "" : "hidden"
                       }`}
                     >
-                      <button onClick={() => handleEditPot(pot.id)}>
+                      <button
+                        onClick={() => {
+                          setActiveId(pot.id);
+                          setEditModalActive(true);
+                          setEditModalActive(true);
+                          setActiveDropdown(null);
+                        }}
+                      >
                         Edit Pot
                       </button>
                       <hr className="my-2" />
                       <button
                         className="text-red"
-                        onClick={() => handleDelete(pot.id, pot.potName)}
+                        onClick={() => {
+                          setActiveId(pot.id);
+                          setActivePotName(pot.potName);
+                          setDeleteModalActive(true);
+                          setActiveDropdown(null);
+                        }}
                       >
                         Delete Pot
                       </button>
@@ -170,16 +152,22 @@ export default function PotsList() {
                     <>
                       <button
                         className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
-                        onClick={() => handleAddPotMoney(pot.id, pot.potName)}
+                        onClick={() => {
+                          setActiveId(pot.id);
+                          setActivePotName(pot.potName);
+                          setAddMoneyActive(true);
+                        }}
                         disabled={isDone}
                       >
                         + Add Money
                       </button>
                       <button
                         className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
-                        onClick={() =>
-                          handleWithdrawPotMoney(pot.id, pot.potName)
-                        }
+                        onClick={() => {
+                          setActiveId(pot.id);
+                          setActivePotName(pot.potName);
+                          setWithdrawActive(true);
+                        }}
                       >
                         With Draw
                       </button>

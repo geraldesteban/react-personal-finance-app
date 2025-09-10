@@ -18,7 +18,7 @@ export default function PotsDeletePot({ active, onClose, potName, potId }) {
     );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className="flex justify-between items-center mb-5">
         <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
           "Delete {potName.replace(/\b\w/g, (char) => char.toUpperCase())}"?

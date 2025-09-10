@@ -1,12 +1,11 @@
 import CloseModal from "../../assets/icon-close-modal.svg?react";
 import { useWithdrawMoney } from "./useWithdrawMoney";
 import Spinner from "../../ui/Spinner";
-import ErrorMessage from "../../ui/Spinner";
 import { useState } from "react";
 import { usePot } from "./usePot";
 import { formatCurrency } from "../../utils/formatCurrency";
-import { Label } from "recharts";
-import { Input } from "postcss";
+import Label from "../../ui/Label";
+import Input from "../../ui/Input";
 import Paragraph from "../../ui/Paragraph";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
@@ -16,15 +15,7 @@ export default function PotsWithdraw({ active, onClose, potId, potName }) {
   const { potData } = usePot(potId);
   const targetMoney = potData?.targetMoney;
   const potMoney = potData?.potMoney;
-
-  const [amountWithdrawPotMoney, setAmountWithdrawPotMoney] = useState(0);
-
-  function handleWithdrawPotMoney(e) {
-    e.preventDefault();
-
-    withdrawPotMoney({ pot_id: potId, amount: amountWithdrawPotMoney });
-    setAmountWithdrawPotMoney(0);
-  }
+  const [amountWithdrawPotMoney, setAmountWithdrawPotMoney] = useState("");
 
   if (!active) return null;
 
@@ -36,7 +27,7 @@ export default function PotsWithdraw({ active, onClose, potId, potName }) {
     );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className="flex justify-between items-center mb-5">
         <h2 className="font-myFontBold text-grey-900 text-[32px]">
           Withdraw from `
@@ -78,8 +69,15 @@ export default function PotsWithdraw({ active, onClose, potId, potName }) {
           )}
         </p>
       </div>
-      <form onSubmit={handleWithdrawPotMoney}>
-        <Label children={"Amount to Withdraw"} />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          withdrawPotMoney({ pot_id: potId, amount: amountWithdrawPotMoney });
+          setAmountWithdrawPotMoney("");
+        }}
+      >
+        <Label>Amount to Withdraw</Label>
         <Input
           type={"number"}
           value={amountWithdrawPotMoney}

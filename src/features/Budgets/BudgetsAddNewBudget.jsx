@@ -16,15 +16,6 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
   const [maximumSpend, setMaximumSpend] = useState("");
   const [budgetThemeColor, setBudgetTheme] = useState("#277C78");
 
-  function handleCreateBudget(e) {
-    e.preventDefault();
-
-    createBudget({ budgetName, maximumSpend, budgetThemeColor });
-    setBudgetName("Entertainment");
-    setMaximumSpend("");
-    setBudgetTheme("#277C78");
-  }
-
   if (!active) return null;
 
   if (isBudget)
@@ -35,7 +26,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
     );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className="flex justify-between items-center mb-5">
         <h2 className="font-myFontBold text-[32px] text-grey-900 sm:text-[20px]">
           Add New Budget
@@ -48,7 +39,16 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
         Choose a category to set a spending budget. These categories can help
         you monitor spending.
       </Paragraph>
-      <form onSubmit={handleCreateBudget}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          createBudget({ budgetName, maximumSpend, budgetThemeColor });
+          setBudgetName("Entertainment");
+          setMaximumSpend("");
+          setBudgetTheme("#277C78");
+        }}
+      >
         <Label>Category</Label>
         <SelectBudgetCategory
           value={budgetName}

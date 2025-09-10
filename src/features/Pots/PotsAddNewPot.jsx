@@ -15,16 +15,6 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
   const [potTheme, setPotTheme] = useState("#277C78");
   const { addPot, isAddPot } = useCreatePots(onClose);
 
-  function handleAddPot(e) {
-    e.preventDefault();
-
-    addPot({ potName, targetMoney, potTheme });
-
-    setPotName("");
-    setPotTheme("");
-    setTargetMoney("");
-  }
-
   if (!active) return null;
 
   if (isAddPot)
@@ -35,7 +25,7 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
     );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className="flex justify-between items-center mb-5">
         <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
           Add New Pot
@@ -48,7 +38,17 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
         Create a pot to set savings targets. These can help keep you on track as
         you save for special purchases.
       </Paragraph>
-      <form onSubmit={handleAddPot}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          addPot({ potName, targetMoney, potTheme });
+
+          setPotName("");
+          setTargetMoney("");
+          setPotTheme("");
+        }}
+      >
         <Label>Pot Name</Label>
         <Input
           type={"text"}

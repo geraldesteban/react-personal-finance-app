@@ -11,26 +11,10 @@ import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 
 export default function BudgetsEditBudget({ active, onClose, budgetId }) {
+  const { updateBudget, isUpdateBudget } = useUpdateBudget(onClose);
   const [editCategory, setEditCategory] = useState("Entertainment");
   const [editMaximumSpend, setEditMaximumSpend] = useState("");
   const [editTheme, setEditTheme] = useState("#277C78");
-
-  const { updateBudget, isUpdateBudget } = useUpdateBudget(onClose);
-
-  function handleEditBudget(e) {
-    e.preventDefault();
-
-    updateBudget({
-      budgetId: budgetId,
-      editBudgetName: editCategory,
-      editMaximumSpend: editMaximumSpend,
-      editBudgetTheme: editTheme,
-    });
-
-    setEditCategory("Entertainment");
-    setEditMaximumSpend("");
-    setEditTheme("#277C78");
-  }
 
   if (!active) return null;
 
@@ -42,7 +26,7 @@ export default function BudgetsEditBudget({ active, onClose, budgetId }) {
     );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className="flex justify-between items-center mb-5">
         <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
           Edit Budget
@@ -54,7 +38,22 @@ export default function BudgetsEditBudget({ active, onClose, budgetId }) {
       <Paragraph>
         As your budgets change, feel free to update your spending limits.
       </Paragraph>
-      <form onSubmit={handleEditBudget}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          updateBudget({
+            budgetId: budgetId,
+            editBudgetName: editCategory,
+            editMaximumSpend: editMaximumSpend,
+            editBudgetTheme: editTheme,
+          });
+
+          setEditCategory("Entertainment");
+          setEditMaximumSpend("");
+          setEditTheme("#277C78");
+        }}
+      >
         <Label>Category</Label>
         <SelectBudgetCategory
           value={editCategory}

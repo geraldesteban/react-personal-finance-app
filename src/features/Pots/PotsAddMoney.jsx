@@ -23,13 +23,6 @@ export default function PotsAddMoney({
   const potMoney = potData?.potMoney;
   const [amountPotMoney, setAmountPotMoney] = useState("");
 
-  function handleAddPotMoney(e) {
-    e.preventDefault();
-
-    addPotMoney({ pot_id: potId, amount: amountPotMoney });
-    setAmountPotMoney("");
-  }
-
   if (!active) return null;
 
   if (isAddPotMoney)
@@ -40,7 +33,7 @@ export default function PotsAddMoney({
     );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className="flex justify-between items-center mb-5 sm:text-[20px]">
         <h2 className="font-myFontBold text-grey-900 text-[32px]">
           Add to `{potName.replace(/\b\w/g, (char) => char.toUpperCase())}`
@@ -68,7 +61,14 @@ export default function PotsAddMoney({
           Target of {formatCurrency(targetMoney)}
         </p>
       </div>
-      <form onSubmit={handleAddPotMoney}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          addPotMoney({ pot_id: potId, amount: amountPotMoney });
+          setAmountPotMoney("");
+        }}
+      >
         <Label>Amount to Add</Label>
         <Input
           type={"number"}

@@ -17,19 +17,6 @@ export default function BudgetsList() {
 
   const { dataBudgets, isDataBudgets, errorDataBudgets } = useReadBudgets();
 
-  function handleEditBudget(id) {
-    setActiveId(id);
-    setEditModalActive(true);
-    setActiveDropDown(false);
-  }
-
-  function handleDeleteBudget(id, name) {
-    setActiveId(id);
-    setDeleteModalActive(true);
-    setActiveDropDown(false);
-    setActiveName(name);
-  }
-
   if (isDataBudgets)
     return (
       <div className="flex-1 bg-white rounded-xl p-10 sm:p-5">
@@ -78,15 +65,24 @@ export default function BudgetsList() {
                       activeDropDown === budgets.id ? false : "hidden"
                     }`}
                   >
-                    <button onClick={() => handleEditBudget(budgets.id)}>
+                    <button
+                      onClick={() => {
+                        setActiveId(budgets.id);
+                        setEditModalActive(true);
+                        setActiveDropDown(false);
+                      }}
+                    >
                       Edit Budget
                     </button>
                     <hr className="my-2" />
                     <button
                       className="text-red"
-                      onClick={() =>
-                        handleDeleteBudget(budgets.id, budgets.budgetName)
-                      }
+                      onClick={() => {
+                        setActiveId(budgets.id);
+                        setDeleteModalActive(true);
+                        setActiveDropDown(false);
+                        setActiveName(budgets.budgetName);
+                      }}
                     >
                       Delete Budget
                     </button>

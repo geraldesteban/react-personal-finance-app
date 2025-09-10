@@ -15,21 +15,6 @@ export default function PotsEditPot({ active, onClose, potId }) {
   const [newTargetMoney, setNewTargetMoney] = useState("");
   const [newPotTheme, setNewPotTheme] = useState("bg-green");
 
-  function handleEditPot(e) {
-    e.preventDefault();
-
-    newPot({
-      potId: potId,
-      newPotName: newPotName,
-      newTargetMoney: newTargetMoney,
-      newPotTheme: newPotTheme,
-    });
-
-    setNewPotName("");
-    setNewTargetMoney("");
-    setNewPotTheme("bg-green");
-  }
-
   if (!active) return null;
 
   if (isNewPot)
@@ -40,7 +25,7 @@ export default function PotsEditPot({ active, onClose, potId }) {
     );
 
   return (
-    <Modal>
+    <Modal onClose={onClose}>
       <div className="flex justify-between items-center mb-5">
         <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
           Edit Pot
@@ -52,7 +37,22 @@ export default function PotsEditPot({ active, onClose, potId }) {
       <Paragraph>
         If your saving targets change, feel free to update your pots.
       </Paragraph>
-      <form onSubmit={handleEditPot}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          newPot({
+            potId: potId,
+            newPotName: newPotName,
+            newTargetMoney: newTargetMoney,
+            newPotTheme: newPotTheme,
+          });
+
+          setNewPotName("");
+          setNewTargetMoney("");
+          setNewPotTheme("bg-green");
+        }}
+      >
         <Label>Pot Name</Label>
         <Input
           type={"text"}

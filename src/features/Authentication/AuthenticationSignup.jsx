@@ -4,53 +4,43 @@ import PasswordHideIcon from "../../assets/icon-hide-password.svg?react";
 import PasswordShowIcon from "../../assets/icon-show-password.svg?react";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
+import Label from "../../ui/Label";
+import Button from "../../ui/Button";
 import { useSignup } from "./useSignup";
 
 export default function AuthenticationSignup() {
   const [showPassword, setShowPassword] = useState(false);
-  const { signup, isSignup, errorSignup } = useSignup();
-
-  function handleHidePassword() {
-    setShowPassword(!showPassword);
-  }
-
-  function handleCreateAccount(e) {
-    e.preventDefault();
-
-    const username = e.target.name.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    signup({ username, email, password });
-  }
-
-  if (errorSignup) return <ErrorMessage errorMessage={errorSignup} />;
+  const { signup, isSignup } = useSignup();
 
   return (
     <form
       className={`relative bg-white p-10 rounded-xl w-[800px] xxl:p-5 xxxl:w-[600px] xl:w-[400px] lg:w-[550px] lg:mx-auto sm:w-[90%]`}
-      onSubmit={handleCreateAccount}
+      onSubmit={(e) => {
+        e.preventDefault();
+
+        const username = e.target.name.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        signup({ username, email, password });
+      }}
     >
       <h2 className="font-myFontBold text-[32px] text-grey-900 mb-10 xxl:mb-5">
         Signup
       </h2>
-
-      <label className="font-myFontBold text-[12px] text-grey-500">Name</label>
+      <Label>Name</Label>
       <input
         name="name"
         type="name"
         className="px-5 py-3 border border-beige-500 outline-none rounded-xl w-full mt-2 mb-4 xxl:px-3 xxl:py-2"
       />
-
-      <label className="font-myFontBold text-[12px] text-grey-500">Email</label>
+      <Label>Email</Label>
       <input
         name="email"
         type="email"
         className="px-5 py-3 border border-beige-500 outline-none rounded-xl w-full mt-2 mb-4 xxl:px-3 xxl:py-2"
       />
-      <label className="font-myFontBold text-[12px] text-grey-500">
-        Create Password
-      </label>
+      <Label>Create Password</Label>
       <input
         name="password"
         type={`${showPassword ? "text" : "password"}`}
@@ -58,7 +48,7 @@ export default function AuthenticationSignup() {
       />
       <span
         className="absolute right-0 mt-6 mr-[50px] cursor-pointer xxl:mt-5 xxl:mr-[35px]"
-        onClick={handleHidePassword}
+        onClick={() => setShowPassword(!showPassword)}
       >
         {showPassword ? (
           <PasswordHideIcon className="h-5 w-5" />
@@ -66,13 +56,14 @@ export default function AuthenticationSignup() {
           <PasswordShowIcon className="h-5 w-5" />
         )}
       </span>
-      <button
-        type="submit"
-        disabled={isSignup}
-        className="font-myFontBold text-[14px] text-white bg-grey-900 py-5 rounded-xl w-full my-10 xxl:py-4 xxl:my-5"
+      <Button
+        type={"submit"}
+        className={
+          "font-myFontBold text-[14px] text-white bg-grey-900 py-5 rounded-xl w-full my-10 xxl:py-4 xxl:my-5"
+        }
       >
         {isSignup ? <Spinner /> : "Create Account"}
-      </button>
+      </Button>
       <div className="text-center">
         <span className="font-myFontRegular text-[14px] text-grey-500 mr-2">
           Already have an account?

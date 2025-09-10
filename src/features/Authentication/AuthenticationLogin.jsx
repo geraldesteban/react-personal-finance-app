@@ -4,43 +4,36 @@ import { useState } from "react";
 import { useLogin } from "./useLogin";
 import { NavLink } from "react-router-dom";
 import Spinner from "../../ui/Spinner";
+import Label from "../../ui/Label";
+import Button from "../../ui/Button";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const { login, isLogin } = useLogin();
 
-  function handleHidePassword() {
-    setShowPassword(!showPassword);
-  }
-
-  function handleSignInAccount(e) {
-    e.preventDefault();
-
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    login({ email, password });
-  }
-
   return (
     <form
       className={`relative bg-white p-10 rounded-xl w-[800px] xxl:p-5 xxxl:w-[600px] xl:w-[400px] lg:w-[550px] lg:mx-auto sm:w-[90%]`}
-      onSubmit={handleSignInAccount}
+      onSubmit={(e) => {
+        e.preventDefault();
+
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+
+        login({ email, password });
+      }}
     >
       <h2 className="font-myFontBold text-[32px] text-grey-900 mb-10 xxl:mb-5">
         Login
       </h2>
-
-      <label className="font-myFontBold text-[12px] text-grey-500">Email</label>
+      <Label>Email</Label>
       <input
         name="email"
         type="email"
         defaultValue="ge@gmail.com"
         className="px-5 py-3 border border-beige-500 outline-none rounded-xl w-full mt-2 mb-4 xxl:px-3 xxl:py-2"
       />
-      <label className="font-myFontBold text-[12px] text-grey-500">
-        Password
-      </label>
+      <Label>Password</Label>
       <input
         name="password"
         type={`${showPassword ? "text" : "password"}`}
@@ -49,7 +42,7 @@ export default function Login() {
       />
       <span
         className="absolute right-0 mt-6 mr-[50px] cursor-pointer xxl:mt-5 xxl:mr-[35px]"
-        onClick={handleHidePassword}
+        onClick={() => setShowPassword(!showPassword)}
       >
         {showPassword ? (
           <PasswordHideIcon className="h-5 w-5" />
@@ -57,13 +50,14 @@ export default function Login() {
           <PasswordShowIcon className="h-5 w-5" />
         )}
       </span>
-      <button
-        type="submit"
-        disabled={isLogin}
-        className="font-myFontBold text-[14px] text-white bg-grey-900 py-5 rounded-xl w-full my-10 xxl:py-4 xxl:my-5"
+      <Button
+        type={"submit"}
+        className={
+          "font-myFontBold text-[14px] text-white bg-grey-900 py-5 rounded-xl w-full my-10 xxl:py-4 xxl:my-5"
+        }
       >
         {isLogin ? <Spinner /> : "Login"}
-      </button>
+      </Button>
       <div className="text-center">
         <span className="font-myFontRegular text-[14px] text-grey-500 mr-2">
           Need to create an account?

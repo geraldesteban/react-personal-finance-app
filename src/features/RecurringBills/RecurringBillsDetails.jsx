@@ -12,13 +12,15 @@ export default function RecurringBillsDetails() {
   const sortBy = searchParams.get("sortBy") || "latest";
   const search = searchParams.get("search") || "";
 
-  const { transactionsData, isTransactionsData, errorTransactionsData } =
-    useTransactions(search, sortBy, "alltransactions", "1", true);
+  const { transactionsData, isTransactionsData } = useTransactions(
+    search,
+    sortBy,
+    "alltransactions",
+    "1",
+    true
+  );
 
   if (isTransactionsData) return <Spinner />;
-
-  if (errorTransactionsData)
-    return <ErrorMessage errorMessage={errorTransactionsData.message} />;
 
   return (
     <div className="mx-5">
