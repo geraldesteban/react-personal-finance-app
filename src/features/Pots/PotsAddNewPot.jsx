@@ -30,7 +30,14 @@ export default function BudgetsAddNewBudget({ active, onClose }) {
         <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
           Add New Pot
         </h2>
-        <Button onClick={onClose}>
+        <Button
+          onClick={() => {
+            onClose();
+            setPotName("");
+            setTargetMoney("");
+            setPotTheme("");
+          }}
+        >
           <CloseModal />
         </Button>
       </div>

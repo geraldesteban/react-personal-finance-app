@@ -22,6 +22,10 @@ export default function PotsAddMoney({
   const targetMoney = potData?.targetMoney;
   const potMoney = potData?.potMoney;
   const [amountPotMoney, setAmountPotMoney] = useState("");
+  const NewAddedMoney = (
+    ((potMoney + amountPotMoney) / targetMoney) *
+    100
+  ).toFixed(1);
 
   if (!active) return null;
 
@@ -38,7 +42,12 @@ export default function PotsAddMoney({
         <h2 className="font-myFontBold text-grey-900 text-[32px]">
           Add to `{potName.replace(/\b\w/g, (char) => char.toUpperCase())}`
         </h2>
-        <Button onClick={onClose}>
+        <Button
+          onClick={() => {
+            onClose();
+            setAmountPotMoney("");
+          }}
+        >
           <CloseModal />
         </Button>
       </div>
@@ -54,9 +63,24 @@ export default function PotsAddMoney({
           {formatCurrency(amountPotMoney < 0 ? 0 : potMoney + amountPotMoney)}
         </p>
       </div>
-      <div className="w-full h-1 rounded-xl bg-black"></div>
+      <div className="w-full h-3 rounded-xl bg-beige-100 flex items-center">
+        <div
+          className="h-3 rounded-tl-xl rounded-bl-xl mr-1 bg-grey-900"
+          style={{
+            width: `${(potMoney / targetMoney) * 100}%`,
+          }}
+        ></div>
+        <div
+          className="h-3 rounded-tr-xl rounded-br-xl mr-1 bg-green"
+          style={{
+            width: `${(amountPotMoney / targetMoney) * 100}%`,
+          }}
+        ></div>
+      </div>
       <div className="flex justify-between items-center my-1">
-        <p className="font-myFontRegular text-green text-[12px]">27.95%</p>
+        <p className="font-myFontRegular text-green text-[12px]">
+          {NewAddedMoney}%
+        </p>
         <p className="font-myFontRegular text-grey-500 text-[12px]">
           Target of {formatCurrency(targetMoney)}
         </p>

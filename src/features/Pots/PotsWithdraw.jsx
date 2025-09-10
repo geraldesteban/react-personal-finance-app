@@ -10,12 +10,22 @@ import Paragraph from "../../ui/Paragraph";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
 
-export default function PotsWithdraw({ active, onClose, potId, potName }) {
+export default function PotsWithdraw({
+  active,
+  onClose,
+  potId,
+  potName,
+  maxAmount,
+}) {
   const { withdrawPotMoney, isWithdrawPotMoney } = useWithdrawMoney(onClose);
   const { potData } = usePot(potId);
   const targetMoney = potData?.targetMoney;
   const potMoney = potData?.potMoney;
   const [amountWithdrawPotMoney, setAmountWithdrawPotMoney] = useState("");
+  const newWithdrawMoney = (
+    ((potMoney - amountWithdrawPotMoney) / targetMoney) *
+    100
+  ).toFixed(1);
 
   if (!active) return null;
 
@@ -33,7 +43,12 @@ export default function PotsWithdraw({ active, onClose, potId, potName }) {
           Withdraw from `
           {potName.replace(/\b\w/g, (char) => char.toUpperCase())}`?
         </h2>
-        <Button onClick={onClose}>
+        <Button
+          onClick={() => {
+            onClose();
+            setAmountWithdrawPotMoney("");
+          }}
+        >
           <CloseModal />
         </Button>
       </div>
@@ -55,18 +70,26 @@ export default function PotsWithdraw({ active, onClose, potId, potName }) {
           )}
         </p>
       </div>
-      <div className="w-full h-1 rounded-xl bg-black"></div>
+      <div className="w-full h-3 rounded-xl bg-beige-100 flex items-center">
+        <div
+          className="h-3 rounded-tl-xl rounded-bl-xl mr-1 bg-grey-900"
+          style={{
+            width: `${(potMoney / targetMoney) * 100}%`,
+          }}
+        ></div>
+        <div
+          className="h-3 rounded-tr-xl rounded-br-xl mr-1 bg-red"
+          style={{
+            width: `${(amountWithdrawPotMoney / targetMoney) * 100}%`,
+          }}
+        ></div>
+      </div>
       <div className="flex justify-between items-center my-1">
-        <p className="font-myFontRegular text-red text-[12px]">5.95%</p>
+        <p className="font-myFontRegular text-red text-[12px]">
+          {newWithdrawMoney}%
+        </p>
         <p className="font-myFontRegular text-grey-500 text-[12px]">
-          Target of{" "}
-          {formatCurrency(
-            amountWithdrawPotMoney < 0
-              ? targetMoney
-              : amountWithdrawPotMoney <= targetMoney
-              ? targetMoney + amountWithdrawPotMoney
-              : targetMoney
-          )}
+          Target of {formatCurrency(targetMoney)}
         </p>
       </div>
       <form
@@ -81,7 +104,14 @@ export default function PotsWithdraw({ active, onClose, potId, potName }) {
         <Input
           type={"number"}
           value={amountWithdrawPotMoney}
-          onChange={(e) => setAmountWithdrawPotMoney(Number(e.target.value))}
+          onChange={(e) => {
+            const value = Number(e.target.value);
+            if (value <= maxAmount) {
+              setAmountWithdrawPotMoney(value);
+            } else {
+              setAmountWithdrawPotMoney(maxAmount);
+            }
+          }}
           placeholder={"$ e.g. 2000"}
         />
         <Button

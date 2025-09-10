@@ -13,7 +13,7 @@ export default function PotsEditPot({ active, onClose, potId }) {
   const { newPot, isNewPot } = useUpdatePot(onClose);
   const [newPotName, setNewPotName] = useState("");
   const [newTargetMoney, setNewTargetMoney] = useState("");
-  const [newPotTheme, setNewPotTheme] = useState("bg-green");
+  const [newPotTheme, setNewPotTheme] = useState("#277C78");
 
   if (!active) return null;
 
@@ -30,7 +30,14 @@ export default function PotsEditPot({ active, onClose, potId }) {
         <h2 className="font-myFontBold text-grey-900 text-[32px] sm:text-[20px]">
           Edit Pot
         </h2>
-        <Button onClick={onClose}>
+        <Button
+          onClick={() => {
+            onClose();
+            setNewPotName("");
+            setNewTargetMoney("");
+            setNewPotTheme("#277C78");
+          }}
+        >
           <CloseModal />
         </Button>
       </div>
@@ -50,7 +57,7 @@ export default function PotsEditPot({ active, onClose, potId }) {
 
           setNewPotName("");
           setNewTargetMoney("");
-          setNewPotTheme("bg-green");
+          setNewPotTheme("#277C78");
         }}
       >
         <Label>Pot Name</Label>

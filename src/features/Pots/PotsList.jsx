@@ -200,6 +200,7 @@ export default function PotsList() {
         onClose={() => setWithdrawActive(false)}
         potId={activeId}
         potName={activePotName}
+        maxAmount={potData ? potData?.potMoney : 0}
       />
     </div>
   );
