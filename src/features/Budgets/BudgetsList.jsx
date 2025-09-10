@@ -1,21 +1,20 @@
 import { useState } from "react";
+import { useReadBudgets } from "./useReadBudgets";
 import Ellipsis from "../../assets/icon-ellipsis.svg?react";
 import BudgetsEditBudget from "./BudgetsEditBudget";
 import BudgetsDeleteBudget from "./BudgetsDeleteBudget";
 import BudgetsLatestSpendings from "./BudgetsLatestSpendings";
 import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
-import { useReadBudgets } from "./useReadBudgets";
 import BudgetsSpentRemaining from "./BudgetsSpentRemaining";
 
 export default function BudgetsList() {
+  const { dataBudgets, isDataBudgets, errorDataBudgets } = useReadBudgets();
   const [activeDropDown, setActiveDropDown] = useState(false);
   const [editModalActive, setEditModalActive] = useState(false);
   const [deleteModalActive, setDeleteModalActive] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const [activeName, setActiveName] = useState("");
-
-  const { dataBudgets, isDataBudgets, errorDataBudgets } = useReadBudgets();
 
   if (isDataBudgets)
     return (

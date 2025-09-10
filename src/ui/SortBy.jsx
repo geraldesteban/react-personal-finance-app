@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CaretDown from "../assets/icon-caret-down.svg?react";
 import SortMobile from "../assets/icon-sort-mobile.svg?react";
+import useClickOutside from "../hooks/useClickOutside";
 
 export default function SortBy() {
   const [active, setActive] = useState(false);
-
   const [searchParams, setSearchParams] = useSearchParams();
   const sortBy = searchParams.get("sortBy") || "latest";
+
+  const ref = useRef(null);
+  useClickOutside(ref, () => setActive(false));
 
   function handleSetSortBy(sort) {
     setSearchParams({ sortBy: sort });
@@ -28,7 +31,7 @@ export default function SortBy() {
       <h2 className="font-myFontRegular text-grey-500 text-[14px] mr-3 sm:hidden whitespace-nowrap">
         Sort by
       </h2>
-      <div className="relative">
+      <div className="relative" ref={ref}>
         <button
           className="flex items-center px-6 py-3 border border-beige-500 rounded-xl sm:px-0 sm:py-0 sm:border-none"
           onClick={() => setActive(!active)}
@@ -43,29 +46,31 @@ export default function SortBy() {
           />
           <SortMobile className="hidden sm:block" />
         </button>
-        <div
-          className={`absolute px-6 py-3 bg-white mt-5 w-full rounded-xl shadow-2xl ${
-            active ? "" : "hidden"
-          } sm:w-fit sm:right-0`}
-        >
-          <div>
-            <h2 className="text-[#696868] mb-2 hidden sm:block">Sort by</h2>
-            <hr className="mb-2 hidden sm:block" />
+        {active && (
+          <div
+            className={`absolute px-6 py-3 bg-white mt-5 w-full rounded-xl shadow-2xl ${
+              active ? "" : "hidden"
+            } sm:w-fit sm:right-0`}
+          >
+            <div>
+              <h2 className="text-[#696868] mb-2 hidden sm:block">Sort by</h2>
+              <hr className="mb-2 hidden sm:block" />
+            </div>
+            <div>
+              {sortOptions.map((option, index) => (
+                <div key={option.value}>
+                  <button
+                    className="mb-2"
+                    onClick={() => handleSetSortBy(option.value)}
+                  >
+                    {option.label}
+                  </button>
+                  {index < sortOptions.length - 1 && <hr className="mb-2" />}
+                </div>
+              ))}
+            </div>
           </div>
-          <div>
-            {sortOptions.map((option, index) => (
-              <div key={option.value}>
-                <button
-                  className="mb-2"
-                  onClick={() => handleSetSortBy(option.value)}
-                >
-                  {option.label}
-                </button>
-                {index < sortOptions.length - 1 && <hr className="mb-2" />}
-              </div>
-            ))}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
