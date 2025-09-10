@@ -9,7 +9,7 @@ export function useLogout() {
 
   const {
     mutate: logout,
-    isLogout,
+    isPending: isLogout,
     errorLogout,
   } = useMutation({
     mutationFn: apiLogout,
