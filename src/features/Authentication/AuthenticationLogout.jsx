@@ -12,7 +12,7 @@ export default function AuthenticationLogout() {
         <Spinner />
       ) : (
         <Button onClick={logout}>
-          <LogoutIcon className="h-14 w-14 text-grey-500 hover:text-green" />
+          <LogoutIcon className="h-14 w-14 text-grey-500 hover:text-green lg:hover:text-grey-500" />
         </Button>
       )}
     </>

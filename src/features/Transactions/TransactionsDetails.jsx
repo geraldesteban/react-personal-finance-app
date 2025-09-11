@@ -85,11 +85,11 @@ export default function TransactionsDetails() {
       </div>
       <div className="flex justify-between items-center mt-10 sm:flex-wrap">
         <button
-          className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 hover:border-beige-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-[15px] sm:py-[10px]`}
+          className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-[15px] sm:py-[10px] lg:hover:bg-transparent`}
           onClick={() => goToPage(page - 1)}
           disabled={firstPage}
         >
-          <CaretRight className="text-grey-500 mr-5 group-hover:text-white sm:mr-0" />
+          <CaretRight className="text-grey-500 mr-5 group-hover:text-white sm:mr-0 lg:group-hover:text-grey-500" />
           <span className="font-myFontRegular text-grey-900 text-[14px] sm:hidden">
             Prev
           </span>
@@ -101,7 +101,7 @@ export default function TransactionsDetails() {
               key={i}
               className={`text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 transition duration-500 ${
                 page === i + 1 ? "bg-grey-900 text-white border-grey-900" : ""
-              }`}
+              } lg:hover:bg-transparent lg:hover:text-grey-900`}
               onClick={() => goToPage(i + 1)}
             >
               {i + 1}
@@ -114,7 +114,9 @@ export default function TransactionsDetails() {
             <button
               className={`text-grey-900 py-2 px-4 border border-beige-500 rounded-lg hover:border-beige-500 hover:text-white hover:bg-beige-500 [&:not(:last-child)]:mr-2 transition duration-500 ${
                 page === i + 1 ? "bg-grey-900 text-white border-grey-900" : ""
-              } ${i + 1 === 4 ? "sm:hidden" : ""} sm:py-1 sm:px-3`}
+              } ${
+                i + 1 === 4 ? "sm:hidden" : ""
+              } sm:py-1 sm:px-3 sm:hover:bg-transparent sm:hover:text-grey-900`}
               onClick={() => goToPage(i + 1)}
               key={i}
               disabled={i + 1 === 3}
@@ -132,14 +134,14 @@ export default function TransactionsDetails() {
           ))}
         </div>
         <button
-          className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 hover:border-beige-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-[15px] sm:py-[10px]`}
+          className={`group flex items-center px-8 py-4 border border-beige-500 rounded-xl transition duration-500 hover:bg-beige-500 hover:text-white lg:py-2 lg:px-4 lg:rounded-lg sm:px-[15px] sm:py-[10px] lg:hover:bg-transparent`}
           onClick={() => goToPage(page + 1)}
           disabled={lastPage}
         >
           <span className="font-myFontRegular text-grey-900 mr-5 sm:mr-5 sm:hidden">
             Next
           </span>
-          <CaretLeft className="text-grey-500 group-hover:text-white" />
+          <CaretLeft className="text-grey-500 group-hover:text-white lg:group-hover:text-grey-500" />
         </button>
       </div>
     </>

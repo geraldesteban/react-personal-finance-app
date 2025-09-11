@@ -71,12 +71,12 @@ function Sidebar() {
         <MinimizeLeftIcon
           className={`text-grey-300 w-6 h-6 mx-10 ${
             active ? "rotate-[-180deg]" : ""
-          } group-hover:text-grey-100`}
+          } group-hover:text-grey-100 lg:group-hover:text-grey-300`}
         />
         <span
           className={`whitespace-nowrap text-grey-300 ${
             active ? "block w-32" : "hidden w-32"
-          } group-hover:text-grey-100`}
+          } group-hover:text-grey-100 lg:group-hover:text-grey-300`}
         >
           Minimize Menu
         </span>

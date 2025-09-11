@@ -14,10 +14,10 @@ export default function OverviewViewDetails({ heading, span, seeDetails }) {
         className="text-[14px] flex items-center group transition-all delay-1000"
         to={`/${seeDetails}`}
       >
-        <span className="font-myFontRegular text-grey-500 text-[14px] mr-5 group-hover:text-grey-900 transition-colors duration-500">
+        <span className="font-myFontRegular text-grey-500 text-[14px] mr-5 group-hover:text-grey-900 transition-colors duration-500 lg:group-hover:text-grey-500">
           {span}
         </span>
-        <CaretRight className="text-grey-500 group-hover:text-grey-900 transition-colors duration-500" />
+        <CaretRight className="text-grey-500 group-hover:text-grey-900 transition-colors duration-500 lg:group-hover:text-grey-500" />
       </NavLink>
     </div>
   );

@@ -151,7 +151,7 @@ export default function PotsList() {
                   ) : (
                     <>
                       <button
-                        className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900"
+                        className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border border-beige-100  hover:bg-white hover:border hover:border-grey-900 lg:hover:border-beige-100 lg:hover:bg-beige-100"
                         onClick={() => {
                           setActiveId(pot.id);
                           setActivePotName(pot.potName);
@@ -162,7 +162,7 @@ export default function PotsList() {
                         + Add Money
                       </button>
                       <button
-                        className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900"
+                        className="font-myFontBold text-[14px] w-full py-5 rounded-xl bg-beige-100 border  border-beige-100  hover:bg-white hover:border hover:border-grey-900 lg:hover:border-beige-100 lg:hover:bg-beige-100"
                         onClick={() => {
                           setActiveId(pot.id);
                           setActivePotName(pot.potName);

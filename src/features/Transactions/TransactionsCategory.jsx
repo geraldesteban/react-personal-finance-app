@@ -26,7 +26,7 @@ export default function TransactionsCategory() {
       </h2>
       <div className="relative" ref={ref}>
         <button
-          className="flex items-center px-6 py-3 border border-beige-500 rounded-xl transition duration-500 hover:border-grey-900 focus:border-grey-900 sm:px-0 sm:py-0 sm:border-none md:px-3 md:py-[10px]"
+          className="flex items-center px-6 py-3 border border-beige-500 rounded-xl transition duration-500 hover:border-grey-900 focus:border-grey-900 sm:px-0 sm:py-0 sm:border-none md:px-3 md:py-[10px] lg:hover:border-beige-500"
           onClick={() => setActive(!active)}
         >
           <span className="font-myFontRegular whitespace-nowrap text-grey-900 text-[14px] mr-5 sm:hidden sm:mr-0">

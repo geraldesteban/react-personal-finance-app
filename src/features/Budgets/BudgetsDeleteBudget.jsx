@@ -39,7 +39,7 @@ export default function BudgetsDeleteBudget({
       <Button
         onClick={() => deleteBudget(budgetId)}
         className={
-          "font-myFontBold text-[14px] text-white w-full py-5  bg-red rounded-xl  font-bold hover:opacity-80"
+          "font-myFontBold text-[14px] text-white w-full py-5  bg-red rounded-xl  font-bold hover:opacity-80 lg:hover:opacity-100"
         }
       >
         Yes, Confirm Deletion

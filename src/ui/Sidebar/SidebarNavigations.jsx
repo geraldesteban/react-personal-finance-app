@@ -29,16 +29,23 @@ export default function SidebarNavigations({
         to={to}
       >
         <Icon
-          className={`w-6 h-6 mr-9 ${active ? "text-green" : ""} ${
-            active ? "" : "group-hover:text-grey-100"
-          } lg:mb-2 lg:mr-0 lg:w-5 lg:h-5`}
+          className={`w-6 h-6 mr-9
+    ${
+      active
+        ? "text-green"
+        : "text-grey-300 group-hover:text-grey-100 lg:group-hover:text-grey-300"
+    }
+    lg:mb-2 lg:mr-0 lg:w-5 lg:h-5`}
         />
+
         <span
-          className={`whitespace-nowrap ${isActive ? `block` : `hidden`} ${
-            active ? "text-grey-900" : ""
-          } text-[16px] ${active ? "" : "group-hover:text-grey-100"} ${
-            isActive ? `block` : `hidden`
-          } lg:text-[12px] lg:block sm:hidden`}
+          className={`whitespace-nowrap text-[16px] 
+    ${
+      active
+        ? "block text-grey-900"
+        : "hidden text-grey-300 group-hover:text-grey-100 lg:group-hover:text-grey-300"
+    }
+    lg:text-[12px] hidden lg:block sm:hidden`}
         >
           {label}
         </span>

@@ -11,7 +11,7 @@ export default function PotsLayout() {
       <div className="flex justify-between items-center">
         <Heading>Pots</Heading>
         <button
-          className="font-myFontBold text-[14px] text-white p-4 bg-grey-900 rounded-xl hover:bg-grey-500"
+          className="font-myFontBold text-[14px] text-white p-4 bg-grey-900 rounded-xl hover:bg-grey-500 lg:hover:bg-grey-900"
           onClick={() => setActive(true)}
         >
           + Add New Pot

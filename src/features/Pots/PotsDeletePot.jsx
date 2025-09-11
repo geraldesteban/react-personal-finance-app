@@ -34,7 +34,7 @@ export default function PotsDeletePot({ active, onClose, potName, potId }) {
       <Button
         onClick={() => deletePot(potId)}
         className={
-          "font-myFontBold text-[14px] text-white w-full py-5  bg-red rounded-xl  font-bold hover:opacity-80"
+          "font-myFontBold text-[14px] text-white w-full py-5  bg-red rounded-xl  font-bold hover:opacity-80 lg:hover:opacity-100"
         }
       >
         Yes, Confirm Deletion
