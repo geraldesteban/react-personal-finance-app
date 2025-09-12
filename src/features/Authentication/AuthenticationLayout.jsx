@@ -4,7 +4,7 @@ import LogoLargeIcon from "../../assets/logo-large.svg?react";
 
 export default function AuthenticationLayout() {
   return (
-    <div className="flex justify-between items-center bg-[#F2F3F7] h-screen lg:flex-col lg:place-content-start">
+    <div className="flex justify-between items-center bg-[#F2F3F7] min-h-screen lg:flex-col lg:pb-40">
       <div className="hidden lg:block lg:bg-grey-900 lg:w-full lg:py-5 lg:rounded-b-xl lg:mb-32">
         <LogoLargeIcon className="lg:mx-auto" />
       </div>
