@@ -19,6 +19,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Routes>
+          {/* Protected Route */}
           <Route
             element={
               <ProtectedRoute>
@@ -26,6 +27,7 @@ function App() {
               </ProtectedRoute>
             }
           >
+            {/* App pages */}
             <Route index element={<Navigate replace to="overview" />} />
             <Route path="overview" element={<Overview />} />
             <Route path="transactions" element={<Transactions />} />
@@ -34,12 +36,15 @@ function App() {
             <Route path="recurringbills" element={<RecurringBills />} />
           </Route>
 
+          {/* Login and Signup pages */}
           <Route element={<AuthenticationLayout />}>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
           </Route>
         </Routes>
       </BrowserRouter>
+
+      {/* Message for success and fail */}
       <Toaster
         position="top-center"
         gutter={12}
