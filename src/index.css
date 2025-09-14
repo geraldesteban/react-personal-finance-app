@@ -3,9 +3,12 @@
 @tailwind utilities;
 
 @layer utilities {
+  /* Remove cancle Icon */
   input[type="search"]::-webkit-search-cancel-button {
     display: none;
   }
+
+  /* Remove Select Icon */
   select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -13,6 +16,7 @@
     background-image: none;
   }
 
+  /* Remove Input Range Icon */
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
