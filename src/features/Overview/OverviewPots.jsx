@@ -6,21 +6,13 @@ import Spinner from "../../ui/Spinner";
 import ErrorMessage from "../../ui/Spinner";
 
 function OverviewPots() {
-  const { potsData, isPots, errorPots } = usePots();
+  const { potsData, isPots } = usePots();
 
   if (isPots)
     return (
       <div className="bg-white p-10 rounded-xl lg:p-5">
         <ViewDetails heading="Pots" span="See Details" seeDetails="pots" />
         <Spinner />
-      </div>
-    );
-
-  if (errorPots)
-    return (
-      <div className="bg-white p-10 rounded-xl lg:p-5">
-        <ViewDetails heading="Pots" span="See Details" seeDetails="pots" />
-        <ErrorMessage />;
       </div>
     );
 

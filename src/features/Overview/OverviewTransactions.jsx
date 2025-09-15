@@ -6,8 +6,12 @@ import ErrorMessage from "../../ui/Spinner";
 import { useTransactions } from "../Transactions/useTransactions";
 
 function OverviewTransactions() {
-  const { transactionsData, isTransactionsData, errorTransactionsData } =
-    useTransactions("", "latest", "alltransactions", "1");
+  const { transactionsData, isTransactionsData } = useTransactions(
+    "",
+    "latest",
+    "alltransactions",
+    "1"
+  );
 
   if (isTransactionsData)
     return (
@@ -18,18 +22,6 @@ function OverviewTransactions() {
           seeDetails="transactions"
         />
         <Spinner />
-      </div>
-    );
-
-  if (errorTransactionsData)
-    return (
-      <div className="bg-white p-10 rounded-xl lg:p-5 lg:w-full">
-        <ViewDetails
-          heading="Transactions"
-          span="View All"
-          seeDetails="transactions"
-        />
-        <ErrorMessage errorMessage={errorTransactionsData.messsage} />;
       </div>
     );
 

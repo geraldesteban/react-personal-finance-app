@@ -10,7 +10,6 @@ export default function OverviewRecurringBills() {
     totalUpcomingBills,
     totalDueSoonBills,
     isTransactionsData,
-    errorTransactionsData,
   } = useRecurringBills();
 
   if (isTransactionsData)
@@ -22,18 +21,6 @@ export default function OverviewRecurringBills() {
           seeDetails="recurringbills"
         />
         <Spinner />
-      </div>
-    );
-
-  if (errorTransactionsData)
-    return (
-      <div className="bg-white p-10 rounded-xl lg:p-5">
-        <ViewDetails
-          heading="Recurring Bills"
-          span="See Details"
-          seeDetails="recurringbills"
-        />
-        <ErrorMessage errorMessage={errorTransactionsData.message} />
       </div>
     );
 

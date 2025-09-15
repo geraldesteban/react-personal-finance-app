@@ -6,7 +6,7 @@ import ErrorMessage from "../../ui/ErrorMessage";
 import PieChartBudget from "../../ui/PieChartBudget";
 
 export default function OverviewBudgets() {
-  const { dataBudgets, isDataBudgets, errorDataBudgets } = useReadBudgets();
+  const { dataBudgets, isDataBudgets } = useReadBudgets();
 
   if (isDataBudgets)
     return (
@@ -17,18 +17,6 @@ export default function OverviewBudgets() {
           seeDetails="budgets"
         />
         <Spinner />
-      </div>
-    );
-
-  if (errorDataBudgets)
-    return (
-      <div className="bg-white p-10 rounded-xl lg:p-5">
-        <ViewDetails
-          heading="Budgets"
-          span="See Details"
-          seeDetails="budgets"
-        />
-        <ErrorMessage errorMessage={errorDataBudgets.message} />
       </div>
     );
 
