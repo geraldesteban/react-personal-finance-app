@@ -12,18 +12,22 @@ export default function OverviewLayout() {
     <div className="m-10 lg:m-5">
       <div className="flex justify-between items-center">
         <Heading>Overview</Heading>
+        {/* Username and Logout button */}
         <div className="flex items-center">
           <AuthenticationUsername />
           <AuthenticationLogout />
         </div>
       </div>
+      {/* Balance, Income, Expenses cards */}
       <OverviewBalanceIncomeExpenses />
       <div className="flex justify-between gap-5 lg:flex-col">
         <div className="flex flex-col flex-1 gap-5 flex-wrap">
+          {/* Summary of Pots and Transactions cards */}
           <OverviewPots />
           <OverviewTransactions />
         </div>
         <div className="flex flex-col gap-5">
+          {/* Summary of Budgets and Recurring Bills cards */}
           <OverviewBudgets />
           <OverviewRecurringBills />
         </div>
