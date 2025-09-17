@@ -46,7 +46,6 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
 
   /* Get Pot Name */
   const potName = potData.potName;
-  console.log(potName);
 
   /* Update Balance of the User */
   const { error: errorBalanceUpdate } = await supabase
