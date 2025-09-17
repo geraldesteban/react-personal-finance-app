@@ -7,13 +7,14 @@ export async function apiDonePot(potId) {
   const currentUser = await GetCurrentUser();
 
   /* Delete Pot */
-  const { error: errorPot } = await supabase
+  const { error: potDoneDeleteError } = await supabase
     .from("pots")
     .delete()
     .eq("id", potId)
     .eq("user_id", currentUser.id);
 
-  if (errorPot) throw new Error("Pot could not be delete");
+  /* Error Pot done delete */
+  if (potDoneDeleteError) throw new Error("Pot could not be delete");
 
   return { donePotId: potId };
 }
