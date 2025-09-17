@@ -15,6 +15,4 @@ export async function apiDonePot(potId) {
 
   /* Error Pot done delete */
   if (potDoneDeleteError) throw new Error("Pot could not be delete");
-
-  return { donePotId: potId };
 }
