@@ -7,45 +7,43 @@ export async function apiDeletePot(potId) {
   const currentUser = await GetCurrentUser();
 
   /* Get the Pot Money */
-  const { data: potData, error: errorPotData } = await supabase
+  const { data: potMoney, error: potMoneyError } = await supabase
     .from("pots")
     .select("potMoney")
     .eq("user_id", currentUser.id)
     .eq("id", potId)
     .single();
 
-  if (errorPotData) throw new Error("Pot Money could not be read");
+  /* Error get Pot money */
+  if (potMoneyError) throw new Error("Pot Money could not be read");
 
   /* Get the Balance Money */
-  const { data: dataBalance, error: errorBalance } = await supabase
+  const { data: balanceMoney, error: balanceMoneyError } = await supabase
     .from("balances")
     .select("balance")
     .eq("user_id", currentUser.id)
     .single();
 
-  if (errorBalance) throw new Error("Balance could not be read");
-  console.log(errorBalance);
-
-  /* Updated Balance */
-  const newBalance = dataBalance.balance + potData.potMoney;
+  /* Error get Balance money */
+  if (balanceMoneyError) throw new Error("Balance could not be read");
 
   /* Update Balance */
-  const { error: errorUpdateBalance } = await supabase
+  const { error: balanceUpdateError } = await supabase
     .from("balances")
-    .update({ balance: newBalance })
+    .update({ balance: balanceMoney.balance + potMoney.potMoney })
     .eq("user_id", currentUser.id)
     .single();
 
-  if (errorUpdateBalance) throw new Error("Balance could not be updated");
+  /* Error update Balance money */
+  if (balanceUpdateError) throw new Error("Balance could not be updated");
 
   /* Delete Pot */
-  const { error: errorPot } = await supabase
+  const { error: potDeleteError } = await supabase
     .from("pots")
     .delete()
     .eq("id", potId)
     .eq("user_id", currentUser.id);
 
-  if (errorPot) throw new Error("Pot could not be delete");
-
-  return { newBalance, deletedPotId: potId };
+  /* Error delete Pot */
+  if (potDeleteError) throw new Error("Pot could not be delete");
 }

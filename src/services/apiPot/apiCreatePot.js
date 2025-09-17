@@ -1,26 +1,24 @@
 import { GetCurrentUser } from "../apiGetCurrentUser";
 import supabase from "../supabase";
 
+/* Add new Pot */
 export async function apiCreatePot({ potName, targetMoney, potTheme }) {
   /* Get current User */
   const currentUser = await GetCurrentUser();
 
-  const addedPotName = potName;
-  const addedTargetMoney = targetMoney;
-  const addedPotTheme = potTheme;
+  /* Target money <= 0 */
+  if (targetMoney <= 0) throw new Error("Invalid amount");
 
-  if (addedTargetMoney <= 0) throw new Error("Invalid amount");
-
-  const { error: potError } = await supabase.from("pots").insert([
+  /* Insert new Pot */
+  const { error: createPotError } = await supabase.from("pots").insert([
     {
       user_id: currentUser.id,
-      potName: addedPotName,
-      targetMoney: addedTargetMoney,
-      potTheme: addedPotTheme,
+      potName,
+      targetMoney,
+      potTheme,
     },
   ]);
 
-  if (potError) throw new Error("Pot could not be Insert");
-
-  return { addedPotName, addedTargetMoney, addedPotTheme };
+  /* Error inserting new Pot */
+  if (createPotError) throw new Error("Pot could not be Insert");
 }
