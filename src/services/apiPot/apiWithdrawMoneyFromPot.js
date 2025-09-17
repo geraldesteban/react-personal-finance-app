@@ -7,15 +7,17 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
   const currentUser = await GetCurrentUser();
 
   /* Get current Balance of the User */
-  const { data: balanceData, error: errorBalance } = await supabase
+  const { data: balanceMoney, error: errorBalanceMoney } = await supabase
     .from("balances")
     .select("balance")
     .eq("user_id", currentUser.id)
     .single();
 
-  if (errorBalance) throw new Error("Balance could not be Read");
+  /* Error get Balance money */
+  if (errorBalanceMoney) throw new Error("Balance could not be Read");
 
-  if (!balanceData || balanceData.balance < 0)
+  /* No Balance money */
+  if (!balanceMoney || balanceMoney.balance < 0)
     throw new Error("You currently have no Balance");
 
   /* Get current Pot Money of the User */
@@ -26,6 +28,7 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
     .eq("id", pot_id)
     .single();
 
+  /* Error get Pot data */
   if (errorPotData) throw new Error(errorPotData.message);
 
   /* No current Pot Money */
@@ -41,38 +44,34 @@ export async function apiWithdrawMoneyFromPot({ pot_id, amount }) {
   /* Invalid Amount */
   if (amount <= 0) throw new Error("Invalid Amount to Withdraw");
 
-  /* Updated Balance and Pot data */
-  const updatedBalance = balanceData.balance + amount;
-  const updatedPotMoney = potData.potMoney - amount;
-
   /* Get Pot Name */
   const potName = potData.potName;
   console.log(potName);
 
   /* Update Balance of the User */
-  const { error: balanceError } = await supabase
+  const { error: errorBalanceUpdate } = await supabase
     .from("balances")
-    .update({ balance: updatedBalance })
+    .update({ balance: balanceMoney.balance + amount })
     .eq("user_id", currentUser.id);
 
-  if (balanceError) throw new Error("Balance could not be updated");
+  /* Error Balance update */
+  if (errorBalanceUpdate) throw new Error("Balance could not be updated");
 
   /* Update Pot Money and Target Money of the User */
-  const { error: potMoneyError } = await supabase
+  const { error: errorPotUpdate } = await supabase
     .from("pots")
     .update({
-      potMoney: updatedPotMoney,
+      potMoney: potData.potMoney - amount,
     })
     .eq("user_id", currentUser.id)
     .eq("id", pot_id);
 
-  if (potMoneyError)
+  /* Error Pot update */
+  if (errorPotUpdate)
     throw new Error("Pot Money or Target Money could not be updated");
 
   return {
     amount,
     potName,
-    updatedBalance,
-    updatedPotMoney,
   };
 }

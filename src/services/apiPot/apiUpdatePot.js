@@ -1,6 +1,7 @@
 import { GetCurrentUser } from "../apiGetCurrentUser";
 import supabase from "../supabase";
 
+/* Update a Pot */
 export async function apiUpdatePot({
   potId,
   newPotName,
@@ -10,28 +11,20 @@ export async function apiUpdatePot({
   /* Get current Login User */
   const currentUser = await GetCurrentUser();
 
+  /* Invalid New Target money */
   if (newTargetMoney <= 0) throw new Error("Invalid Target Money");
 
-  /* Updated Pot data */
-  const updatedPotName = newPotName;
-  const updatedTargetMoney = newTargetMoney;
-  const updatedPotTheme = newPotTheme;
-
-  const { error: potError } = await supabase
+  /* Update a Pot */
+  const { error: potUpdateError } = await supabase
     .from("pots")
     .update({
-      potName: updatedPotName,
-      targetMoney: updatedTargetMoney,
-      potTheme: updatedPotTheme,
+      potName: newPotName,
+      targetMoney: newTargetMoney,
+      potTheme: newPotTheme,
     })
     .eq("user_id", currentUser.id)
     .eq("id", potId);
 
-  if (potError) throw new Error(potError.message);
-
-  return {
-    updatedPotName,
-    updatedTargetMoney,
-    updatedPotTheme,
-  };
+  /* Error Pot update */
+  if (potUpdateError) throw new Error("Pot could not be updated");
 }
