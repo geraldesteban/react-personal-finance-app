@@ -11,13 +11,16 @@ export async function apiSignUp({ username, email, password }) {
     },
   });
 
+  /* Error Signup */
   if (error) throw new Error(error.message);
 
+  /* Insert Balance */
   if (data.user) {
-    const { error: balanceError } = await supabase
+    const { error: errorBalance } = await supabase
       .from("balances")
       .insert([{ user_id: data.user.id }]);
-    if (balanceError) throw new Error(balanceError.message);
+    /* Error Insert Balance */
+    if (errorBalance) throw new Error(errorBalance.message);
   }
 
   return data;

@@ -9,6 +9,7 @@ export async function apiReadTransactions(
   page = 1,
   getAll = false
 ) {
+  /* Get Transactions data */
   let query = supabase.from("transactions").select("*", { count: "exact" });
 
   /* Search */
@@ -65,12 +66,18 @@ export async function apiReadTransactions(
     query = query.range(from, to);
   }
 
-  const { data: dataTransactions, error, count } = await query;
+  const {
+    data: transactionsData,
+    error: transactionsDataError,
+    count,
+  } = await query;
 
-  if (error) throw new Error("Transactions data could not be read");
+  /* Error Transactions data */
+  if (transactionsDataError)
+    throw new Error("Transactions data could not be read");
 
   /* Page count */
   const pageCount = Math.ceil((count ?? 0) / PAGE_SIZE);
 
-  return { dataTransactions, count, pageCount };
+  return { transactionsData, count, pageCount };
 }
