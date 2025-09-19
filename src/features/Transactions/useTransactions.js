@@ -19,7 +19,7 @@ export function useTransactions(
   });
 
   return {
-    transactionsData: data?.dataTransactions ?? [],
+    transactionsData: data?.transactionsData ?? [],
     count: data?.count ?? 0,
     pageCount: data?.pageCount ?? 1,
     isTransactionsData,
