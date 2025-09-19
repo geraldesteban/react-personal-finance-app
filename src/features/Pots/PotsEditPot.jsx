@@ -4,7 +4,7 @@ import { useUpdatePot } from "./useUpdatePot";
 import Spinner from "../../ui/Spinner";
 import SelectThemeColor from "../../ui/SelectThemeColor";
 import Input from "../../ui/Input";
-import { Label } from "recharts";
+import Label from "../../ui/Label";
 import Paragraph from "../../ui/Paragraph";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
