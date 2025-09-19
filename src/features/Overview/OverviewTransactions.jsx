@@ -2,7 +2,6 @@ import { format } from "date-fns";
 import { formatCurrency } from "../../utils/formatCurrency";
 import ViewDetails from "../../ui/ViewDetails";
 import Spinner from "../../ui/Spinner";
-import ErrorMessage from "../../ui/Spinner";
 import { useTransactions } from "../Transactions/useTransactions";
 
 function OverviewTransactions() {
