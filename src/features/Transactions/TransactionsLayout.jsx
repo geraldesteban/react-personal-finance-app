@@ -10,7 +10,7 @@ export default function TransactionsLayout() {
       <div className="ml-10 mt-10 sm:ml-5 sm:mt-5">
         <Heading>Transactions</Heading>
       </div>
-      <div className="bg-white rounded-xl p-10 m-10 sm:m-5 lg:p-5">
+      <div className="bg-white rounded-xl p-10 m-10 sm:m-5 lg:p-5 min-h-screen">
         <div className="flex items-center justify-between">
           <Search />
           <div className="flex items-center">
