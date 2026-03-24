@@ -2,6 +2,8 @@
 
 A Full Stack Personal Finance app, a challenge from Frontend Mentor at Guru difficulty.
 
+![React Personal Finance App](./public/reactpersonalfinanceapp.png)
+
 # Highlights
 
 - Built from scratch based on the design and requirements from a Frontend Mentor challenge, implementing a full stack personal finance app with overview, transactions, budgets, pots, and recurring bills.
