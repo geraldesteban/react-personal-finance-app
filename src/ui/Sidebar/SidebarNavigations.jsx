@@ -34,7 +34,7 @@ export default function SidebarNavigations({
           } lg:mb-2 lg:mr-0 lg:w-5 lg:h-5`}
         />
         <span
-          className={`whitespace-nowrap text-[16px] ${
+          className={`sm:hidden whitespace-nowrap text-[16px] ${
             active
               ? "text-grey-900"
               : "text-grey-300 group-hover:text-grey-100 lg:group-hover:text-grey-300"

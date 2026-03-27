@@ -21,7 +21,7 @@ export default function PieChartBudget() {
   }));
 
   return (
-    <div className="relative flex justify-center items-center w-[400px] h-[400px] mx-auto xl:w-[340px] xl:h-[340px]">
+    <div className="relative flex justify-center items-center w-[400px] h-[400px] mx-auto xl:w-[340px] xl:h-[340px] sm:w-[250px] sm:h-[250px]">
       <PieChart width={400} height={400}>
         <Pie
           data={chartData}
